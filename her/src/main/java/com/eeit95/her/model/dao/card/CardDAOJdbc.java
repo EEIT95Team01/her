@@ -203,12 +203,15 @@ public class CardDAOJdbc implements cardDAOInterface {
 		return result;
 	}
 
+	
+	
+	
 	@Override
-	public boolean delete(int cardno) {
-		try(
-				Connection conn = DriverManager.getConnection(URL, userID, password);
-				PreparedStatement stmt = conn.prepareStatement(Delete);) {			
-			stmt.setInt(1, cardno);
+	public boolean delete(String id) {
+		try{
+				conn = ds.getConnection();
+				PreparedStatement stmt = conn.prepareStatement(Delete);			
+			stmt.setString(1, id);
 			int i = stmt.executeUpdate();
 			if(i==1) {
 				return true;
