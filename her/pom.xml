@@ -15,6 +15,14 @@
 	</properties>
 
 	<dependencies>
+	
+		<!-- servlet/jstl 1.2 -->
+		<dependency>
+		    <groupId>javax.servlet</groupId>
+		    <artifactId>jstl</artifactId>
+		    <version>1.2</version>
+		</dependency>
+		
 		<!-- JSP 2.3.1 API -->
 		<dependency>
 			<groupId>javax.servlet.jsp</groupId>
