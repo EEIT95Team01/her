@@ -32,10 +32,10 @@ public class CardDAOJdbc implements cardDAOInterface {
 	private static DataSource ds; 
 	private static Connection conn;
 	static{
-		Context context;
+		
 		try {
-			context = new InitialContext();
-			DataSource ds= (DataSource)context.lookup("java:com/env/jdbc/her");
+			Context context = new InitialContext();
+			ds= (DataSource)context.lookup("java:comp/env/jdbc/her");
 		} catch (NamingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

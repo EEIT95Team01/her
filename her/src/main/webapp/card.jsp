@@ -25,7 +25,7 @@ function clearForm() {
 
 <h3>Card Table</h3>
 
-<form action="/HandwritingCard/model/CardServlet.controller" method="get">
+<form action="/her/model/CardServlet.controller" method="get">
 <table>
 	<tr>
 		<td>卡片編號  </td>
