@@ -3,7 +3,7 @@ package com.eeit95.her.model.card;
 import java.sql.Blob;
 import java.util.List;
 
-public interface CardDAOInterface {
+public interface cardDAOInterface {
 	public abstract CardBean select(String id);
 	public abstract CardBean insert(CardBean bean);
 	public abstract CardBean update(String name,Long price,Blob cover,int viewCount,int salesCount,

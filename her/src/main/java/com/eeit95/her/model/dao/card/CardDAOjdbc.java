@@ -15,11 +15,9 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 import com.eeit95.her.model.card.CardBean;
-import com.eeit95.her.model.card.CardDAOInterface;
+import com.eeit95.her.model.card.cardDAOInterface;
 
-
-
-public class CardDAOjdbc implements CardDAOInterface {
+public class CardDAOjdbc implements cardDAOInterface {
 	private static final String Select_By_ID = "select*from card where id=?";
 	private static final String Insert = "insert into card (id,name,price,cover,viewCount,"
 			+ "salesCount,status,manufacturer,cost,gpratio,stock,maxWordCount)"+
