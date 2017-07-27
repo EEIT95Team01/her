@@ -63,7 +63,13 @@
 			<artifactId>hibernate-proxool</artifactId>
 			<version>${hibernate.version}</version>
 		</dependency>
-
+		
+		<!-- JSTL -->
+		<dependency>
+		    <groupId>javax.servlet</groupId>
+		    <artifactId>jstl</artifactId>
+		    <version>1.2</version>
+		</dependency>
 
 		<!-- Apache Commons -->
 		<dependency>
