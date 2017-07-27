@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.eeit95.her.model.card.cardBean;
-import com.eeit95.her.model.dao.card.CardDAOJdbc;
+import com.eeit95.her.model.card.CardBean;
+import com.eeit95.her.model.dao.card.CardDAOjdbc;
 
 
 
@@ -26,10 +26,10 @@ public class CardServlet extends HttpServlet {
 		String prodaction = request.getParameter("prodaction");
 		switch(prodaction) {
 		case "Select":
-			CardDAOJdbc cardDAO = new CardDAOJdbc();
-			List<cardBean> beans = cardDAO.select();
+			CardDAOjdbc cardDAO = new CardDAOjdbc();
+			List<CardBean> beans = cardDAO.select();
 			request.setAttribute("beans", beans);
-			for(cardBean bean : beans){
+			for(CardBean bean : beans){
 				System.out.println(bean);
 			}
 			break;

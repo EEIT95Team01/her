@@ -1,6 +1,6 @@
 package com.eeit95.her.model.member;
 
-public class memberBean {
+public class MemberBean {
 	private String id;
 	private String email;
 	private String password;

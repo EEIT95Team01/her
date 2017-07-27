@@ -16,7 +16,7 @@ import javax.sql.DataSource;
 import com.eeit95.her.model.pack.PackageBean;
 import com.eeit95.her.model.pack.PackageDAOInterface;
 
-public class PackageDAO implements PackageDAOInterface {
+public class PackageDAOjdbc implements PackageDAOInterface {
 
 	private static final String GET_PACKAGE_IDS = "SELECT id FROM [package] WHERE [memberId] = ? AND [status] = ?";
 
@@ -35,7 +35,7 @@ public class PackageDAO implements PackageDAOInterface {
 
 	public static void main(String[] args) {
 		// selectById
-		PackageDAO packageDAO = new PackageDAO();
+		PackageDAOjdbc packageDAO = new PackageDAOjdbc();
 		PackageBean packageBean1 = packageDAO.selectById("p01703150001");
 		if (packageBean1 != null) {
 			System.out.println(packageBean1);

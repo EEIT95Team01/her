@@ -2,7 +2,7 @@ package com.eeit95.her.model.card;
 
 import java.sql.Blob;
 
-public class cardBean {
+public class CardBean {
 	
 	
 	String id;

@@ -1,4 +1,4 @@
-package com.eeit95.controller;
+package com.eeit95.her.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.eeit95.her.model.dao.pack.PackageDAO;
+import com.eeit95.her.model.dao.pack.PackageDAOjdbc;
 import com.eeit95.her.model.pack.PackageBean;
 
 @WebServlet("/member/package")
@@ -23,7 +23,7 @@ public class PackageController extends HttpServlet {
 		String memberId = request.getParameter("memberId");
 		int statusM = 1, statusR = 2, statusO = 3;
 		
-		PackageDAO packageDAO = new PackageDAO();
+		PackageDAOjdbc packageDAO = new PackageDAOjdbc();
 		List<String> packageIdsM = packageDAO.getPackageIds(memberId, statusM);
 		List<String> packageIdsR = packageDAO.getPackageIds(memberId, statusR);
 		
