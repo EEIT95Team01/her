@@ -11,7 +11,5 @@ public interface cardDAOInterface {
 	short maxWordCount,String id);
 	public abstract boolean delete(String id);
 	public abstract List <cardBean> select();
-	
-
 
 }
