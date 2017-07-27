@@ -14,12 +14,12 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-import com.eeit95.her.model.card.cardBean;
+import com.eeit95.her.model.card.CardBean;
 import com.eeit95.her.model.card.cardDAOInterface;
 
 
 
-public class CardDAOJdbc implements cardDAOInterface {
+public class CardDAOjdbc implements cardDAOInterface {
 	private static final String Select_By_ID = "select*from card where id=?";
 	private static final String Insert = "insert into card (id,name,price,cover,viewCount,"
 			+ "salesCount,status,manufacturer,cost,gpratio,stock,maxWordCount)"+
@@ -43,10 +43,10 @@ public class CardDAOJdbc implements cardDAOInterface {
 		
 	}
 	public static void main(String[] args){
-		CardDAOJdbc cdj = new CardDAOJdbc();
-		List<cardBean>  beans = cdj.select();
+		CardDAOjdbc cdj = new CardDAOjdbc();
+		List<CardBean>  beans = cdj.select();
 		
-		for(cardBean bean: beans){
+		for(CardBean bean: beans){
 
 			System.out.println(bean);
 		}
@@ -55,8 +55,8 @@ public class CardDAOJdbc implements cardDAOInterface {
 	}
 	
 	@Override
-	public List <cardBean> select() {
-		List<cardBean> result = new ArrayList<cardBean>();
+	public List <CardBean> select() {
+		List<CardBean> result = new ArrayList<CardBean>();
 		try	{
 		    conn = ds.getConnection();
 //			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
@@ -67,7 +67,7 @@ public class CardDAOJdbc implements cardDAOInterface {
 			//result = new ArrayList<cardBean>();
 			while(rset.next()) {
 //				System.out.println("while");
-				cardBean bean = new cardBean();
+				CardBean bean = new CardBean();
 				bean.setId(rset.getString("id"));
 				bean.setName(rset.getString("name"));
 				bean.setPrice( rset.getLong("price"));
@@ -93,8 +93,8 @@ public class CardDAOJdbc implements cardDAOInterface {
 
 	
 	@Override
-	public cardBean select(String id) {
-		cardBean result = null;
+	public CardBean select(String id) {
+		CardBean result = null;
 		ResultSet rset = null;
 		Connection conn;
 		try {
@@ -105,7 +105,7 @@ public class CardDAOJdbc implements cardDAOInterface {
 			stmt.setString(1, id);
 			rset=stmt.executeQuery();
 			while(rset.next()){
-				result=new cardBean();
+				result=new CardBean();
 				result.setName(rset.getString("name"));
 				result.setPrice( rset.getLong("price"));
 				result.setCover(rset.getBlob("cover"));
@@ -137,8 +137,8 @@ public class CardDAOJdbc implements cardDAOInterface {
 	}
 
 	@Override
-	public cardBean insert(cardBean bean) {
-		cardBean result = null;
+	public CardBean insert(CardBean bean) {
+		CardBean result = null;
 		try{
 //				Connection conn = DriverManager.getConnection(URL, userID, password);
 				conn = ds.getConnection();
@@ -171,11 +171,11 @@ public class CardDAOJdbc implements cardDAOInterface {
 	
 
 	@Override
-	public cardBean update(String name,Long price,Blob cover,int viewCount,int salesCount,
+	public CardBean update(String name,Long price,Blob cover,int viewCount,int salesCount,
 			Boolean	status,String manufacturer,Long cost,Long gpratio,short stock,
 			short maxWordCount,String id) {
 		
-		cardBean result = null;
+		CardBean result = null;
 		try {
 			conn = ds.getConnection();
 			PreparedStatement stmt = conn.prepareStatement(Update);

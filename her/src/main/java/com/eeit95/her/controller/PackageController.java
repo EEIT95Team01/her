@@ -1,4 +1,4 @@
-package com.eeit95.controller;
+package com.eeit95.her.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
