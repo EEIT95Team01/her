@@ -3,70 +3,64 @@ package com.eeit95.her.model.font;
 import java.sql.Blob;
 
 public class FontBean {
-	private int fontId;
-	private String fontNo;
-	private String fontName;
-	private int fontPrice;
-	private int writerNo;
-	private Blob fontCover;
-	private int fontViewCount;
-	private int fontSalesCount;
-	private boolean fontStatus;
+	private String id;
+	private String name;
+	private int price;
+	private int writerId;
+	private Blob cover;
+	private int viewCount;
+	private int salesCount;
+	private boolean status;
 	
-	public int getFontId() {
-		return fontId;
+	public String getId() {
+		return id;
 	}
-	public void setFontId(int fontId) {
-		this.fontId = fontId;
+	public void setId(String id) {
+		this.id = id;
 	}
-	public String getFontNo() {
-		return fontNo;
+	public String getName() {
+		return name;
 	}
-	public void setFontNo(String fontNo) {
-		this.fontNo = fontNo;
+	public void setName(String name) {
+		this.name = name;
 	}
-	public String getFontName() {
-		return fontName;
+	public int getPrice() {
+		return price;
 	}
-	public void setFontName(String fontName) {
-		this.fontName = fontName;
+	public void setPrice(int price) {
+		this.price = price;
 	}
-	public int getFontPrice() {
-		return fontPrice;
+	public int getWriterId() {
+		return writerId;
 	}
-	public void setFontPrice(int fontPrice) {
-		this.fontPrice = fontPrice;
+	public void setWriterId(int writerId) {
+		this.writerId = writerId;
 	}
-	public int getWriterNo() {
-		return writerNo;
+	public Blob getCover() {
+		return cover;
 	}
-	public void setWriterNo(int writerNo) {
-		this.writerNo = writerNo;
+	public void setCover(Blob cover) {
+		this.cover = cover;
+	}
+	public int getViewCount() {
+		return viewCount;
+	}
+	public void setViewCount(int viewCount) {
+		this.viewCount = viewCount;
+	}
+	public int getSalesCount() {
+		return salesCount;
+	}
+	public void setSalesCount(int salesCount) {
+		this.salesCount = salesCount;
+	}
+	public boolean isStatus() {
+		return status;
+	}
+	public void setStatus(boolean status) {
+		this.status = status;
 	}
 	
-	public Blob getFontCover() {
-		return fontCover;
-	}
-	public void setFontCover(Blob fontCover) {
-		this.fontCover = fontCover;
-	}
-	public int getFontViewCount() {
-		return fontViewCount;
-	}
-	public void setFontViewCount(int fontViewCount) {
-		this.fontViewCount = fontViewCount;
-	}
-	public int getFontSalesCount() {
-		return fontSalesCount;
-	}
-	public void setFontSalesCount(int fontSalesCount) {
-		this.fontSalesCount = fontSalesCount;
-	}
-	public boolean isFontStatus() {
-		return fontStatus;
-	}
-	public void setFontStatus(boolean fontStatus) {
-		this.fontStatus = fontStatus;
-	}
+	
 	
 }
