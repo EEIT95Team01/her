@@ -29,65 +29,65 @@ function clearForm() {
 <table>
 	<tr>
 		<td>卡片編號  </td>
-		<td><input type="text" name="cardNo" value=""></td>
+		<td><input type="text" name="id" value=""></td>
 		<td></td>
 	</tr>
 	<tr>
 		<td>卡片名稱 </td>
-		<td><input type="text" name="cardName" value=""></td>
+		<td><input type="text" name="name" value=""></td>
 		<td></td>
 	</tr>
 
 	<tr>
 		<td>卡片價格 </td>
-		<td><input type="text" name="cardPrice" value=""></td>
+		<td><input type="text" name="price" value=""></td>
 		<td></td>
 	</tr>
 	<tr>
 		<td>卡片成本</td>
-		<td><input type="text" name="cardCost" value=""></td>
+		<td><input type="text" name="cost" value=""></td>
 		<td></td>
 	</tr>
 	<tr>
 		<td>卡片毛利</td>
-		<td><input type="text" name="cardGrossProfit" value=""></td>
+		<td><input type="text" name="gpratio" value=""></td>
 		<td></td>
 	</tr>
 	<tr>
 		<td>卡片廠商</td>
-		<td><input type="text" name="cardManufacturer" value=""></td>
+		<td><input type="text" name="manufacturer" value=""></td>
 		<td></td>
 	</tr>
 	<tr>
 		<td>卡片字數</td>
-		<td><input type="text" name="cardMaxWordCount" value=""></td>
+		<td><input type="text" name="maxWordCount" value=""></td>
 		<td></td>
 	</tr>
 	<tr>
 		<td>卡片圖片</td>
-		<td><input type="text" name="cardImage" value=""></td>
+		<td><input type="text" name="cover" value=""></td>
 		<td></td>
 	</tr>
 	<tr>
 		<td>卡片庫存</td>
-		<td><input type="text" name="cardStock" value=""></td>
+		<td><input type="text" name="stock" value=""></td>
 		<td></td>
 	</tr>
 	<tr>
 		<td>瀏覽次數</td>
-		<td><input type="text" name="cardViewCount" value=""></td>
+		<td><input type="text" name="viewCount" value=""></td>
 		<td></td>
 	</tr>
 	<tr>
 		<td>銷售數量</td>
-		<td><input type="text" name="cardSalesCount" value=""></td>
+		<td><input type="text" name="salesCount" value=""></td>
 		<td></td>
 	</tr>
 	<tr>
 		<td>上/下架狀態</td>
 		<td>
-		<input type="radio" name="cardStatus" value="true">上架
-		<input type="radio" name="cardStatus" value="false">下架
+		<input type="radio" name="status" value="true">上架
+		<input type="radio" name="status" value="false">下架
 		</td>
 		<td></td>
 	</tr>
