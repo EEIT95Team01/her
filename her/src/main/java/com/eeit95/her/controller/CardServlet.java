@@ -34,7 +34,7 @@ public class CardServlet extends HttpServlet {
 			}
 			break;
 		}
-		
+		//測試修改
 		//接收資料
 //		
 //		String cardNo = request.getParameter("cardNo");
