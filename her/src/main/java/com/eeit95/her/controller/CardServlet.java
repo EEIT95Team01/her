@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.eeit95.her.model.img.dao.ImageBlob;
+import com.eeit95.her.model.img.dao.ImageToBytes;
 
 
 
@@ -70,7 +70,7 @@ public class CardServlet extends HttpServlet {
 
 		Blob cover= null;
 		if(temp2!=null || temp2.length()!=0){
-			cover=ImageBlob.imgIn(temp2);
+			cover=ImageToBytes.imgIn(temp2);
 		}
 		
 		int viewCount=0;

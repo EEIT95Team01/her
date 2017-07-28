@@ -10,10 +10,10 @@ import java.sql.SQLException;
 import javax.sql.rowset.serial.SerialBlob;
 import javax.sql.rowset.serial.SerialException;
 
-public class ImageBlob {
+public class ImageToBytes {
 
 	
-	public static Blob imgIn(String path) {
+	public static byte[] imgIn(String path) {
 			File f = new File(path);
 			byte[] b = new byte[(int)f.length()];
 			FileInputStream fis = null;
@@ -42,6 +42,6 @@ public class ImageBlob {
 			}
 			System.out.println(blob);
 		
-		return blob;
+		return b;
 	}
 }

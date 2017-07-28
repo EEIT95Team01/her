@@ -7,11 +7,17 @@ public class FontBean {
 	private String name;
 	private int price;
 	private int writerId;
-	private Blob cover;
+	private byte[] cover;
 	private int viewCount;
 	private int salesCount;
 	private boolean status;
 	
+	
+	@Override
+	public String toString() {
+		return "FontBean [id=" + id + ", name=" + name + ", price=" + price + ", writerId=" + writerId + ", cover="
+				+ cover + ", viewCount=" + viewCount + ", salesCount=" + salesCount + ", status=" + status + "]";
+	}
 	public String getId() {
 		return id;
 	}
@@ -36,10 +42,10 @@ public class FontBean {
 	public void setWriterId(int writerId) {
 		this.writerId = writerId;
 	}
-	public Blob getCover() {
+	public byte[] getCover() {
 		return cover;
 	}
-	public void setCover(Blob cover) {
+	public void setCover(byte[] cover) {
 		this.cover = cover;
 	}
 	public int getViewCount() {
