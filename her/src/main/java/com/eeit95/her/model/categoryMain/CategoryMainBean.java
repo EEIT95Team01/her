@@ -2,7 +2,7 @@ package com.eeit95.her.model.categoryMain;
 
 public class CategoryMainBean {
 
-	private int id;	//資料庫型態為smallint(-2^15~2^15-1),與short範圍相同。
+	private int id;	 //資料庫型態為smallint(-2^15~2^15-1),與short範圍相同。
 	private String name;
 	
 	public int getId() {
