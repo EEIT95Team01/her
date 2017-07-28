@@ -19,6 +19,8 @@ import com.eeit95.her.model.card.CardDAOInterface;
 
 public class CardDAOjdbc implements CardDAOInterface {
 	private static final String Select_By_ID = "select*from card where id=?";
+	private static final String Select_All_TopN = "SELECT TOP ? [id], [name], [price], [cover]	,[viewCount], [salesCount], [status], \r\n" + 
+			"[manufacturer], [cost], [gpratio], [stock],[maxWordCount] FROM [card] WHERE [status] = 1 ORDER BY ? DESC";
 	private static final String Insert = "insert into card (id,name,price,cover,viewCount,"
 			+ "salesCount,status,manufacturer,cost,gpratio,stock,maxWordCount)"+
 			"value(?,?,?,?,?,?,?,?,?,?,?,?)";
@@ -29,11 +31,13 @@ public class CardDAOjdbc implements CardDAOInterface {
 	private static final String Delete = "delete from card where id=?";
 	private static DataSource ds; 
 	private static Connection conn;
+	private static List<CardBean> result; 
 	static{
 		
 		try {
 			Context context = new InitialContext();
 			ds= (DataSource)context.lookup("java:comp/env/jdbc/her");
+			result = new ArrayList<CardBean>();
 		} catch (NamingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -51,10 +55,40 @@ public class CardDAOjdbc implements CardDAOInterface {
 		
 		
 	}
-	
+	@Override
+
+	public  List <CardBean> selectAll(int n,String type){
+		PreparedStatement stmt;
+		try {
+			stmt = conn.prepareStatement(Select_All_TopN);
+			ResultSet rset = stmt.executeQuery(); 
+			while(rset.next()) {
+				CardBean bean = new CardBean();
+				bean.setId(rset.getString("id"));
+				bean.setName(rset.getString("name"));
+				bean.setPrice( rset.getLong("price"));
+				bean.setCover(rset.getBlob("cover"));
+				bean.setViewCount(rset.getInt("viewCount"));
+				bean.setSalesCount(rset.getInt("salesCount"));
+				bean.setStatus(rset.getBoolean("status"));
+				bean.setManufacturer(rset.getString("manufacturer"));
+				bean.setCost( rset.getLong("cost"));
+				bean.setGpratio( rset.getLong("gpratio"));
+				bean.setStock(rset.getShort("stock"));
+				bean.setMaxWordCount(rset.getShort("maxWordCount"));
+				
+				result.add(bean);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return result;
+	}
 	@Override
 	public List <CardBean> selectAll() {
-		List<CardBean> result = new ArrayList<CardBean>();
+		
+
 		try	{
 		    conn = ds.getConnection();
 //			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");

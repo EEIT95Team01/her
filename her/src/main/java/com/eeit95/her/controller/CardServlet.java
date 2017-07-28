@@ -1,8 +1,8 @@
 package com.eeit95.her.controller;
 
 import java.io.IOException;
+import java.sql.Blob;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletException;
@@ -11,8 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.eeit95.her.model.card.CardBean;
-import com.eeit95.her.model.dao.card.CardDAOjdbc;
+import com.eeit95.her.model.img.dao.ImageBlob;
 
 
 
@@ -30,6 +29,7 @@ public class CardServlet extends HttpServlet {
 //		case "Select":
 //			CardDAOjdbc cardDAO = new CardDAOjdbc();
 //			List<CardBean> beans = cardDAO.selectAll();
+
 //			request.setAttribute("beans", beans);
 //			for(CardBean bean : beans){
 //				System.out.println(bean);
@@ -38,60 +38,64 @@ public class CardServlet extends HttpServlet {
 //		}
 		//測試修改
 		//接收資料
+
 		
-		String cardNo = request.getParameter("cardNo");
-		String cardName = request.getParameter("cardName");
-		String temp3 = request.getParameter("cardPrice");
-		String temp4 = request.getParameter("cardCost");
-		String temp5= request.getParameter("cardGrossProfit");
-		String cardManufactory = request.getParameter("cardManufactory");
-		String temp6 = request.getParameter("cardMaxWordCount");
-		String temp7 = request.getParameter("cardImage");
-		String temp8 = request.getParameter("cardStock");
-		String temp9 = request.getParameter("cardViewCount");
-		String temp10 = request.getParameter("cardSalesCount");
-		String temp11 = request.getParameter("cardStatus");
+		String id = request.getParameter("id");
+		String name = request.getParameter("name");
+		String temp1 = request.getParameter("price");
+		String temp2 = request.getParameter("cover");
+		String temp3 = request.getParameter("viewCount");
+		String temp4 = request.getParameter("salesCount");
+		String temp5 = request.getParameter("status");
+		String manufacturer = request.getParameter("manufacturer");
+		String temp6 = request.getParameter("cost");
+		String temp7= request.getParameter("gpratio");
+		String temp8 = request.getParameter("stock");
+		String temp9 = request.getParameter("maxWordCount");
 		String prodaction = request.getParameter("prodaction");
 		
 //轉換資料
 		Map<String, String> errors = new HashMap<String, String>();
 		request.setAttribute("errors", errors);
-		int cardId=0;
-		if(temp3!=null || temp3.length()!=0){
+		Long price=null;
+		if(temp1!=null || temp1.length()!=0){
 			try{
-				cardId = Integer.parseInt(temp3);
+				price = Long.parseLong(temp1);
+				if(price < 0 ) {
+					errors.put("price", "price必須為正整數");
+				}	
 			}catch(NumberFormatException e){
 				e.printStackTrace();
-				errors.put("cardPrice", "cardPrice必須為正數");
+				errors.put("price", "price必須為正整數");
 			}
+		}
+
+		Blob cover= null;
+		if(temp2!=null || temp2.length()!=0){
+			cover=ImageBlob.imgIn(temp2);
+		}
+		
+		int viewCount=0;
+		if(temp3!=null || temp3.length()!=0){
+			
+			
 		}
 		
 		
-//		String temp1 = request.getParameter("cardId");int cardId;
-//		int cardNo;
-//		String cardName;
-//		int cardPrice;
-//		Double cardCost;
-//		Double cardGrossProfit;
-//		String cardManufactory;
-//		int cardMaxWordCount;
-//		Blob cardImage;
-//		short cardStock;
-//		int cardViewCount;
-//		int cardSalesCount;
-//		Boolean cardStatus;
-//		String temp2 = request.getParameter("cardNo");
-//		String cardName = request.getParameter("cardName");
-//		String temp3 = request.getParameter("cardPrice");
-//		String temp4 = request.getParameter("cardCost");
-//		String temp5= request.getParameter("cardGrossProfit");
-//		String cardManufactory = request.getParameter("cardManufactory");
-//		String temp6 = request.getParameter("cardMaxWordCount");
-//		String temp7 = request.getParameter("cardImage");
-//		String temp8 = request.getParameter("cardStock");
-//		String temp9 = request.getParameter("cardViewCount");
-//		String temp10 = request.getParameter("cardSalesCount");
-//		String temp11 = request.getParameter("cardStatus");
+//		int salesCount;
+//		Boolean	status;
+//		String manufacturer;
+//		Long cost;
+//		Long gpratio;
+//		short stock;
+//		short maxWordCount;
+//		String temp4 = request.getParameter("salesCount");
+//		String temp5 = request.getParameter("status");
+//		String manufacturer = request.getParameter("manufacturer");
+//		String temp6 = request.getParameter("cost");
+//		String temp7= request.getParameter("gpratio");
+//		String temp8 = request.getParameter("stock");
+//		String temp9 = request.getParameter("maxWordCount");
 //		String prodaction = request.getParameter("prodaction");
 		//驗證資料
 		//呼叫Model

@@ -21,7 +21,7 @@ public class PackageController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
 		String memberId = request.getParameter("memberId");
-		int statusM = 1, statusR = 2, statusO = 3;
+		int statusM = 1, statusR = 2;
 		
 		PackageDAOjdbc packageDAO = new PackageDAOjdbc();
 		List<String> packageIdsM = packageDAO.getPackageIds(memberId, statusM);
