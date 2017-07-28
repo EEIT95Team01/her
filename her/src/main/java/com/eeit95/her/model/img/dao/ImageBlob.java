@@ -40,8 +40,6 @@ public class ImageBlob {
 					}
 				}
 			}
-			System.out.println(blob);
-		
 		return blob;
 	}
 }

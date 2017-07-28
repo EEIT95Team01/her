@@ -16,19 +16,17 @@ import javax.sql.DataSource;
 
 import com.eeit95.her.model.card.CardBean;
 import com.eeit95.her.model.card.CardDAOInterface;
+import com.eeit95.her.model.img.dao.ImageBlob;
 
 public class CardDAOjdbc implements CardDAOInterface {
 	private static int n = 2;
 	private static String type = null;
 	private static final String Select_By_ID = "select*from card where id=?";
 	private static String Select_All_TopN = "SELECT TOP " + n
-			+ " [id], [name], [price], [cover],[viewCount], [salesCount], [status], \r\n"
-			+ "[manufacturer], [cost], [gpratio], [stock],[maxWordCount] FROM [card] WHERE [status] = 1 ORDER BY "
-			+ type + " DESC";
-	private static final String Insert = "insert into card (id,name,price,cover,viewCount,"
-			+ "salesCount,status,manufacturer,cost,gpratio,stock,maxWordCount)" + "value(?,?,?,?,?,?,?,?,?,?,?,?)";
+			+ " * FROM [card] WHERE [status] = 1 ORDER BY "	+ type + " DESC";
+	private static final String Insert = "insert into card values(?,?,?,?,?,?,?,?,?,?,?,?)";
 	private static final String Update = "update card set name=?,price=?,cover=?,viewCount=?,"
-			+ "salesCount,status=?,manufacturer=?,cost=?,gpratio=?,stock=?,maxWordCount=?" + "where id=? ";
+			+ "salesCount=?,status=?,manufacturer=?,cost=?,gpratio=?,stock=?,maxWordCount=?" + " where id=? ";
 	private static final String Select_All = "select*from card";
 	private static final String Delete = "delete from card where id=?";
 	private static DataSource ds;
@@ -51,20 +49,42 @@ public class CardDAOjdbc implements CardDAOInterface {
 
 		CardDAOjdbc cdj = new CardDAOjdbc();
 		
-//		List<CardBean> beans1 = cdj.selectAll();
-//		
-//		for (CardBean bean : beans1) {
-//
-//			System.out.println(bean);
-//		}
-
-		List<CardBean> beans = cdj.selectAll(2, "[viewCount]");
-
-		for (CardBean bean : beans) {
-
-			System.out.println(bean);
+		// SELECT 一筆資料 & PRINT
+		CardBean bean =cdj.selectById("c01706010001");
+		System.out.println("SELECT 一筆資料 & PRINT");
+		System.out.println(bean);
+		
+		System.out.println("===================================================");
+		
+		// INSERT 一筆資料 & PRINT
+		bean.setId("c01707280001");
+		bean =cdj.insert(bean);
+		System.out.println("INSERT 一筆資料 & PRINT");
+		System.out.println(bean);
+		
+		System.out.println("===================================================");
+		
+		// UPDATE 一筆資料 & PRINT
+		bean.setName("史奴比");
+		cdj.update(bean);
+		System.out.println("UPDATE 一筆資料 & PRINT");
+		System.out.println(bean);
+		
+		System.out.println("===================================================");
+		
+		// DELETE 一筆資料 & PRINT
+		System.out.println("DELETE 一筆資料 & PRINT");
+		System.out.println(cdj.delete("c01707280001"));
+		
+		System.out.println("===================================================");
+		
+		// SELECT 所有資料 & PRINT
+		result=cdj.selectAll();
+		System.out.println("SELECT 所有資料 & PRINT");
+		for(CardBean bean1:result) {
+			System.out.println(bean1);
 		}
-
+		
 	}
 
 	@Override
@@ -78,7 +98,7 @@ public class CardDAOjdbc implements CardDAOInterface {
 		try {
 			// conn = ds.getConnection();
 			conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;database=her", "sa", "sa123456");
-
+			result.clear();
 			stmt = conn.prepareStatement(Select_All_TopN);
 			// stmt.setInt(1, n);
 			// stmt.setString(1, type);
@@ -116,6 +136,7 @@ public class CardDAOjdbc implements CardDAOInterface {
 			conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;database=her", "sa", "sa123456");
 			PreparedStatement stmt = conn.prepareStatement(Select_All);
 			ResultSet rset = stmt.executeQuery();
+			result.clear();
 			// System.out.println("test1");
 
 			while (rset.next()) {
@@ -133,7 +154,6 @@ public class CardDAOjdbc implements CardDAOInterface {
 				bean.setGpratio(rset.getLong("gpratio"));
 				bean.setStock(rset.getShort("stock"));
 				bean.setMaxWordCount(rset.getShort("maxWordCount"));
-				System.out.println(bean);
 				result.add(bean);
 			}
 		} catch (SQLException e) {
@@ -149,14 +169,15 @@ public class CardDAOjdbc implements CardDAOInterface {
 		ResultSet rset = null;
 		Connection conn;
 		try {
-			// conn = DriverManager.getConnection(URL, userID, password);
-
-			conn = ds.getConnection();
+			conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;database=her", "sa", "sa123456");
+//			conn = ds.getConnection();
+			
 			PreparedStatement stmt = conn.prepareStatement(Select_By_ID);
 			stmt.setString(1, id);
 			rset = stmt.executeQuery();
-			while (rset.next()) {
+			if (rset.next()) {
 				result = new CardBean();
+				result.setId(rset.getString("id"));
 				result.setName(rset.getString("name"));
 				result.setPrice(rset.getLong("price"));
 				result.setCover(rset.getBlob("cover"));
@@ -191,27 +212,28 @@ public class CardDAOjdbc implements CardDAOInterface {
 	public CardBean insert(CardBean bean) {
 		CardBean result = null;
 		try {
-			// Connection conn = DriverManager.getConnection(URL, userID, password);
-			conn = ds.getConnection();
+			conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;database=her", "sa", "sa123456");
+//			conn = ds.getConnection();
 			PreparedStatement stmt = conn.prepareStatement(Insert);
-			if (bean != null) {
-				stmt.setString(1, bean.getId());
-				stmt.setString(2, bean.getName());
-				stmt.setLong(3, bean.getPrice());
-				stmt.setBlob(4, bean.getCover());
-				stmt.setInt(5, bean.getViewCount());
-				stmt.setInt(6, bean.getSalesCount());
-				stmt.setBoolean(7, bean.getStatus());
-				stmt.setString(8, bean.getManufacturer());
-				stmt.setLong(9, bean.getCost());
-				stmt.setLong(10, bean.getGpratio());
-				stmt.setShort(11, bean.getStock());
-				stmt.setShort(12, bean.getMaxWordCount());
+			
+				if (bean != null) {
+					stmt.setString(1, bean.getId());
+					stmt.setString(2, bean.getName());
+					stmt.setLong(3, bean.getPrice());
+					stmt.setBlob(4, bean.getCover());
+					stmt.setInt(5, bean.getViewCount());
+					stmt.setInt(6, bean.getSalesCount());
+					stmt.setBoolean(7, bean.getStatus());
+					stmt.setString(8, bean.getManufacturer());
+					stmt.setLong(9, bean.getCost());
+					stmt.setLong(10, bean.getGpratio());
+					stmt.setShort(11, bean.getStock());
+					stmt.setShort(12, bean.getMaxWordCount());
 
-				int i = stmt.executeUpdate();
-				if (i == 1) {
-					result = bean;
-				}
+					int i = stmt.executeUpdate();
+					if (i == 1) {
+						result = bean;
+					}
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -220,29 +242,30 @@ public class CardDAOjdbc implements CardDAOInterface {
 	}
 
 	@Override
-	public CardBean update(String name, Long price, Blob cover, int viewCount, int salesCount, Boolean status,
-			String manufacturer, Long cost, Long gpratio, short stock, short maxWordCount, String id) {
-
+	public CardBean update(CardBean bean) {
 		CardBean result = null;
 		try {
-			conn = ds.getConnection();
+//			conn = ds.getConnection();
+			conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;database=her", "sa", "sa123456");
 			PreparedStatement stmt = conn.prepareStatement(Update);
-			stmt.setString(1, name);
-			stmt.setLong(2, price);
-			stmt.setBlob(3, cover);
-			stmt.setInt(4, viewCount);
-			stmt.setInt(5, salesCount);
-			stmt.setBoolean(6, status);
-			stmt.setString(7, manufacturer);
-			stmt.setLong(8, cost);
-			stmt.setLong(9, gpratio);
-			stmt.setShort(10, stock);
-			stmt.setShort(11, maxWordCount);
-			stmt.setString(12, id);
-
+			stmt.setString(1, bean.getName());
+			stmt.setLong(2, bean.getPrice());
+			stmt.setBlob(3, bean.getCover());
+			stmt.setInt(4, bean.getViewCount());
+			stmt.setInt(5, bean.getSalesCount());
+			stmt.setBoolean(6, bean.getStatus());
+			stmt.setString(7, bean.getManufacturer());
+			stmt.setLong(8, bean.getCost());
+			stmt.setLong(9, bean.getGpratio());
+			stmt.setShort(10, bean.getStock());
+			stmt.setShort(11, bean.getMaxWordCount());
+			stmt.setString(12, bean.getId());
+			
 			int i = stmt.executeUpdate();
 			if (i == 1) {
-				result = this.selectById(id);
+				result = this.selectById(bean.getId());
+			} else {
+				System.out.println("Not found");
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -254,7 +277,8 @@ public class CardDAOjdbc implements CardDAOInterface {
 	@Override
 	public boolean delete(String id) {
 		try {
-			conn = ds.getConnection();
+//			conn = ds.getConnection();
+			conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;database=her", "sa", "sa123456");
 			PreparedStatement stmt = conn.prepareStatement(Delete);
 
 			if (id != null) {
