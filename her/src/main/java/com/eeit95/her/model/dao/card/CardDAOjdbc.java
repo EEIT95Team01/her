@@ -74,7 +74,7 @@ public class CardDAOjdbc implements CardDAOInterface {
 		System.out.println("===================================================");
 		
 		// DELETE 一筆資料 & PRINT
-		System.out.println("DELETE 一筆資料 & PRINT");
+//		System.out.println("DELETE 一筆資料 & PRINT");
 		System.out.println(cdj.delete("c01707280001"));
 		
 		System.out.println("===================================================");
