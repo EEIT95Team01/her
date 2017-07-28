@@ -10,7 +10,7 @@ import java.sql.SQLException;
 import javax.sql.rowset.serial.SerialBlob;
 import javax.sql.rowset.serial.SerialException;
 
-public class ImageBlob {
+public class ImageToBytes {
 
 	
 	public static byte[] imgIn(String path) {

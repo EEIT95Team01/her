@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.eeit95.her.model.dao.font.FontDAOjdbc;
 import com.eeit95.her.model.font.FontBean;
-import com.eeit95.her.model.img.dao.ImageBlob;
+import com.eeit95.her.model.img.dao.ImageToBytes;
 
 /**
  * Servlet implementation class ShowPictureServlet

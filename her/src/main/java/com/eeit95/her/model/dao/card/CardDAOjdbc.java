@@ -16,7 +16,7 @@ import javax.sql.DataSource;
 
 import com.eeit95.her.model.card.CardBean;
 import com.eeit95.her.model.card.CardDAOInterface;
-import com.eeit95.her.model.img.dao.ImageBlob;
+import com.eeit95.her.model.img.dao.ImageToBytes;
 
 public class CardDAOjdbc implements CardDAOInterface {
 	private static int n = 2;

@@ -16,7 +16,7 @@ import org.hibernate.Session;
 
 import com.eeit95.her.model.font.FontBean;
 import com.eeit95.her.model.font.FontDAOInterface;
-import com.eeit95.her.model.img.dao.ImageBlob;
+import com.eeit95.her.model.img.dao.ImageToBytes;
 
 
 public class FontDAOjdbc implements FontDAOInterface {
@@ -207,7 +207,7 @@ public class FontDAOjdbc implements FontDAOInterface {
 		fontBean.setName("AAAA");
 		fontBean.setPrice(123);
 		fontBean.setWriterId(123);
-		fontBean.setCover(ImageBlob.imgIn("C:\\Users\\Public\\Pictures\\Sample Pictures\\Desert.jpg"));
+		fontBean.setCover(ImageToBytes.imgIn("C:\\Users\\Public\\Pictures\\Sample Pictures\\Desert.jpg"));
 		fontBean.setViewCount(123456);
 		fontBean.setSalesCount(7651);
 		fontBean.setStatus(true);

@@ -6,7 +6,7 @@ public class CardDescriptionBean {
 	private String cardId;
 	private short order;
 	private String text;
-	private Blob image;
+	private byte[] image;
 	
 	
 	@Override
@@ -46,12 +46,12 @@ public class CardDescriptionBean {
 	}
 
 
-	public Blob getImage() {
+	public byte[] getImage() {
 		return image;
 	}
 
 
-	public void setImage(Blob image) {
+	public void setImage(byte[]  image) {
 		this.image = image;
 	}
 	

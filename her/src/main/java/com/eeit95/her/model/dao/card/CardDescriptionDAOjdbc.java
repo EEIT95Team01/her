@@ -19,6 +19,7 @@ import com.eeit95.her.model.card.CardDescriptionDAOInterface;
 public class CardDescriptionDAOjdbc implements CardDescriptionDAOInterface {
 	private static final String Select_By_Id = "select * from [card_description] where [cardId] = ?";
 	private static final String Insert = "insert into [card_description] values(?,?,?,?)";
+	private static final String Delete = "delete from [card_description] where id=?";
 	private static DataSource ds;
 	private static Connection conn;
 	private static List<CardDescriptionBean> result = new ArrayList<CardDescriptionBean>();
@@ -50,7 +51,7 @@ public class CardDescriptionDAOjdbc implements CardDescriptionDAOInterface {
 				bean.setCardId(rest.getString("cardId"));
 				bean.setOrder(rest.getShort("order"));
 				bean.setText(rest.getString("text"));
-				bean.setImage(rest.getBlob("image"));
+				bean.setImage(rest.getBytes("image"));
 
 				result.add(bean);
 			}
@@ -73,14 +74,11 @@ public class CardDescriptionDAOjdbc implements CardDescriptionDAOInterface {
 				stmt.setString(1,bean.getCardId());
 				stmt.setShort(2,bean.getOrder());
 				stmt.setString(3,bean.getText());
-				stmt.setBlob(4,bean.getImage());
+				stmt.setBytes(4,bean.getImage());
 			}
 
 				int i = stmt.executeUpdate();
 				
-			
-			
-			
 		}catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -88,15 +86,21 @@ public class CardDescriptionDAOjdbc implements CardDescriptionDAOInterface {
 	}
 
 	@Override
-	public CardDescriptionBean update(CardDescriptionBean bean) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	public boolean deleteById(String cardId) {
+		try{
+		conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;database=her", "sa", "sa123456");
+		PreparedStatement stmt = conn.prepareStatement(Delete);
 
-	@Override
-	public boolean deleteByPrimaryKey(String cardId, short order) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+		if (cardId != null) {
+			stmt.setString(1, cardId);
+			int i = stmt.executeUpdate();
+			return true;
+		}
 
+	} catch (SQLException e) {
+		e.printStackTrace();
+	}
+	return false;
+
+	}
 }
