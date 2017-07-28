@@ -43,9 +43,9 @@ public class ShowPictureServlet extends HttpServlet {
 			FontBean bean = dao.selectById(ID);
 			response.setContentType("image/jpeg");
 			OutputStream os = response.getOutputStream();
-			Blob b = bean.getCover();
-			byte[] data = b.getBytes(1, (int) b.length());
-			os.write(data, 0, (int) b.length());
+			byte[] b = bean.getCover();
+		
+			os.write(b, 0, (int) b.length);
 	
 		} catch (Exception e) {
 			e.printStackTrace();

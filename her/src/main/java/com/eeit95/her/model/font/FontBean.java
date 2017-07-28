@@ -7,7 +7,7 @@ public class FontBean {
 	private String name;
 	private int price;
 	private int writerId;
-	private Blob cover;
+	private byte[] cover;
 	private int viewCount;
 	private int salesCount;
 	private boolean status;
@@ -36,10 +36,10 @@ public class FontBean {
 	public void setWriterId(int writerId) {
 		this.writerId = writerId;
 	}
-	public Blob getCover() {
+	public byte[] getCover() {
 		return cover;
 	}
-	public void setCover(Blob cover) {
+	public void setCover(byte[] cover) {
 		this.cover = cover;
 	}
 	public int getViewCount() {
@@ -60,6 +60,7 @@ public class FontBean {
 	public void setStatus(boolean status) {
 		this.status = status;
 	}
+
 	
 	
 	

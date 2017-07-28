@@ -6,7 +6,7 @@ public class CardBean {
 	
 	private String name;
 	private Long price;
-	private Blob cover;
+	private byte[] cover;
 	private int viewCount;
 	private int salesCount;
 	private Boolean	status;
@@ -45,10 +45,10 @@ public class CardBean {
 	public void setPrice(Long price) {
 		this.price = price;
 	}
-	public Blob getCover() {
+	public byte[] getCover() {
 		return cover;
 	}
-	public void setCover(Blob cover) {
+	public void setCover(byte[] cover) {
 		this.cover = cover;
 	}
 	public int getViewCount() {

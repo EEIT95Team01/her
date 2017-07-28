@@ -42,7 +42,7 @@ public class FontDAOjdbc implements FontDAOInterface {
 				stmt.setString(2, fontBean.getName());
 				stmt.setInt(3, fontBean.getPrice());
 				stmt.setInt(4, fontBean.getWriterId());
-				stmt.setBlob(5, fontBean.getCover());
+				stmt.setBytes(5, fontBean.getCover());
 				stmt.setInt(6, fontBean.getViewCount());
 				stmt.setInt(7, fontBean.getSalesCount());
 				stmt.setBoolean(8, fontBean.getStatus());
@@ -73,7 +73,7 @@ public class FontDAOjdbc implements FontDAOInterface {
 				stmt.setString(1, fontBean.getName());
 				stmt.setInt(2, fontBean.getPrice());
 				stmt.setInt(3, fontBean.getWriterId());
-				stmt.setBlob(4, fontBean.getCover());
+				stmt.setBytes(4, fontBean.getCover());
 				stmt.setInt(5, fontBean.getViewCount());
 				stmt.setInt(6, fontBean.getSalesCount());
 				stmt.setBoolean(7, fontBean.getStatus());
@@ -141,7 +141,7 @@ public class FontDAOjdbc implements FontDAOInterface {
 					bean.setName(rs.getString("name"));
 					bean.setPrice(rs.getInt("price"));
 					bean.setWriterId(rs.getInt("writerId"));
-					bean.setCover(rs.getBlob("cover"));
+					bean.setCover(rs.getBytes("cover"));
 					bean.setViewCount(rs.getInt("viewCount"));
 					bean.setSalesCount(rs.getInt("salesCount"));
 					bean.setStatus(rs.getBoolean("status"));
@@ -187,7 +187,7 @@ public class FontDAOjdbc implements FontDAOInterface {
 				bean.setName(rs.getString("name"));
 				bean.setPrice(rs.getInt("price"));
 				bean.setWriterId(rs.getInt("writerId"));
-				bean.setCover(rs.getBlob("cover"));
+				bean.setCover(rs.getBytes("cover"));
 				bean.setViewCount(rs.getInt("viewCount"));
 				bean.setSalesCount(rs.getInt("salesCount"));
 				bean.setStatus(rs.getBoolean("status"));

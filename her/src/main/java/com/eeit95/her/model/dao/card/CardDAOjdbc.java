@@ -108,7 +108,7 @@ public class CardDAOjdbc implements CardDAOInterface {
 				bean.setId(rset.getString("id"));
 				bean.setName(rset.getString("name"));
 				bean.setPrice(rset.getLong("price"));
-				bean.setCover(rset.getBlob("cover"));
+				bean.setCover(rset.getBytes("cover"));
 				bean.setViewCount(rset.getInt("viewCount"));
 				bean.setSalesCount(rset.getInt("salesCount"));
 				bean.setStatus(rset.getBoolean("status"));
@@ -145,7 +145,7 @@ public class CardDAOjdbc implements CardDAOInterface {
 				bean.setId(rset.getString("id"));
 				bean.setName(rset.getString("name"));
 				bean.setPrice(rset.getLong("price"));
-				bean.setCover(rset.getBlob("cover"));
+				bean.setCover(rset.getBytes("cover"));
 				bean.setViewCount(rset.getInt("viewCount"));
 				bean.setSalesCount(rset.getInt("salesCount"));
 				bean.setStatus(rset.getBoolean("status"));
@@ -180,7 +180,7 @@ public class CardDAOjdbc implements CardDAOInterface {
 				result.setId(rset.getString("id"));
 				result.setName(rset.getString("name"));
 				result.setPrice(rset.getLong("price"));
-				result.setCover(rset.getBlob("cover"));
+				result.setCover(rset.getBytes("cover"));
 				result.setViewCount(rset.getInt("viewCount"));
 				result.setSalesCount(rset.getInt("salesCount"));
 				result.setStatus(rset.getBoolean("status"));
@@ -220,7 +220,7 @@ public class CardDAOjdbc implements CardDAOInterface {
 					stmt.setString(1, bean.getId());
 					stmt.setString(2, bean.getName());
 					stmt.setLong(3, bean.getPrice());
-					stmt.setBlob(4, bean.getCover());
+					stmt.setBytes(4, bean.getCover());
 					stmt.setInt(5, bean.getViewCount());
 					stmt.setInt(6, bean.getSalesCount());
 					stmt.setBoolean(7, bean.getStatus());
@@ -250,7 +250,7 @@ public class CardDAOjdbc implements CardDAOInterface {
 			PreparedStatement stmt = conn.prepareStatement(Update);
 			stmt.setString(1, bean.getName());
 			stmt.setLong(2, bean.getPrice());
-			stmt.setBlob(3, bean.getCover());
+			stmt.setBytes(3, bean.getCover());
 			stmt.setInt(4, bean.getViewCount());
 			stmt.setInt(5, bean.getSalesCount());
 			stmt.setBoolean(6, bean.getStatus());

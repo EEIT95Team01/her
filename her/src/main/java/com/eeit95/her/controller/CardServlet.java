@@ -70,7 +70,7 @@ public class CardServlet extends HttpServlet {
 			}
 		}
 
-		Blob cover= null;
+		byte[] cover= null;
 		if(temp2!=null || temp2.length()!=0){
 			cover=ImageBlob.imgIn(temp2);
 		}
