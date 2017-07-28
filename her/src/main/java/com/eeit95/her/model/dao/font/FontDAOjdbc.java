@@ -45,7 +45,7 @@ public class FontDAOjdbc implements FontDAOInterface {
 				stmt.setBlob(5, fontBean.getCover());
 				stmt.setInt(6, fontBean.getViewCount());
 				stmt.setInt(7, fontBean.getSalesCount());
-				stmt.setBoolean(8, fontBean.isStatus());
+				stmt.setBoolean(8, fontBean.getStatus());
 				int n = stmt.executeUpdate();
 				System.out.println(n);
 			}
@@ -76,7 +76,7 @@ public class FontDAOjdbc implements FontDAOInterface {
 				stmt.setBlob(4, fontBean.getCover());
 				stmt.setInt(5, fontBean.getViewCount());
 				stmt.setInt(6, fontBean.getSalesCount());
-				stmt.setBoolean(7, fontBean.isStatus());
+				stmt.setBoolean(7, fontBean.getStatus());
 				stmt.setString(8, fontBean.getId());
 				int n = stmt.executeUpdate();
 				System.out.println(n);
@@ -223,7 +223,7 @@ public class FontDAOjdbc implements FontDAOInterface {
 			System.out.print(bean.getCover()+",\t");
 			System.out.print(bean.getViewCount()+",\t");
 			System.out.print(bean.getSalesCount()+",\t");
-			System.out.print(bean.isStatus() + "\n");
+			System.out.print(bean.getStatus() + "\n");
 			
 		}
 		
