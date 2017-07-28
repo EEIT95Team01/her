@@ -75,7 +75,7 @@ public class CardServlet extends HttpServlet {
 			cover=ImageBlob.imgIn(temp2);
 		}
 		
-		int viewCount=0;
+		int viewCount=1;
 		if(temp3!=null || temp3.length()!=0){
 			
 			

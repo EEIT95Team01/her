@@ -16,18 +16,18 @@
 <table>
 	<thead>
 	<tr>
-		<th>cardNo</th>
-		<th>cardName</th>
-		<th>cardPrice</th>
-		<th>cardCost</th>
-		<th>cardGrossProfit</th>
-		<th>cardManufactory</th>
-		<th>cardMaxWordCount</th>
-		<th>cardImage</th>
-		<th>cardStock</th>
-		<th>cardViewCount</th>
-		<th>cardSalesCount</th>
-		<th>cardStatus</th>
+		<th>id</th>
+		<th>name</th>
+		<th>price</th>
+		<th>cover</th>
+		<th>viewCount</th>
+		<th>salesCount</th>
+		<th>status</th>
+		<th>manufacturer</th>
+		<th>cost</th>
+		<th>gpratio</th>
+		<th>stock</th>
+		<th>maxWordCount</th>
 		
 	</tr>
 	</thead>
@@ -35,18 +35,18 @@
 	<c:forEach var="bean" items="${beans}">
 		
 	<tr>
-		<td>${bean.cardNo}</td>
-		<td>${bean.cardName}</td>
-		<td>${bean.cardPrice}</td>
-		<td>${bean.cardCost}</td>
-		<td>${bean.cardGrossProfit}</td>
-		<td>${bean.cardManufacturer}</td>
-		<td>${bean.cardMaxWordCount}</td>
-		<td>${bean.cardCover}</td>
-		<td>${bean.cardStock}</td>
-		<td>${bean.cardViewCount}</td>
-		<td>${bean.cardSalesCount}</td>
-		<td>${bean.cardStatus}</td>
+		<td>${bean.id}</td>
+		<td>${bean.name}</td>
+		<td>${bean.price}</td>
+		<td>${bean.cover}</td>
+		<td>${bean.viewCount}</td>
+		<td>${bean.salesCount}</td>
+		<td>${bean.status}</td>
+		<td>${bean.manufacturer}</td>
+		<td>${bean.cost}</td>
+		<td>${bean.gpratio}</td>
+		<td>${bean.stock}</td>
+		<td>${bean.maxWordCount}</td>
 		
 	</tr>
 	</c:forEach>
