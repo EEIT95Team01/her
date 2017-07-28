@@ -203,7 +203,7 @@ public class FontDAOjdbc implements FontDAOInterface {
 		FontDAOjdbc dao = new FontDAOjdbc();
 
 		FontBean fontBean = new FontBean();
-		fontBean.setId("3");
+		fontBean.setId("1");
 		fontBean.setName("AAAA");
 		fontBean.setPrice(123);
 		fontBean.setWriterId(123);
@@ -211,7 +211,7 @@ public class FontDAOjdbc implements FontDAOInterface {
 		fontBean.setViewCount(123456);
 		fontBean.setSalesCount(7651);
 		fontBean.setStatus(true);
-		dao.update(fontBean);
+		dao.insert(fontBean);
 //		dao.delete(2);
 		List<FontBean> test = null;
 		test = dao.selectAll();

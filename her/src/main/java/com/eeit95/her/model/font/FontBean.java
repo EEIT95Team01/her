@@ -12,6 +12,12 @@ public class FontBean {
 	private int salesCount;
 	private boolean status;
 	
+	
+	@Override
+	public String toString() {
+		return "FontBean [id=" + id + ", name=" + name + ", price=" + price + ", writerId=" + writerId + ", cover="
+				+ cover + ", viewCount=" + viewCount + ", salesCount=" + salesCount + ", status=" + status + "]";
+	}
 	public String getId() {
 		return id;
 	}
