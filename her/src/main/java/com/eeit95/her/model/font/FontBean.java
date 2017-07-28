@@ -54,7 +54,7 @@ public class FontBean {
 	public void setSalesCount(int salesCount) {
 		this.salesCount = salesCount;
 	}
-	public boolean isStatus() {
+	public boolean getStatus() {
 		return status;
 	}
 	public void setStatus(boolean status) {

@@ -1,6 +1,8 @@
 package com.eeit95.her.model.member;
 
-public class MemberBean {
+import java.sql.Date;
+
+public class MemberBean implements java.io.Serializable{
 	private String id;
 	private String email;
 	private String password;
@@ -8,14 +10,20 @@ public class MemberBean {
 	private String phone;
 	private String city;
 	private String district;
-	private String add;
+	private String addr;
 	private java.sql.Date birthday;
 	
-	
-	@Override
-	public String toString() {
-		return "memberBean [id=" + id + ", email=" + email + ", password=" + password + ", name=" + name + ", phone="
-				+ phone + ", city=" + city + ", district=" + district + ", add=" + add + ", birthday=" + birthday + "]";
+	public MemberBean(String email, String password, String name, String phone, String city, String district,
+			String addr, Date birthday) {
+		super();
+		this.email = email;
+		this.password = password;
+		this.name = name;
+		this.phone = phone;
+		this.city = city;
+		this.district = district;
+		this.addr = addr;
+		this.birthday = birthday;
 	}
 	
 	public String getId() {
@@ -60,15 +68,17 @@ public class MemberBean {
 	public void setDistrict(String district) {
 		this.district = district;
 	}
-	public String getAdd() {
-		return add;
+	public String getAddr() {
+		return addr;
 	}
-	public void setAdd(String add) {
-		this.add = add;
+	public void setAddr(String addr) {
+		this.addr = addr;
 	}
+
 	public java.sql.Date getBirthday() {
 		return birthday;
 	}
+
 	public void setBirthday(java.sql.Date birthday) {
 		this.birthday = birthday;
 	}
