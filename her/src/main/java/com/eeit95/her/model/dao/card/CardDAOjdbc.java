@@ -15,9 +15,9 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 import com.eeit95.her.model.card.CardBean;
-import com.eeit95.her.model.card.cardDAOInterface;
+import com.eeit95.her.model.card.CardDAOInterface;
 
-public class CardDAOjdbc implements cardDAOInterface {
+public class CardDAOjdbc implements CardDAOInterface {
 	private static final String Select_By_ID = "select*from card where id=?";
 	private static final String Insert = "insert into card (id,name,price,cover,viewCount,"
 			+ "salesCount,status,manufacturer,cost,gpratio,stock,maxWordCount)"+
@@ -42,7 +42,7 @@ public class CardDAOjdbc implements cardDAOInterface {
 	}
 	public static void main(String[] args){
 		CardDAOjdbc cdj = new CardDAOjdbc();
-		List<CardBean>  beans = cdj.select();
+		List<CardBean>  beans = cdj.selectAll();
 		
 		for(CardBean bean: beans){
 
@@ -53,7 +53,7 @@ public class CardDAOjdbc implements cardDAOInterface {
 	}
 	
 	@Override
-	public List <CardBean> select() {
+	public List <CardBean> selectAll() {
 		List<CardBean> result = new ArrayList<CardBean>();
 		try	{
 		    conn = ds.getConnection();
@@ -91,7 +91,7 @@ public class CardDAOjdbc implements cardDAOInterface {
 
 	
 	@Override
-	public CardBean select(String id) {
+	public CardBean selectById(String id) {
 		CardBean result = null;
 		ResultSet rset = null;
 		Connection conn;
@@ -192,7 +192,7 @@ public class CardDAOjdbc implements cardDAOInterface {
 		    
 		    int i = stmt.executeUpdate();
 			if(i==1) {
-				result = this.select(id);
+				result = this.selectById(id);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

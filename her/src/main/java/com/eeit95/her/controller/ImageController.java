@@ -23,7 +23,7 @@ public class ImageController extends HttpServlet {
 		switch(type) {
 			case "c":
 				CardDAOjdbc cardDAOjdbc = new CardDAOjdbc();
-				CardBean cardBean = cardDAOjdbc.select(id);
+				CardBean cardBean = cardDAOjdbc.selectById(id);
 				response.setContentType("image");
 		}
 		
