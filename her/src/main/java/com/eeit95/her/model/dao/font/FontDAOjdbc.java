@@ -115,7 +115,7 @@ public class FontDAOjdbc implements FontDAOInterface {
 	}
 
 	@Override
-	public FontBean findByPrimaryKey(String id) {
+	public FontBean selectById(String id) {
 //		FontDescriptionBean fontBean = null;
 //		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 //		try {
@@ -162,7 +162,7 @@ public class FontDAOjdbc implements FontDAOInterface {
 	}
 
 	@Override
-	public List<FontBean> getAll() {
+	public List<FontBean> selectAll() {
 //		List<FontDescriptionBean> list = null;
 //		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 //		try {
@@ -214,7 +214,7 @@ public class FontDAOjdbc implements FontDAOInterface {
 		dao.update(fontBean);
 //		dao.delete(2);
 		List<FontBean> test = null;
-		test = dao.getAll();
+		test = dao.selectAll();
 		for(FontBean bean : test) {
 			System.out.print(bean.getId()+",\t");
 			System.out.print(bean.getName()+",\t");

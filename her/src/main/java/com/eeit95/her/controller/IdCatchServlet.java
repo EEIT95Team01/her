@@ -17,7 +17,7 @@ public class IdCatchServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String ID = request.getParameter("Id");
 		FontDAOjdbc dao = new FontDAOjdbc();
-		FontBean fontBean = dao.findByPrimaryKey(ID);
+		FontBean fontBean = dao.selectById(ID);
 		request.setAttribute("fontBean", fontBean);
 		request.getRequestDispatcher("view/showPicture.jsp").forward(request, response);
 	}

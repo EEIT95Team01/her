@@ -40,7 +40,7 @@ public class ShowPictureServlet extends HttpServlet {
 		try {
 			
 			FontDAOjdbc dao = new FontDAOjdbc();
-			FontBean bean = dao.findByPrimaryKey(ID);
+			FontBean bean = dao.selectById(ID);
 			response.setContentType("image/jpeg");
 			OutputStream os = response.getOutputStream();
 			Blob b = bean.getCover();
