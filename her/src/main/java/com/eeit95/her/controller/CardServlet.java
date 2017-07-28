@@ -28,7 +28,8 @@ public class CardServlet extends HttpServlet {
 //		switch(prodaction) {
 //		case "Select":
 //			CardDAOjdbc cardDAO = new CardDAOjdbc();
-//			List<CardBean> beans = cardDAO.select();
+//			List<CardBean> beans = cardDAO.selectAll();
+
 //			request.setAttribute("beans", beans);
 //			for(CardBean bean : beans){
 //				System.out.println(bean);
@@ -37,6 +38,7 @@ public class CardServlet extends HttpServlet {
 //		}
 		//測試修改
 		//接收資料
+
 		
 		String id = request.getParameter("id");
 		String name = request.getParameter("name");
@@ -68,12 +70,12 @@ public class CardServlet extends HttpServlet {
 			}
 		}
 
-		Blob cover= null;
+		byte[] cover= null;
 		if(temp2!=null || temp2.length()!=0){
 			cover=ImageToBytes.imgIn(temp2);
 		}
 		
-		int viewCount=0;
+		int viewCount=1;
 		if(temp3!=null || temp3.length()!=0){
 			
 			

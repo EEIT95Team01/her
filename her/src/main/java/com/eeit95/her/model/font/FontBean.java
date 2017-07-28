@@ -66,6 +66,7 @@ public class FontBean {
 	public void setStatus(boolean status) {
 		this.status = status;
 	}
+
 	
 	
 	

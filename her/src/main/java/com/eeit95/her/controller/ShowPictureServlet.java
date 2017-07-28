@@ -44,8 +44,13 @@ public class ShowPictureServlet extends HttpServlet {
 			response.setContentType("image/jpeg");
 			OutputStream os = response.getOutputStream();
 			byte[] b = bean.getCover();
+
 //			byte[] data = b.getBytes(1, (int) b.length());
 			os.write(b, 0, b.length);
+
+		
+			//os.write(b, 0, (int) b.length);
+
 	
 		} catch (Exception e) {
 			e.printStackTrace();
