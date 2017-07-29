@@ -1,18 +1,17 @@
 package com.eeit95.her.model.dao.font;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.sql.Date;
 import java.util.List;
 
 import com.eeit95.her.model.font.AdvertisementBean;
 import com.eeit95.her.model.font.AdvertisementDAOInterface;
+import com.eeit95.her.model.font.FontBean;
 import com.eeit95.her.model.img.dao.ImageToBytes;
 
 public class AdvertisementDAOjdbc implements AdvertisementDAOInterface {
@@ -165,7 +164,7 @@ public class AdvertisementDAOjdbc implements AdvertisementDAOInterface {
 		return list;
 	}
 
-	public static void main(String[] args) throws ParseException {
+	public static void main(String[] args) {
 
 		AdvertisementDAOjdbc dao = new AdvertisementDAOjdbc();
 
@@ -173,15 +172,8 @@ public class AdvertisementDAOjdbc implements AdvertisementDAOInterface {
 		//advertisementBean.setId(123);
 		advertisementBean.setName("AAAA");
 		advertisementBean.setImage(ImageToBytes.imgIn("C:\\Users\\Public\\Pictures\\Sample Pictures\\Desert.jpg"));
-		
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-//		long now = System.currentTimeMillis();
-//		Date date = new Date(now);
-		
-		java.util.Date d = sdf.parse("2016-02-12");
-		Date date = new Date(d.getTime());
-		
-		advertisementBean.setBeginDate(date);
+		advertisementBean.setBeginDate(new Date(2015-06-23));
+
 		advertisementBean.setEndDate(new Date(2015-12-23));
 		dao.insert(advertisementBean);
 //		dao.delete(2);
