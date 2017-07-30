@@ -6,6 +6,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -171,14 +173,29 @@ public class AdvertisementDAOjdbc implements AdvertisementDAOInterface {
 		AdvertisementBean advertisementBean = new AdvertisementBean();
 		//advertisementBean.setId(123);
 		advertisementBean.setName("AAAA");
-		advertisementBean.setImage(ImageToBytes.imgIn("C:\\Users\\Public\\Pictures\\Sample Pictures\\Desert.jpg"));
-		advertisementBean.setBeginDate(new Date(2015-06-23));
-
-		advertisementBean.setEndDate(new Date(2015-12-23));
+		advertisementBean.setImage(ImageToBytes.imgIn("C:\\Users\\User\\Pictures\\Sample Pictures\\IMG_2493.jpg"));
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Date beginDate=null;
+		Date endDate = null;
+		try {
+			java.util.Date bd = sdf.parse("2017-06-30");
+			beginDate =new Date(bd.getTime());
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		advertisementBean.setBeginDate(beginDate);
+		try {
+			java.util.Date ed = sdf.parse("2017-08-30");
+			endDate= new Date(ed.getTime());
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		advertisementBean.setEndDate(endDate);
 		dao.insert(advertisementBean);
 //		dao.delete(2);
 		List<AdvertisementBean> test = null;
-		test = dao.selectAll();
+		test = dao.selectByDate();
 		for(AdvertisementBean bean : test) {
 			System.out.print(bean.getId()+",\t");
 			System.out.print(bean.getName()+",\t");
@@ -187,6 +204,11 @@ public class AdvertisementDAOjdbc implements AdvertisementDAOInterface {
 			System.out.print(bean.getEndDate()+",\n");
 			
 		}
+//		AdvertisementBean bean = dao.selectById(1);
+//		System.out.print(bean.getId()+",\t");
+//		System.out.print(bean.getName()+",\t");
+//		System.out.print(bean.getImage()+",\t");
+//		System.out.print(bean.getBeginDate()+",\t");
+//		System.out.print(bean.getEndDate()+",\n");
 	}
-
 }

@@ -6,7 +6,7 @@ public class WriterBean {
 	
 	private int id;
 	private String name;
-	private Blob cover;
+	private byte[] cover;
 	private String description;
 	
 	
@@ -26,10 +26,10 @@ public class WriterBean {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public Blob getCover() {
+	public byte[] getCover() {
 		return cover;
 	}
-	public void setCover(Blob cover) {
+	public void setCover(byte[] cover) {
 		this.cover = cover;
 	}
 	public String getDescription() {
