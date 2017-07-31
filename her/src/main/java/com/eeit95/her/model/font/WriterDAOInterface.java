@@ -6,6 +6,6 @@ public interface WriterDAOInterface {
 	public void insert(WriterBean writerBean);
     public void update(WriterBean writerBean);
     public void delete(int id);
-    public FontBean selectById(int id);
-    public List<FontBean> selectAll();
+    public WriterBean selectById(int id);
+    public List<WriterBean> selectAll();
 }

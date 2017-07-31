@@ -1,6 +1,7 @@
 package com.eeit95.her.model.dao.font;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -165,28 +166,36 @@ public class AdvertisementDAOjdbc implements AdvertisementDAOInterface {
 		return list;
 	}
 
-	public static void main(String[] args) throws ParseException {
+	public static void main(String[] args) {
 
 		AdvertisementDAOjdbc dao = new AdvertisementDAOjdbc();
 
 		AdvertisementBean advertisementBean = new AdvertisementBean();
 		//advertisementBean.setId(123);
 		advertisementBean.setName("AAAA");
-		advertisementBean.setImage(ImageToBytes.imgIn("C:\\Users\\Public\\Pictures\\Sample Pictures\\Desert.jpg"));
+		advertisementBean.setImage(ImageToBytes.imgIn("C:\\Users\\User\\Pictures\\Sample Pictures\\IMG_2493.jpg"));
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-//		long now = System.currentTimeMillis();
-//		Date date = new Date(now);
-		
-		java.util.Date d = sdf.parse("2016-02-12");
-		Date date = new Date(d.getTime());
-		
-		advertisementBean.setBeginDate(date);
-		advertisementBean.setEndDate(new Date(2015-12-23));
+		Date beginDate=null;
+		Date endDate = null;
+		try {
+			java.util.Date bd = sdf.parse("2017-06-30");
+			beginDate =new Date(bd.getTime());
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		advertisementBean.setBeginDate(beginDate);
+		try {
+			java.util.Date ed = sdf.parse("2017-08-30");
+			endDate= new Date(ed.getTime());
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		advertisementBean.setEndDate(endDate);
 		dao.insert(advertisementBean);
 //		dao.delete(2);
 		List<AdvertisementBean> test = null;
-		test = dao.selectAll();
+		test = dao.selectByDate();
 		for(AdvertisementBean bean : test) {
 			System.out.print(bean.getId()+",\t");
 			System.out.print(bean.getName()+",\t");
@@ -195,6 +204,11 @@ public class AdvertisementDAOjdbc implements AdvertisementDAOInterface {
 			System.out.print(bean.getEndDate()+",\n");
 			
 		}
+//		AdvertisementBean bean = dao.selectById(1);
+//		System.out.print(bean.getId()+",\t");
+//		System.out.print(bean.getName()+",\t");
+//		System.out.print(bean.getImage()+",\t");
+//		System.out.print(bean.getBeginDate()+",\t");
+//		System.out.print(bean.getEndDate()+",\n");
 	}
-
 }

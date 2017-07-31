@@ -16,6 +16,8 @@ import javax.sql.DataSource;
 
 import com.eeit95.her.model.card.CardBean;
 import com.eeit95.her.model.card.CardDAOInterface;
+import com.eeit95.her.model.img.dao.ImageToBytes;
+
 
 public class CardDAOjdbc implements CardDAOInterface {
 	private static int n = 2;
@@ -72,7 +74,7 @@ public class CardDAOjdbc implements CardDAOInterface {
 		System.out.println("===================================================");
 		
 		// DELETE 一筆資料 & PRINT
-		System.out.println("DELETE 一筆資料 & PRINT");
+//		System.out.println("DELETE 一筆資料 & PRINT");
 		System.out.println(cdj.delete("c01707280001"));
 		
 		System.out.println("===================================================");

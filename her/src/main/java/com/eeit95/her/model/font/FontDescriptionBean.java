@@ -7,7 +7,7 @@ public class FontDescriptionBean {
 	private String fontId;
 	private int order;
 	private String text;
-	private Blob image;
+	private byte[] image;
 	
 	
 	@Override
@@ -33,10 +33,10 @@ public class FontDescriptionBean {
 	public void setText(String text) {
 		this.text = text;
 	}
-	public Blob getImage() {
+	public byte[] getImage() {
 		return image;
 	}
-	public void setImage(Blob image) {
+	public void setImage(byte[] image) {
 		this.image = image;
 	}
 }

@@ -17,6 +17,7 @@ public class ImageToBytes {
 			File f = new File(path);
 			byte[] b = new byte[(int)f.length()];
 			FileInputStream fis = null;
+
 			Blob blob = null;
 			try {
 				fis = new FileInputStream(f);
