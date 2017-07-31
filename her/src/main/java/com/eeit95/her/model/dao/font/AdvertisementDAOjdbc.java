@@ -38,8 +38,20 @@ public class AdvertisementDAOjdbc implements AdvertisementDAOInterface {
 			if (advertisementBean != null) {
 				stmt.setString(1, advertisementBean.getName());
 				stmt.setBytes(2, advertisementBean.getImage());
-				stmt.setDate(3, advertisementBean.getBeginDate());
-				stmt.setDate(4, advertisementBean.getEndDate());
+				java.util.Date bDate = advertisementBean.getBeginDate();
+				if(bDate!=null) {
+					long btime = bDate.getTime();
+					stmt.setDate(3, new java.sql.Date(btime));
+				} else {
+					stmt.setDate(3, null);				
+				}
+				java.util.Date eDate = advertisementBean.getEndDate();
+				if(eDate!=null) {
+					long etime = eDate.getTime();
+					stmt.setDate(4, new java.sql.Date(etime));
+				} else {
+					stmt.setDate(4, null);				
+				}
 
 				int n = stmt.executeUpdate();
 				System.out.println(n);
@@ -58,8 +70,20 @@ public class AdvertisementDAOjdbc implements AdvertisementDAOInterface {
 			if (advertisementBean != null) {
 				stmt.setString(1, advertisementBean.getName());
 				stmt.setBytes(2, advertisementBean.getImage());
-				stmt.setDate(3, advertisementBean.getBeginDate());
-				stmt.setDate(4, advertisementBean.getEndDate());
+				java.util.Date bDate = advertisementBean.getBeginDate();
+				if(bDate!=null) {
+					long btime = bDate.getTime();
+					stmt.setDate(3, new java.sql.Date(btime));
+				} else {
+					stmt.setDate(3, null);				
+				}
+				java.util.Date eDate = advertisementBean.getEndDate();
+				if(eDate!=null) {
+					long etime = eDate.getTime();
+					stmt.setDate(4, new java.sql.Date(etime));
+				} else {
+					stmt.setDate(4, null);				
+				}
 				stmt.setInt(5, advertisementBean.getId());
 				int n = stmt.executeUpdate();
 				System.out.println(n);
@@ -172,8 +196,8 @@ public class AdvertisementDAOjdbc implements AdvertisementDAOInterface {
 
 		AdvertisementBean advertisementBean = new AdvertisementBean();
 		//advertisementBean.setId(123);
-		advertisementBean.setName("AAAA");
-		advertisementBean.setImage(ImageToBytes.imgIn("C:\\Users\\User\\Pictures\\Sample Pictures\\IMG_2493.jpg"));
+		advertisementBean.setName("BANANA");
+		advertisementBean.setImage(ImageToBytes.imgIn("C:\\Users\\Public\\Pictures\\Sample Pictures\\Jellyfish.jpg"));
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Date beginDate=null;
@@ -201,7 +225,7 @@ public class AdvertisementDAOjdbc implements AdvertisementDAOInterface {
 			System.out.print(bean.getName()+",\t");
 			System.out.print(bean.getImage()+",\t");
 			System.out.print(bean.getBeginDate()+",\t");
-			System.out.print(bean.getEndDate()+",\n");
+			System.out.print(bean.getEndDate()+"\n");
 			
 		}
 //		AdvertisementBean bean = dao.selectById(1);

@@ -1,8 +1,17 @@
 package com.eeit95.her.model.font;
 
-import java.sql.Date;
+import java.util.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+@Entity
+@Table(name = "advertisement")
 public class AdvertisementBean {
+	
 	private int id;
 	private String name;
 	private byte[] image;
@@ -15,6 +24,7 @@ public class AdvertisementBean {
 		return "AdvertisementBean [id=" + id + ", name=" + name + ", image=" + image + ", beginDate=" + beginDate
 				+ ", endDate=" + endDate + "]";
 	}
+	@Id
 	public int getId() {
 		return id;
 	}
@@ -33,12 +43,14 @@ public class AdvertisementBean {
 	public void setImage(byte[] image) {
 		this.image = image;
 	}
+	@Temporal(TemporalType.DATE)
 	public Date getBeginDate() {
 		return beginDate;
 	}
 	public void setBeginDate(Date beginDate) {
 		this.beginDate = beginDate;
 	}
+	@Temporal(TemporalType.DATE)
 	public Date getEndDate() {
 		return endDate;
 	}

@@ -1,5 +1,6 @@
 package com.eeit95.her.controller;
 
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.sql.Blob;
@@ -43,10 +44,12 @@ public class ShowPictureServlet extends HttpServlet {
 			FontBean bean = dao.selectById(ID);
 			response.setContentType("image/jpeg");
 			OutputStream os = response.getOutputStream();
+//			OutputStream os = new FileOutputStream("C:\\Users\\Student\\Desktop\\aazzz.jpg");
 			byte[] b = bean.getCover();
 
 //			byte[] data = b.getBytes(1, (int) b.length());
 			os.write(b, 0, b.length);
+			os.close();
 
 		
 			//os.write(b, 0, (int) b.length);

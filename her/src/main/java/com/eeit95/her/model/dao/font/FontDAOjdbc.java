@@ -1,5 +1,6 @@
 package com.eeit95.her.model.dao.font;
 
+import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -202,14 +203,20 @@ public class FontDAOjdbc implements FontDAOInterface {
 	}
 
 	public static void main(String[] args) {
+		File f = new File("C:\\Users\\Student\\Desktop\\zzz.png");
+		if(f.exists()) {
+			f.delete();
+		}
+		
+		
 		FontDAOjdbc dao = new FontDAOjdbc();
 
 		FontBean fontBean = new FontBean();
-		fontBean.setId("1");
-		fontBean.setName("AAAA");
+		fontBean.setId("141");
+		fontBean.setName("asas");
 		fontBean.setPrice(123);
 		fontBean.setWriterId(123);
-		fontBean.setCover(ImageToBytes.imgIn("C:\\Users\\Public\\Pictures\\Sample Pictures\\Desert.jpg"));
+		fontBean.setCover(ImageToBytes.imgIn("C:\\Users\\Public\\Pictures\\Sample Pictures\\Tulips.jpg"));
 		fontBean.setViewCount(123456);
 		fontBean.setSalesCount(7651);
 		fontBean.setStatus(true);
