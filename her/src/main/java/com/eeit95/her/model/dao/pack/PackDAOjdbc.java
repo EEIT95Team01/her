@@ -13,10 +13,10 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-import com.eeit95.her.model.pack.PackageBean;
-import com.eeit95.her.model.pack.PackageDAOInterface;
+import com.eeit95.her.model.pack.PackBean;
+import com.eeit95.her.model.pack.PackDAOInterface;
 
-public class PackageDAOjdbc implements PackageDAOInterface {
+public class PackDAOjdbc implements PackDAOInterface {
 
 	private static final String GET_PACKAGE_IDS = "SELECT id FROM [package] WHERE [memberId] = ? AND [status] = ?";
 
@@ -35,8 +35,8 @@ public class PackageDAOjdbc implements PackageDAOInterface {
 
 	public static void main(String[] args) {
 		// selectById
-		PackageDAOjdbc packageDAO = new PackageDAOjdbc();
-		PackageBean packageBean1 = packageDAO.selectById("p01703150001");
+		PackDAOjdbc packageDAO = new PackDAOjdbc();
+		PackBean packageBean1 = packageDAO.selectById("p01703150001");
 		if (packageBean1 != null) {
 			System.out.println(packageBean1);
 		} else {
@@ -50,13 +50,13 @@ public class PackageDAOjdbc implements PackageDAOInterface {
 		// getPackageIds
 		List<String> packageIds = packageDAO.getPackageIds("m01701150001", 1);
 		for(String id : packageIds) {
-			PackageBean packageBean2 = packageDAO.selectById(id);
+			PackBean packageBean2 = packageDAO.selectById(id);
 			System.out.println(packageBean2);
 		}
 		
 		// deleteById
 		packageDAO.deleteById("p01707270001");
-		PackageBean packageBean3 = packageDAO.selectById("p01707270001");
+		PackBean packageBean3 = packageDAO.selectById("p01707270001");
 		if (packageBean3 != null) {
 			System.out.println(packageBean1);
 		} else {
@@ -73,10 +73,6 @@ public class PackageDAOjdbc implements PackageDAOInterface {
 			e.printStackTrace();
 		}
 	}
-	
-//	private static final String url = "jdbc:sqlserver://localhost:1433;DatabaseName=her";
-//	private static final String user = "sa";
-//	private static final String password = "sa123456";
 
 	@Override
 	public List<String> getPackageIds(String memberId, int status) {
@@ -84,7 +80,7 @@ public class PackageDAOjdbc implements PackageDAOInterface {
 		List<String> packageIds = new ArrayList<String>();
 		try {
 			conn = dataSource.getConnection();
-//			conn = DriverManager.getConnection(url, user, password);
+
 			PreparedStatement pstmt = conn.prepareStatement(GET_PACKAGE_IDS);
 			pstmt.setString(1, memberId);
 			pstmt.setInt(2, status);
@@ -101,18 +97,18 @@ public class PackageDAOjdbc implements PackageDAOInterface {
 	}
 
 	@Override
-	public PackageBean selectById(String id) {
+	public PackBean selectById(String id) {
 		Connection conn;
-		PackageBean packageBean = null;
+		PackBean packageBean = null;
 		try {
 			conn = dataSource.getConnection();
-//			conn = DriverManager.getConnection(url, user, password);
+
 			PreparedStatement pstmt = conn.prepareStatement(SELECT_BY_ID);
 			pstmt.setString(1, id);
 			ResultSet rs = pstmt.executeQuery();
 			
 			if(rs.next()) {
-				packageBean = new PackageBean();
+				packageBean = new PackBean();
 				packageBean.setId(rs.getString("id"));
 				packageBean.setName(rs.getString("name"));
 				packageBean.setMemberId(rs.getString("memberId"));
@@ -135,7 +131,7 @@ public class PackageDAOjdbc implements PackageDAOInterface {
 				packageBean.setSenderCity(rs.getString("senderCity"));
 				packageBean.setSenderDistrict(rs.getString("senderDistrict"));
 				packageBean.setSenderAddr(rs.getString("senderAddr"));
-				packageBean.setStatus(rs.getBoolean("status"));
+				packageBean.setStatus(rs.getInt("status"));
 			}
 			
 		} catch (SQLException e) {
@@ -145,48 +141,49 @@ public class PackageDAOjdbc implements PackageDAOInterface {
 	}
 
 	@Override
-	public int insert(PackageBean packagebean) {
+	public PackBean insert(PackBean packBean) {
 		Connection conn;
-		int result = 0;
+		PackBean packBeanResult = null;
 		
 		try {
-//			conn = DriverManager.getConnection(url, user, password);
 			conn = dataSource.getConnection();
 			PreparedStatement pstmt = conn.prepareStatement(INSERT);
-			pstmt.setString(1, packagebean.getId());
-			pstmt.setString(2, packagebean.getName());
-			pstmt.setString(3, packagebean.getMemberId());
-			pstmt.setString(4, packagebean.getCardId());
-			pstmt.setDouble(5, packagebean.getCardPrice());
-			pstmt.setString(6, packagebean.getFontId());
-			pstmt.setDouble(7, packagebean.getFontPrice());
-			pstmt.setDouble(8, packagebean.getGiftSum());
-			pstmt.setString(9, packagebean.getContent());
-			pstmt.setString(10, packagebean.getRecipientId());
-			pstmt.setString(11, packagebean.getRecipientName());
-			pstmt.setString(12, packagebean.getRecipientPhone());
-			pstmt.setString(13, packagebean.getRecipientCity());
-			pstmt.setString(14, packagebean.getRecipientDistrict());
-			pstmt.setString(15, packagebean.getRecipientAddr());
-			pstmt.setDate(16, packagebean.getDateMailed());
-			pstmt.setString(17, packagebean.getSenderName());
-			pstmt.setString(18, packagebean.getSenderPhone());
-			pstmt.setString(19, packagebean.getSenderCity());
-			pstmt.setString(20, packagebean.getSenderDistrict());
-			pstmt.setString(21, packagebean.getSenderAddr());
-			pstmt.setBoolean(22, packagebean.getStatus());
+			pstmt.setString(1, packBean.getId());
+			pstmt.setString(2, packBean.getName());
+			pstmt.setString(3, packBean.getMemberId());
+			pstmt.setString(4, packBean.getCardId());
+			pstmt.setDouble(5, packBean.getCardPrice());
+			pstmt.setString(6, packBean.getFontId());
+			pstmt.setDouble(7, packBean.getFontPrice());
+			pstmt.setDouble(8, packBean.getGiftSum());
+			pstmt.setString(9, packBean.getContent());
+			pstmt.setString(10, packBean.getRecipientId());
+			pstmt.setString(11, packBean.getRecipientName());
+			pstmt.setString(12, packBean.getRecipientPhone());
+			pstmt.setString(13, packBean.getRecipientCity());
+			pstmt.setString(14, packBean.getRecipientDistrict());
+			pstmt.setString(15, packBean.getRecipientAddr());
+			pstmt.setDate(16, packBean.getDateMailed());
+			pstmt.setString(17, packBean.getSenderName());
+			pstmt.setString(18, packBean.getSenderPhone());
+			pstmt.setString(19, packBean.getSenderCity());
+			pstmt.setString(20, packBean.getSenderDistrict());
+			pstmt.setString(21, packBean.getSenderAddr());
+			pstmt.setInt(22, packBean.getStatus());
 			
-			result = pstmt.executeUpdate();
+			if(pstmt.executeUpdate() == 1) {
+				packBeanResult = packBean;
+			};
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return result;
+		return packBeanResult;
 	}
 
 	@Override
-	public int update(PackageBean packageBean) {
-		// TODO Auto-generated method stub
-		return 0;
+	public PackBean update(PackBean packageBean) {
+
+		return null;
 	}
 
 	@Override
@@ -195,7 +192,6 @@ public class PackageDAOjdbc implements PackageDAOInterface {
 		int result = 0;
 		
 		try {
-//			conn = DriverManager.getConnection(url, user, password);
 			conn = dataSource.getConnection();
 			PreparedStatement pstmt = conn.prepareStatement(DELETE_BY_ID);
 			pstmt.setString(1, id);
