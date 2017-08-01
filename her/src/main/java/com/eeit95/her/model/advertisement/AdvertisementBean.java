@@ -1,4 +1,4 @@
-package com.eeit95.her.model.font;
+package com.eeit95.her.model.advertisement;
 
 import java.util.Date;
 

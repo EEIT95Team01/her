@@ -1,4 +1,4 @@
-package com.eeit95.her.model.tag.dao;
+package com.eeit95.her.model.dao.tag;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -16,11 +16,11 @@ import org.hibernate.Session;
 
 import com.eeit95.her.model.card.CardBean;
 import com.eeit95.her.model.tag.TagBean;
+import com.eeit95.her.model.tag.TagDAOInterface;
 
 import hibernate.util.HibernateUtil;
 
-
-public class TagDAOhibernate implements TagDAOinterface {
+public class TagDAOhibernate implements TagDAOInterface {
 
 	
 	private static final String selectAll = "from TagBean";
