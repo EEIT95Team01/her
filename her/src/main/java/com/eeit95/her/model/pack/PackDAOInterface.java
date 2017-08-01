@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface PackDAOInterface {
 	
-	public List<String> getPackageIds(String memberId, int status);
+	public List<PackBean> selectByMIdAndStatus(String memberId, int status);
 	
 	public PackBean selectById(String id);
 	

@@ -2,6 +2,11 @@ package com.eeit95.her.model.pack;
 
 import java.sql.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "pack")
 public class PackBean implements java.io.Serializable {
 	
 	private static final long serialVersionUID = 1L;
