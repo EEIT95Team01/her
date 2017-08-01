@@ -1,10 +1,11 @@
-package com.eeit95.her.model.dao.giftDescription;
+package com.eeit95.her.model.dao.gift;
 
 import java.sql.SQLException;
 import java.util.List;
-import com.eeit95.her.model.giftDescription.GiftDescriptionBean;
-import com.eeit95.her.model.giftDescription.GiftDescriptionDAO;
-import com.eeit95.her.model.giftDescription.IGiftDescriptionDAO;
+
+import com.eeit95.her.model.gift.GiftDescriptionBean;
+import com.eeit95.her.model.gift.GiftDescriptionDAO;
+import com.eeit95.her.model.gift.IGiftDescriptionDAO;
 
 public class GiftDescriptionjdbc {
 

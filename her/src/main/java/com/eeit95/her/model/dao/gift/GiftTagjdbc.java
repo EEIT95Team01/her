@@ -1,10 +1,10 @@
-package com.eeit95.her.model.dao.giftTag;
+package com.eeit95.her.model.dao.gift;
 
 import java.sql.SQLException;
 import java.util.List;
 
-import com.eeit95.her.model.giftTag.GiftTagBean;
-import com.eeit95.her.model.giftTag.GiftTagDAO;
+import com.eeit95.her.model.gift.GiftTagBean;
+import com.eeit95.her.model.gift.GiftTagDAO;
 
 public class GiftTagjdbc {
 

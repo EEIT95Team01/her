@@ -1,10 +1,11 @@
-package com.eeit95.her.model.dao.category;
+package com.eeit95.her.model.dao.gift;
 
 import java.sql.SQLException;
 import java.util.List;
-import com.eeit95.her.model.category.CategoryBean;
-import com.eeit95.her.model.category.CategoryDAO;
-import com.eeit95.her.model.category.ICategoryDAO;
+
+import com.eeit95.her.model.gift.CategoryBean;
+import com.eeit95.her.model.gift.CategoryDAO;
+import com.eeit95.her.model.gift.ICategoryDAO;
 
 public class Categoryjdbc {
 

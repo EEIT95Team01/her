@@ -1,4 +1,4 @@
-package com.eeit95.her.model.categoryMain;
+package com.eeit95.her.model.gift;
 
 public class CategoryMainBean {
 
