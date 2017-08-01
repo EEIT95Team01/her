@@ -29,9 +29,9 @@
 
 		<!--Java物件與資料庫表格的映射檔 -->
 		<mapping class="com.eeit95.her.model.card.CardBean"/>
-    		<mapping class="com.eeit95.her.model.card.CardDescriptionBean"/>
-    		<mapping class="com.eeit95.her.model.card.CardTagBean"/>
-    		<mapping class="com.eeit95.her.model.tag.TagBean"/>
+    	<mapping class="com.eeit95.her.model.card.CardDescriptionBean"/>
+    	<mapping class="com.eeit95.her.model.card.CardTagBean"/>
+    	<mapping class="com.eeit95.her.model.tag.TagBean"/>
 
 		<mapping class="com.eeit95.her.model.font.AdvertisementBean" />
 		<mapping class="com.eeit95.her.model.font.FontBean" />
@@ -39,6 +39,7 @@
 		<mapping class="com.eeit95.her.model.font.FontTagBean" />
 		<mapping class="com.eeit95.her.model.font.WriterBean" />
 
+		<mapping class="com.eeit95.her.model.pack.PackStatusBean" />
 
 	</session-factory>
 	
