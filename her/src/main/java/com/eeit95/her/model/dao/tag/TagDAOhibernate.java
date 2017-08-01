@@ -41,13 +41,13 @@ public class TagDAOhibernate implements TagDAOInterface {
 //		
 		System.out.println("===================================================");
 //		
-		// UPDATE 一筆資料 & PRINT
-		bean.setId(13);
-		bean.setName("史奴比");
-		tdj.update(bean);
-		System.out.println("UPDATE 一筆資料 & PRINT");
-		System.out.println(bean.getId()+","+bean.getName()+bean.getDiscount());
-		
+//		// UPDATE 一筆資料 & PRINT
+//		bean.setId(13);
+//		bean.setName("史奴比");
+//		tdj.update(bean);
+//		System.out.println("UPDATE 一筆資料 & PRINT");
+//		System.out.println(bean.getId()+","+bean.getName()+bean.getDiscount());
+//		
 		
 //		System.out.println("===================================================");
 //		
