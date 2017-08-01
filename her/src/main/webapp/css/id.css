@@ -1,0 +1,420 @@
+/*_______________________ All _______________________*/
+#All {
+    width: 1060px;
+    margin: 0px auto;
+}
+
+/*_____________ Header _____________*/
+#HeaderBlock {
+	height: 120px;
+}
+
+	#HeaderBar {
+		height: 20px;
+	}
+
+		#BarNavBox {
+			width: 400px;
+			height: 20px;
+
+			border-bottom: 1px solid #000;
+		}
+
+			.barNav {
+				height: 20px;
+				border-bottom: 1px solid #000;
+
+				float: right;
+			}
+
+	#LogoBox {
+		width: 160px;
+		height: 100px;
+	}
+
+		#Logo {
+			width: 100px;
+			height: 100px;
+
+			background-color: pink;
+		}
+
+	#HeaderMainNavBox {
+		width: 500px;
+		height: 100px;
+	}
+
+	#HeaderMemberNavBox {
+		width: 200px;
+		height: 100px;
+	}
+
+	#HeaderMailboxNavBox {
+		width: 200px;
+		height: 100px;
+
+		position: relative;
+	}
+
+		#HeaderMailboxNav {
+			width: 98px;
+			height: 40px;
+		}
+
+/*_____________ Mailbox _____________*/
+#Mailbox {
+	width: 580px;
+    height: 40px;
+    box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.5);
+
+    display: none;
+
+    position: absolute;
+    right: 0px;
+    top: 70px;
+}
+
+#HeaderMailboxNav:hover #Mailbox {
+	display: -webkit-flex;
+	display: flex;
+}
+
+#HeaderMailboxNav:hover #Logo {
+	background-color: #000;
+}
+
+/*_____________ PackageBasket _____________*/
+#PackageBasketBlock {
+    height: 360px;
+}
+
+	#BasketCardBox {
+		width: 220px;
+		height: 320px;
+	}
+
+	#BasketFontBox {
+		width: 220px;
+		height: 320px;
+	}
+
+	#BasketGiftBox {
+		width: 580px;
+		height: 320px;
+	}
+
+		#BasketGiftTitleBox {
+			width: 580px;
+			height: 40px;
+		}
+
+		#BasketGiftContentBox {
+			width: 580px;
+			height: 240px;
+
+			display: block;
+
+            overflow-x: hidden;
+			overflow-y: scroll;
+		}
+
+			.giftNameTitleRec {
+				width: 280px;
+				height: 100%;
+			}
+
+			.giftNameRec{
+				width: 220px;
+				height: 100%;
+			}
+
+			.gfitPAndQRec {
+				width: 90px;
+				height: 100%;
+			}
+
+/*_______________________ HOME _______________________*/
+/*_____________ Recommend _____________*/
+#RecommendBlock {
+    height: 440px;
+}
+
+    #RecommendProductBox {
+        width: 700px;
+        height: 400px;
+    }
+
+    #RecommendAdBox {
+        width: 340px;
+        height: 400px;
+    }
+
+/*_____________ Category _____________*/
+#CategoryBlock {
+    height: 250px;
+}
+
+	.categoryBox {
+		width: 340px;
+    	height: 210px;
+
+    	float: left;
+	}
+
+/*_____________ Recent _____________*/
+#RecentBlock {
+    height: 452px;
+}
+
+/*_______________________ CARD / FONT / GIFT _______________________*/
+	#CategoryMainBox {
+		width: 820px;
+		height: auto;
+	}
+
+		.categoryProductBox {
+			width: 190px;
+			height: 290px;
+
+			margin: 0px 20px 20px 0px;
+
+			background-color: #EEE;
+		}
+
+		.categoryProductBox:nth-child(4n + 1) {
+			width: 190px;
+			height: 290px;
+
+			margin: 0px 0px 20px 0px;
+
+			background-color: #EEE;
+		}
+
+	#CategoryNavBox {
+		width: 220px;
+		height: auto;
+	}
+
+/*_______________________ PRODUCT _______________________*/
+	#ProductCoverBox {
+		width: 460px;
+		height: 460px;
+	}
+
+	#ProductMainBox {
+		width: 580px;
+		height: 460px;
+	}
+
+		#ProductNameRec {
+			height: 60px;
+
+			float: left;
+
+			margin: 0px 20px;
+		}
+
+		#ProductPriceRec {
+			height: 60px;
+
+			float: right;
+
+			margin-right: 20px;
+		}
+
+		.productButton {
+			width: 280px;
+			height: 60px;
+
+			cursor: pointer;
+		}
+
+		.productInfoRec {
+			width: 180px;
+			height: 40px;
+		}
+
+#ProductDescriptionBox {
+	width: 640px;
+	height: auto;
+}
+
+	.productDescriptionRec {
+		width: 640px;
+
+		margin: 10px 0px;
+		padding: 0px 20px;
+	}
+
+#ProductExtensionBox {
+	width: 400px;
+	height: auto;
+}
+
+	.productExtensionRec {
+		width: 400px;
+		height: auto;
+	}
+
+		.productExtensionSquare {
+			width: 120px;
+			height: 120px;
+
+			margin: 0px 20px 20px 0px;
+
+			background-color: pink;
+		}
+
+		.productExtensionSquare:nth-child(3n) {
+			width: 120px;
+			height: 120px;
+
+			margin: 0px 0px 20px 0px;
+
+			background-color: pink;
+		}
+
+/*_______________________ PACKAGE _______________________*/
+    #PackageMainBox{
+        width: 820px;
+        height: 500px;
+    }
+
+    	.packageTitleBox {
+    		width: 400px;
+    		height: 40px;
+    	}
+
+    		.packageLabel {
+    			width: 84px;
+    			height: 40px;
+
+    			margin-left: 20px;
+    		}
+
+    		.inputNormal {
+    			width: 163px;
+    			height: 30px;
+
+    			margin: 5px 0px;
+    		}
+
+    	.packageRAndSBox {
+    		width: 400px;
+    		height: 240px;
+    	}
+
+    		.inputPostalCode {
+    			width: 40px;
+    			height: 30px;
+
+    			margin: 5px 0px;    		
+    		}
+
+    		.inputCityAndDistrict {
+    			width: 113px;
+    			height: 30px;
+
+    			margin: 5px 0px 5px 10px;
+    		}
+
+    		.inputAddr {
+    			width: 286px;
+    			height: 70px;
+
+    			margin: 5px 0px;
+    		}
+
+    	.packageContentBox {
+    		width: 820px;
+    		height: 140px
+    	}
+
+    		.inputContent {
+    			width: 800px;
+    			height: 90px;
+
+    			margin: 5px 10px;
+    		}
+
+    #PackageNavBox {
+    	width: 220px;
+    	height: auto;
+    }
+
+	    .packageNavBox{
+	        width: 220px;
+	        height: auto;
+	    }
+
+	    .blockPackage {
+	    	width: 100%;
+	    	height: 40px;
+
+	    	padding-left: 20px;
+	    }
+
+/*_______________________ ORDER _______________________*/
+	#OrderMainBox {
+		width: 820px;
+		height: auto;
+	}
+
+        .orderBox {
+            width: 100%;
+            height: auto;
+        }
+
+            .orderNameTitleRec {
+				width: 520px;
+				height: 100%;
+			}
+
+			.orderNameRec{
+				width: 400px;
+				height: 100%;
+			}
+
+			.orderPAndQRec {
+				width: 90px;
+				height: 100%;
+			}
+
+            .orderLabel {
+    			width: 72px;
+    			height: 40px;
+
+    			margin-left: 20px;
+    		}
+
+            .orderAddr {
+                width: 308px;
+                height: 70px;
+
+                margin: 5px 0px;
+                padding-right: 10px;
+            }
+
+            .orderContent {
+                width: 800px;
+                height: 90px;
+
+                margin: 5px 10px;
+                padding: 0px 10px;
+            }
+
+	#OrderNavBox {
+		width: 220px;
+		height: auto;
+	}
+
+/*_______________________ MEMEBER _______________________*/
+	#MemberNavBox {
+		width: 220px;
+		height: auto;
+	}
+
+	#MemberMainBox {
+		width: 820px;
+		height: auto;
+	}

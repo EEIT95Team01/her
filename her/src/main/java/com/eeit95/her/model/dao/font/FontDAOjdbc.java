@@ -1,5 +1,6 @@
 package com.eeit95.her.model.dao.font;
 
+import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -16,12 +17,14 @@ import org.hibernate.Session;
 
 import com.eeit95.her.model.font.FontBean;
 import com.eeit95.her.model.font.FontDAOInterface;
-import com.eeit95.her.model.img.dao.ImageBlob;
+import com.eeit95.her.model.img.dao.ImageToBytes;
 
 
 public class FontDAOjdbc implements FontDAOInterface {
 	
 	String url="jdbc:sqlserver://localhost:1433;databaseName=her";
+	String username = "sa";
+	String password = "sa123456";
 	private static final String INSERT = "insert into font (id,name,price,writerId,cover,viewCount,salesCount,status) "
 			+ "values ( ?,?, ?, ?, ?, ?, ?, ?)";
 	private static final String UPDATE = "update font set name=?,price=?,"
@@ -34,7 +37,7 @@ public class FontDAOjdbc implements FontDAOInterface {
 	public void insert(FontBean fontBean) {
 //		Connection conn=null;
 //		PreparedStatement stmt = null;
-		try( Connection conn = DriverManager.getConnection(url,"sa","sa123456"); 
+		try( Connection conn = DriverManager.getConnection(url,username,password); 
 				PreparedStatement stmt = conn.prepareStatement(INSERT))  {
 			
 			if (fontBean != null) {
@@ -42,7 +45,7 @@ public class FontDAOjdbc implements FontDAOInterface {
 				stmt.setString(2, fontBean.getName());
 				stmt.setInt(3, fontBean.getPrice());
 				stmt.setInt(4, fontBean.getWriterId());
-				stmt.setBlob(5, fontBean.getCover());
+				stmt.setBytes(5, fontBean.getCover());
 				stmt.setInt(6, fontBean.getViewCount());
 				stmt.setInt(7, fontBean.getSalesCount());
 				stmt.setBoolean(8, fontBean.getStatus());
@@ -66,14 +69,14 @@ public class FontDAOjdbc implements FontDAOInterface {
 //			session.getTransaction().rollback();
 //			throw ex;
 //		}
-		try( Connection conn = DriverManager.getConnection(url,"sa","sa123456"); 
+		try( Connection conn = DriverManager.getConnection(url,username,password); 
 				PreparedStatement stmt = conn.prepareStatement(UPDATE))  {
 			
 			if (fontBean != null) {
 				stmt.setString(1, fontBean.getName());
 				stmt.setInt(2, fontBean.getPrice());
 				stmt.setInt(3, fontBean.getWriterId());
-				stmt.setBlob(4, fontBean.getCover());
+				stmt.setBytes(4, fontBean.getCover());
 				stmt.setInt(5, fontBean.getViewCount());
 				stmt.setInt(6, fontBean.getSalesCount());
 				stmt.setBoolean(7, fontBean.getStatus());
@@ -100,7 +103,7 @@ public class FontDAOjdbc implements FontDAOInterface {
 //			session.getTransaction().rollback();
 //			throw ex;
 //		}
-		try( Connection conn = DriverManager.getConnection(url,"sa","sa123456"); 
+		try( Connection conn = DriverManager.getConnection(url,username,password); 
 				PreparedStatement stmt = conn.prepareStatement(DELETE))  {
 			
 			if (id != null) {
@@ -128,7 +131,7 @@ public class FontDAOjdbc implements FontDAOInterface {
 //		}
 		FontBean bean = null;
 		ResultSet rs = null;
-		try( Connection conn = DriverManager.getConnection(url,"sa","sa123456"); 
+		try( Connection conn = DriverManager.getConnection(url,username,password); 
 				PreparedStatement stmt = conn.prepareStatement(SELECT))  {
 			
 			if (id != null) {
@@ -141,7 +144,7 @@ public class FontDAOjdbc implements FontDAOInterface {
 					bean.setName(rs.getString("name"));
 					bean.setPrice(rs.getInt("price"));
 					bean.setWriterId(rs.getInt("writerId"));
-					bean.setCover(rs.getBlob("cover"));
+					bean.setCover(rs.getBytes("cover"));
 					bean.setViewCount(rs.getInt("viewCount"));
 					bean.setSalesCount(rs.getInt("salesCount"));
 					bean.setStatus(rs.getBoolean("status"));
@@ -176,7 +179,7 @@ public class FontDAOjdbc implements FontDAOInterface {
 //		}
 		List<FontBean> list = null;
 		ResultSet rs = null;
-		try( Connection conn = DriverManager.getConnection(url,"sa","sa123456");
+		try( Connection conn = DriverManager.getConnection(url,username,password);
 			 PreparedStatement pstmt = conn.prepareStatement(SELECT_ALL))  {
 			rs = pstmt.executeQuery();
 			
@@ -187,7 +190,7 @@ public class FontDAOjdbc implements FontDAOInterface {
 				bean.setName(rs.getString("name"));
 				bean.setPrice(rs.getInt("price"));
 				bean.setWriterId(rs.getInt("writerId"));
-				bean.setCover(rs.getBlob("cover"));
+				bean.setCover(rs.getBytes("cover"));
 				bean.setViewCount(rs.getInt("viewCount"));
 				bean.setSalesCount(rs.getInt("salesCount"));
 				bean.setStatus(rs.getBoolean("status"));
@@ -200,18 +203,24 @@ public class FontDAOjdbc implements FontDAOInterface {
 	}
 
 	public static void main(String[] args) {
+		File f = new File("C:\\Users\\Student\\Desktop\\zzz.png");
+		if(f.exists()) {
+			f.delete();
+		}
+		
+		
 		FontDAOjdbc dao = new FontDAOjdbc();
 
 		FontBean fontBean = new FontBean();
-		fontBean.setId("3");
-		fontBean.setName("AAAA");
+		fontBean.setId("141");
+		fontBean.setName("asas");
 		fontBean.setPrice(123);
 		fontBean.setWriterId(123);
-		fontBean.setCover(ImageBlob.imgIn("C:\\Users\\Public\\Pictures\\Sample Pictures\\Desert.jpg"));
+		fontBean.setCover(ImageToBytes.imgIn("C:\\Users\\Public\\Pictures\\Sample Pictures\\Tulips.jpg"));
 		fontBean.setViewCount(123456);
 		fontBean.setSalesCount(7651);
 		fontBean.setStatus(true);
-		dao.update(fontBean);
+		dao.insert(fontBean);
 //		dao.delete(2);
 		List<FontBean> test = null;
 		test = dao.selectAll();

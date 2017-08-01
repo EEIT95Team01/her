@@ -4,27 +4,29 @@ import java.sql.Blob;
 
 public class CardBean {
 	
+	private String name;
+	private Long price;
+	private byte[] cover;
+	private int viewCount;
+	private int salesCount;
+	private Boolean	status;
+	private String manufacturer;
+	private Long cost;
+	private Long gpratio;
+	private short stock;
+	private short maxWordCount;
 	
-	String id;
-	String name;
-	Long price;
-	Blob cover;
-	int viewCount;
-	int salesCount;
-	Boolean	status;
-	String manufacturer;
-	Long cost;
-	Long gpratio;
-	short stock;
-	short maxWordCount;
 	
-    @Override
+	private String id;
+	@Override
 	public String toString() {
-		return "cardBean [id=" + id + ", name=" + name + ", price=" + price + ", cover=" + cover + ", viewCount="
+		return "CardBean [id=" + id + ", name=" + name + ", price=" + price + ", cover=" + cover + ", viewCount="
 				+ viewCount + ", salesCount=" + salesCount + ", status=" + status + ", manufacturer=" + manufacturer
 				+ ", cost=" + cost + ", gpratio=" + gpratio + ", stock=" + stock + ", maxWordCount=" + maxWordCount
 				+ "]";
 	}
+	
+	
 	public String getId() {
 		return id;
 	}
@@ -43,10 +45,10 @@ public class CardBean {
 	public void setPrice(Long price) {
 		this.price = price;
 	}
-	public Blob getCover() {
+	public byte[] getCover() {
 		return cover;
 	}
-	public void setCover(Blob cover) {
+	public void setCover(byte[] cover) {
 		this.cover = cover;
 	}
 	public int getViewCount() {
@@ -98,5 +100,6 @@ public class CardBean {
 		this.maxWordCount = maxWordCount;
 	}
 	
+
 	
 }
