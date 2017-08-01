@@ -1,7 +1,5 @@
 package com.eeit95.her.model.font;
 
-import java.util.Arrays;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -9,14 +7,13 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "font")
 public class FontBean implements java.io.Serializable{
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 1L;
 	private String id;
 	private String name;
@@ -36,7 +33,6 @@ public class FontBean implements java.io.Serializable{
 				+ cover + ", viewCount=" + viewCount + ", salesCount=" + salesCount + ", status=" + status + "]";
 	}
 	@Id
-	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER, mappedBy="fontBean")
 	public String getId() {
 		return id;
 	}

@@ -15,9 +15,6 @@ import javax.persistence.TemporalType;
 @Table(name = "advertisement")
 public class AdvertisementBean implements java.io.Serializable{
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private int id;
 	private String name;

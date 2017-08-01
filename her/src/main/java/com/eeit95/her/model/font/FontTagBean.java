@@ -19,8 +19,6 @@ public class FontTagBean implements java.io.Serializable{
 	@JoinColumn(name="fontId")
 	private FontBean fontBean;
 	@Id
-	@ManyToOne
-	@JoinColumn()
 	private int tagId;
 	
 	
