@@ -1,4 +1,4 @@
-package com.eeit95.her.model.category;
+package com.eeit95.her.model.gift;
 
 public class CategoryBean {
 	private int mainId;	//資料庫型態為smallint(-2^15~2^15-1),與short範圍相同。

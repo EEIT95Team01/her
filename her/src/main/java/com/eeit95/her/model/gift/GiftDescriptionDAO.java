@@ -1,4 +1,4 @@
-package com.eeit95.her.model.giftDescription;
+package com.eeit95.her.model.gift;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

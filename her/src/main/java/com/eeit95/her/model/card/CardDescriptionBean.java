@@ -1,38 +1,56 @@
 package com.eeit95.her.model.card;
 
-import java.sql.Blob;
 
-public class CardDescriptionBean {
-	private String cardId;
-	private short order;
+import java.io.Serializable;
+import java.util.Arrays;
+
+import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+
+
+@Entity
+@Table(name="card_description")
+public class CardDescriptionBean implements Serializable {
+	@Id
+	@ManyToOne//(fetch=FetchType.LAZY)
+	@JoinColumn(name = "cardId")
+	private CardBean cardBean;
+	@Id
+	private int orderNo;
 	private String text;
 	private byte[] image;
 	
 	
-	@Override
-	public String toString() {
-		return "CardDescriptionBean [cardId=" + cardId + ", order=" + order + ", text=" + text + ", image=" + image
-				+ "]";
+	
+//	@Override
+//	public String toString() {
+//		return "CardDescriptionBean [cardBean=" + cardBean + ", orders=" + orders + ", text=" + text + ", image="
+//				+ Arrays.toString(image) + "]";
+//	}
+
+	
+	public CardBean getCardBean() {
+		return cardBean;
 	}
 
 
-	public String getCardId() {
-		return cardId;
+	public void setCardBean(CardBean cardBean) {
+		this.cardBean = cardBean;
+	}
+	
+	public int getOrderNo() {
+		return orderNo;
 	}
 
 
-	public void setCardId(String cardId) {
-		this.cardId = cardId;
-	}
-
-
-	public short getOrder() {
-		return order;
-	}
-
-
-	public void setOrder(short order) {
-		this.order = order;
+	public void setOrderNo(int orderNo) {
+		this.orderNo = orderNo;
 	}
 
 

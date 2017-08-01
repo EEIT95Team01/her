@@ -1,4 +1,4 @@
-package com.eeit95.her.model.giftTag;
+package com.eeit95.her.model.gift;
 
 public class GiftTagBean {
 	private String giftId;

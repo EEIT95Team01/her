@@ -1,0 +1,198 @@
+package com.eeit95.her.model.dao.card;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+import javax.sql.DataSource;
+
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+
+import com.eeit95.her.model.card.CardBean;
+import com.eeit95.her.model.card.CardDAOInterface;
+import com.eeit95.her.model.card.CardDescriptionBean;
+
+import hibernate.util.HibernateUtil;
+
+
+public class CardDAOhibernate implements CardDAOInterface {
+	private static int n = 0;
+	private static String type = null;
+	private static final String selectAll = "from CardBean";
+	private static final String Delete = "delete from CardBean where id=?";
+
+	public static void main(String[] args) {
+
+		CardDAOhibernate cdj = new CardDAOhibernate();
+
+		// SELECT 一筆資料 & PRINT
+		System.out.println("==================");
+		CardBean bean = cdj.selectById("c01706010001");
+		System.out.println("SELECT 一筆資料 & PRINT");
+		System.out.println(bean);
+
+		System.out.println("===================================================");
+
+		// INSERT 一筆資料 & PRINT
+		bean.setId("c01707280001");
+		bean = cdj.insert(bean);
+		System.out.println("INSERT 一筆資料 & PRINT");
+		System.out.println(bean);
+
+		System.out.println("===================================================");
+
+		// UPDATE 一筆資料 & PRINT
+		bean.setName("史奴比");
+		System.out.println("snoopy");
+		cdj.update(bean);
+		System.out.println("UPDATE 一筆資料 & PRINT");
+		System.out.println(bean);
+
+		System.out.println("===================================================");
+
+//		// DELETE 一筆資料 & PRINT
+//		System.out.println("DELETE 一筆資料 & PRINT");
+//		cdj.delete("c01707280001");
+//		
+//		System.out.println("===================================================");
+
+//		// SELECT TopN & PRINT
+//		List<CardBean> result = cdj.selectAll(3,"viewCount");
+//		System.out.println("SELECT 所有資料 & PRINT");
+//		for (CardBean bean1 : result) {
+//			System.out.println(bean1);
+//		}
+		
+		System.out.println("===================================================");
+
+		// SELECT 所有資料 & PRINT
+		List<CardBean> beans = cdj.selectAll();
+		System.out.println("SELECT 所有資料 & PRINT");
+		for (CardBean bean1 : beans) {
+			System.out.println(bean1);
+			Set<CardDescriptionBean> desc =bean1.getDesc();
+			for(CardDescriptionBean BEAN2:desc) {
+				System.out.println(BEAN2);
+			}
+		}
+
+	}
+
+	@Override
+	public List<CardBean> selectAll(int n, String type) {
+		String Select_All_TopN = null;
+		if (n == 0) {
+			Select_All_TopN = "FROM CardBean WHERE status = 1 ORDER BY " + type + " DESC";
+		} else {
+			Select_All_TopN = "SELECT  TOP " + n + " * FROM ard WHERE status = 1 ORDER BY " + type + " DESC";
+		}
+		System.out.println(Select_All_TopN);
+		List<CardBean> result = null;
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		try {
+			session.beginTransaction();
+			Query query = session.createSQLQuery(Select_All_TopN);
+			result = query.list();
+			session.getTransaction().commit();
+		} catch (RuntimeException ex) {
+			session.getTransaction().rollback();
+			throw ex;
+		}
+		return result;
+	}
+
+	@Override
+	public List<CardBean> selectAll() {
+		List<CardBean> list = null;
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		try {
+			Query query = session.createQuery(selectAll);
+			list = query.list();
+			session.getTransaction().commit();
+		} catch (RuntimeException ex) {
+			session.getTransaction().rollback();
+			throw ex;
+		}
+		return list;
+	}
+
+	@Override
+	public CardBean selectById(String id) {
+		CardBean bean = null;
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		try {
+			session.beginTransaction();
+			bean = (CardBean) session.get(CardBean.class, id);
+			session.getTransaction().commit();
+		} catch (RuntimeException ex) {
+			session.getTransaction().rollback();
+			throw ex;
+		}
+		return bean;
+	}
+
+	@Override
+	public CardBean insert(CardBean bean) {
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		try {
+			if (bean != null) {
+				session.save(bean);
+				session.getTransaction().commit();
+				return bean;
+			}
+		} catch (RuntimeException ex) {
+			session.getTransaction().rollback();
+			throw ex;
+		}
+		return null;
+
+	}
+
+	@Override
+	public CardBean update(CardBean bean) {
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		try {
+			session.saveOrUpdate(bean);
+			session.getTransaction().commit();
+			if (bean != null)
+				return bean;
+		} catch (RuntimeException ex) {
+			session.getTransaction().rollback();
+			throw ex;
+
+		}
+		return null;
+	}
+
+	@Override
+	public boolean delete(String id) {
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		CardBean result = null;
+		try {
+			result = (CardBean) session.get(CardBean.class, id);
+			if (result != null) {
+				Query query = session.createQuery(Delete);
+				query.setParameter(0, id);
+				System.out.println("刪除筆數:" + query.executeUpdate());
+				session.getTransaction().commit();
+				return true;
+			}
+		} catch (RuntimeException ex) {
+			session.getTransaction().rollback();
+			throw ex;
+		}
+		return false;
+	}
+
+}
