@@ -1,20 +1,43 @@
 package com.eeit95.her.model.font;
 
-public class FontTagBean {
-	private String fontId;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "font_tag")
+public class FontTagBean implements java.io.Serializable{
+	/**
+	 * 
+	 */
+	
+	private static final long serialVersionUID = 1L;
+	@Id
+	@ManyToOne
+	@JoinColumn(name="fontId")
+	private FontBean fontBean;
+	@Id
+	@ManyToOne
+	@JoinColumn()
 	private int tagId;
+	
 	
 	
 	@Override
 	public String toString() {
-		return "FontTagBean [fontId=" + fontId + ", tagId=" + tagId + "]";
+		return "FontTagBean [fontBean=" + fontBean + ", tagId=" + tagId + "]";
 	}
-	public String getFontId() {
-		return fontId;
+	
+	public FontBean getFontBean() {
+		return fontBean;
 	}
-	public void setFontId(String fontId) {
-		this.fontId = fontId;
+
+	public void setFontBean(FontBean fontBean) {
+		this.fontBean = fontBean;
 	}
+
 	public int getTagId() {
 		return tagId;
 	}

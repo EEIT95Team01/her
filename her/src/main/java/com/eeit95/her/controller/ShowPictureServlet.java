@@ -1,23 +1,20 @@
 package com.eeit95.her.controller;
 
-import java.io.FileOutputStream;
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
-import java.sql.Blob;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.eeit95.her.model.dao.font.FontDAOjdbc;
+import com.eeit95.her.model.dao.font.FontDAOHibernate;
 import com.eeit95.her.model.font.FontBean;
-import com.eeit95.her.model.img.dao.ImageToBytes;
 
 /**
  * Servlet implementation class ShowPictureServlet
@@ -40,16 +37,43 @@ public class ShowPictureServlet extends HttpServlet {
 		System.out.println(ID);
 		try {
 			
-			FontDAOjdbc dao = new FontDAOjdbc();
+			FontDAOHibernate dao = new FontDAOHibernate();
 			FontBean bean = dao.selectById(ID);
-			response.setContentType("image/jpeg");
+			String path = bean.getCover();
+			String type = path.substring(path.lastIndexOf("."));
+			switch (type) {
+			case "png":
+				response.setContentType("png");
+			case "jpg":
+				response.setContentType("image/jpeg");
+			case "jpeg":
+				response.setContentType("image/jpeg");
+			case "gif":
+				response.setContentType("image/gif");
+			}
+			
+			InputStream is = new FileInputStream(path);
+			BufferedInputStream bis = new BufferedInputStream(is);
 			OutputStream os = response.getOutputStream();
+			BufferedOutputStream bos = new BufferedOutputStream(os);
+			
+			int data;
+			
+			while((data=bis.read())!= -1) {
+				bos.write(data);
+			}
+			bos.close();
+			os.close();
+			bis.close();
+			is.close();
+			
 //			OutputStream os = new FileOutputStream("C:\\Users\\Student\\Desktop\\aazzz.jpg");
-			byte[] b = bean.getCover();
+			
+			//byte[] b = bean.getCover();
 
 //			byte[] data = b.getBytes(1, (int) b.length());
-			os.write(b, 0, b.length);
-			os.close();
+			//os.write(b, 0, b.length);
+			//os.close();
 
 		
 			//os.write(b, 0, (int) b.length);

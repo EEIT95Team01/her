@@ -1,18 +1,21 @@
 package com.eeit95.her.model.font;
 
-import java.sql.Blob;
+public class FontDescriptionBean implements java.io.Serializable{
 
-public class FontDescriptionBean {
-
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String fontId;
-	private int order;
+	private int orderNo;
 	private String text;
-	private byte[] image;
+	private String image;
+	
 	
 	
 	@Override
 	public String toString() {
-		return "FontDescriptionBean [fontId=" + fontId + ", order=" + order + ", text=" + text + ", image=" + image
+		return "FontDescriptionBean [fontId=" + fontId + ", orderNo=" + orderNo + ", text=" + text + ", image=" + image
 				+ "]";
 	}
 	public String getFontId() {
@@ -21,11 +24,12 @@ public class FontDescriptionBean {
 	public void setFontId(String fontId) {
 		this.fontId = fontId;
 	}
-	public int getOrder() {
-		return order;
+	
+	public int getOrderNo() {
+		return orderNo;
 	}
-	public void setOrder(int order) {
-		this.order = order;
+	public void setOrderNo(int orderNo) {
+		this.orderNo = orderNo;
 	}
 	public String getText() {
 		return text;
@@ -33,10 +37,10 @@ public class FontDescriptionBean {
 	public void setText(String text) {
 		this.text = text;
 	}
-	public byte[] getImage() {
+	public String getImage() {
 		return image;
 	}
-	public void setImage(byte[] image) {
+	public void setImage(String image) {
 		this.image = image;
 	}
 }
