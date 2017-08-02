@@ -1,15 +1,17 @@
 package com.eeit95.her.model.dao.advertisement;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-import org.hibernate.*;
+import org.hibernate.Criteria;
+import org.hibernate.Query;
+import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
 import com.eeit95.her.model.advertisement.AdvertisementBean;
 import com.eeit95.her.model.advertisement.AdvertisementDAOInterface;
-import com.eeit95.her.model.font.FontBean;
 
 import hibernate.util.HibernateUtil;
 
@@ -86,8 +88,9 @@ public class AdvertisementDAOHibernate implements AdvertisementDAOInterface {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		List<AdvertisementBean> list = null;
 		try {
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 			String s = sdf.format(new Date());
+			System.out.println(s);
 			java.sql.Date today = java.sql.Date.valueOf(s);
 			session.beginTransaction();
 			Criteria criteria = session.createCriteria(AdvertisementBean.class);
@@ -123,7 +126,7 @@ public class AdvertisementDAOHibernate implements AdvertisementDAOInterface {
 		AdvertisementDAOHibernate dao = new AdvertisementDAOHibernate();
 //		boolean b = dao.delete(1);
 //		System.out.println(b);
-		List<AdvertisementBean> list = dao.selectAll();
+		List<AdvertisementBean> list = dao.selectByDate();
 		for(AdvertisementBean bean: list) {
 			System.out.println(bean.getName());
 		}
