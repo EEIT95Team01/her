@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.eeit95.her.model.dao.pack.PackageDAOjdbc;
-import com.eeit95.her.model.pack.PackageBean;
+import com.eeit95.her.model.dao.pack.PackDAOjdbc;
+import com.eeit95.her.model.pack.PackBean;
 
 @WebServlet("/member/package")
 public class PackageController extends HttpServlet {
@@ -23,19 +23,19 @@ public class PackageController extends HttpServlet {
 		String memberId = request.getParameter("memberId");
 		int statusM = 1, statusR = 2;
 		
-		PackageDAOjdbc packageDAO = new PackageDAOjdbc();
+		PackDAOjdbc packageDAO = new PackDAOjdbc();
 		List<String> packageIdsM = packageDAO.getPackageIds(memberId, statusM);
 		List<String> packageIdsR = packageDAO.getPackageIds(memberId, statusR);
 		
-		List<PackageBean> packageBeansM = new ArrayList<PackageBean>();
+		List<PackBean> packageBeansM = new ArrayList<PackBean>();
 		for(String packageIdM : packageIdsM) {
-			PackageBean packageBean = packageDAO.selectById(packageIdM);
+			PackBean packageBean = packageDAO.selectById(packageIdM);
 			packageBeansM.add(packageBean);
 		}
 		
-		List<PackageBean> packageBeansR = new ArrayList<PackageBean>();
+		List<PackBean> packageBeansR = new ArrayList<PackBean>();
 		for(String packageIdR : packageIdsR) {
-			PackageBean packageBean = packageDAO.selectById(packageIdR);
+			PackBean packageBean = packageDAO.selectById(packageIdR);
 			packageBeansR.add(packageBean);
 		}
 		request.setAttribute("mailboxPackages", packageBeansM);

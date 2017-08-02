@@ -2,8 +2,8 @@ package com.eeit95.her.model.pack;
 
 import java.sql.Date;
 
-public class PackageBean implements java.io.Serializable {
-
+public class PackBean implements java.io.Serializable {
+	
 	private static final long serialVersionUID = 1L;
 	
 	private String id;					//  1
@@ -28,24 +28,8 @@ public class PackageBean implements java.io.Serializable {
 	private String senderCity;			// 20
 	private String senderDistrict;		// 21
 	private String senderAddr;			// 22
-	private Boolean status;				// 23
+	private int status;					// 23
 	
-	public PackageBean() {
-		
-	}
-	
-	@Override
-	public String toString() {
-		return "packageBean [id=" + id + ", name=" + name + ", memberId=" + memberId + ", cardId=" + cardId
-				+ ", cardPrice=" + cardPrice + ", fontId=" + fontId + ", fontPrice=" + fontPrice + ", giftSum="
-				+ giftSum + ", sum=" + sum + ", content=" + content + ", recipientId=" + recipientId
-				+ ", recipientName=" + recipientName + ", recipientPhone=" + recipientPhone + ", recipientCity="
-				+ recipientCity + ", recipientDistrict=" + recipientDistrict + ", recipientAddr=" + recipientAddr
-				+ ", dateMailed=" + dateMailed + ", senderName=" + senderName + ", senderPhone=" + senderPhone
-				+ ", senderCity=" + senderCity + ", senderDistrict=" + senderDistrict + ", senderAddr=" + senderAddr
-				+ ", status=" + status + "]";
-		
-	}
 	public String getId() {
 		return id;
 	}
@@ -178,10 +162,10 @@ public class PackageBean implements java.io.Serializable {
 	public void setSenderAddr(String senderAddr) {
 		this.senderAddr = senderAddr;
 	}
-	public Boolean getStatus() {
+	public int getStatus() {
 		return status;
 	}
-	public void setStatus(Boolean status) {
+	public void setStatus(int status) {
 		this.status = status;
 	}
 }

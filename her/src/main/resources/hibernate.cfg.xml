@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-configuration PUBLIC
 		"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
 		"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
@@ -28,7 +28,12 @@
 		<property name="hibernate.current_session_context_class">thread</property>
 
 		<!--Java物件與資料庫表格的映射檔 -->
-		<mapping class="com.eeit95.her.model.font.AdvertisementBean" />
+		<mapping class="com.eeit95.her.model.card.CardBean"/>
+    	<mapping class="com.eeit95.her.model.card.CardDescriptionBean"/>
+    	<mapping class="com.eeit95.her.model.card.CardTagBean"/>
+    	<mapping class="com.eeit95.her.model.tag.TagBean"/>
+    	
+<!-- 		<mapping class="com.eeit95.her.model.font.AdvertisementBean" /> -->
 		<mapping class="com.eeit95.her.model.font.FontBean" />
 		<mapping class="com.eeit95.her.model.font.FontDescriptionBean" />
 		<mapping class="com.eeit95.her.model.font.FontTagBean" />
@@ -39,6 +44,7 @@
 		<mapping class="com.eeit95.her.model.gift.GiftDescriptionBean" />
 		<mapping class="com.eeit95.her.model.gift.GiftTagBean" />
 
+		<mapping class="com.eeit95.her.model.pack.PackStatusBean" />
 
 	</session-factory>
 	

@@ -1,25 +1,46 @@
 package com.eeit95.her.model.card;
 
-public class CardTagBean {
-	private String cardId;
-	private short tagId;
-	
-	
+import java.io.Serializable;
 
-	@Override
-	public String toString() {
-		return "CardTagBean [cardId=" + cardId + ", tagId=" + tagId + "]";
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+import com.eeit95.her.model.dao.card.CardTagDAOhibernate;
+import com.eeit95.her.model.tag.TagBean;
+
+@Entity
+@Table(name = "card_tag")
+public class CardTagBean implements Serializable {
+
+	@Id
+	@ManyToOne//(fetch=FetchType.LAZY)
+	@JoinColumn(name = "cardId")
+	private CardBean cardBean;
+	@Id
+	@ManyToOne//(fetch=FetchType.LAZY)
+	@JoinColumn(name = "tagId")
+	private TagBean tagBean;
+	
+	
+    public CardTagBean() {
+    }
+
+
+
+	public CardBean getCardBean() {
+		return cardBean;
 	}
-	public String getCardId() {
-		return cardId;
+	public void setCardBean(CardBean cardBean) {
+		this.cardBean = cardBean;
 	}
-	public void setCardId(String cardId) {
-		this.cardId = cardId;
+	public TagBean getTagBean() {
+		return tagBean;
 	}
-	public short getTagId() {
-		return tagId;
-	}
-	public void setTagId(short tagId) {
-		this.tagId = tagId;
+	public void setTagBean(TagBean tagBean) {
+		this.tagBean = tagBean;
 	}
 }
