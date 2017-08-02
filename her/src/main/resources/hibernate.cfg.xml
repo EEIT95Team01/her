@@ -33,6 +33,11 @@
 		<mapping class="com.eeit95.her.model.font.FontDescriptionBean" />
 		<mapping class="com.eeit95.her.model.font.FontTagBean" />
 		<mapping class="com.eeit95.her.model.font.WriterBean" />
+		<mapping class="com.eeit95.her.model.gift.CategoryBean" />
+		<mapping class="com.eeit95.her.model.gift.CategoryMainBean" />
+		<mapping class="com.eeit95.her.model.gift.GiftBean" />
+		<mapping class="com.eeit95.her.model.gift.GiftDescriptionBean" />
+		<mapping class="com.eeit95.her.model.gift.GiftTagBean" />
 
 
 	</session-factory>
