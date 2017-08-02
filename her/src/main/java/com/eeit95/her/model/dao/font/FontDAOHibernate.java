@@ -14,44 +14,51 @@ public class FontDAOHibernate implements FontDAOInterface {
 	private static final String SELECT_ALL = "from FontBean order by id";
 	
 	@Override
-	public void insert(FontBean fontBean) {
+	public FontBean insert(FontBean fontBean) {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try {
 			session.beginTransaction();
 			session.saveOrUpdate(fontBean);
 			session.getTransaction().commit();
+			return fontBean;
 		} catch (RuntimeException ex) {
 			session.getTransaction().rollback();
-			throw ex;
+			ex.printStackTrace();
+			return null;
 		}
 	}
 
 	@Override
-	public void update(FontBean fontBean) {
+	public FontBean update(FontBean fontBean) {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try {
 			session.beginTransaction();
 			session.saveOrUpdate(fontBean);
 			session.getTransaction().commit();
+			return fontBean;
 		} catch (RuntimeException ex) {
 			session.getTransaction().rollback();
-			throw ex;
+			ex.printStackTrace();
+			return null;
 		}
 	}
 
 	@Override
-	public void delete(String id) {
+	public boolean delete(String id) {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		boolean result = false;
 		try {
 			session.beginTransaction();
 			FontBean fontBean = new FontBean();
 			fontBean.setId(id);
 			session.delete(fontBean);
 			session.getTransaction().commit();
+			result = true;
 		} catch (RuntimeException ex) {
 			session.getTransaction().rollback();
 			throw ex;
 		}
+		return result;
 	}
 
 	@Override

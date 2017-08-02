@@ -11,29 +11,29 @@
 		<property name="hibernate.connection.url">jdbc:sqlserver://localhost:1433;DatabaseName=her</property>
 		<property name="hibernate.connection.username">sa</property>
 		<property name="hibernate.connection.password">sa123456</property>
-        
+
 		<!--SQL方言,以下使用SQLServer -->
 		<property name="hibernate.dialect">org.hibernate.dialect.SQLServerDialect</property>
 
 		<!--是否要顯示實際操作資料庫時的SQL -->
 		<property name="hibernate.show_sql">true</property>
 
-        <!-- Disable the second-level cache -->
-        <property name="hibernate.cache.provider_class">org.hibernate.cache.NoCacheProvider</property>
+		<!-- Disable the second-level cache -->
+		<property name="hibernate.cache.provider_class">org.hibernate.cache.NoCacheProvider</property>
 
 		<!--交易管理類型, 以下使用JDBC Transaction -->
 		<property name="hibernate.transaction.factory_class">org.hibernate.transaction.JDBCTransactionFactory</property>
-        
-        <!-- Enable Hibernate's automatic session context management -->
+
+		<!-- Enable Hibernate's automatic session context management -->
 		<property name="hibernate.current_session_context_class">thread</property>
 
 		<!--Java物件與資料庫表格的映射檔 -->
-		<mapping class="com.eeit95.her.model.card.CardBean"/>
-    		<mapping class="com.eeit95.her.model.card.CardDescriptionBean"/>
-    		<mapping class="com.eeit95.her.model.card.CardTagBean"/>
-    		<mapping class="com.eeit95.her.model.tag.TagBean"/>
+		<mapping class="com.eeit95.her.model.card.CardBean" />
+		<mapping class="com.eeit95.her.model.card.CardDescriptionBean" />
+		<mapping class="com.eeit95.her.model.card.CardTagBean" />
+		<mapping class="com.eeit95.her.model.tag.TagBean" />
 
-		<mapping class="com.eeit95.her.model.font.AdvertisementBean" />
+		<mapping class="com.eeit95.her.model.advertisement.AdvertisementBean" />
 		<mapping class="com.eeit95.her.model.font.FontBean" />
 		<mapping class="com.eeit95.her.model.font.FontDescriptionBean" />
 		<mapping class="com.eeit95.her.model.font.FontTagBean" />
@@ -41,5 +41,5 @@
 
 
 	</session-factory>
-	
+
 </hibernate-configuration>

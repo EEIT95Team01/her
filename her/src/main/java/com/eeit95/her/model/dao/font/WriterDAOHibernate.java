@@ -14,44 +14,52 @@ public class WriterDAOHibernate implements WriterDAOInterface {
 	
 	private static final String SELECT_ALL = "from WriterBean order by id";
 	@Override
-	public void insert(WriterBean writerBean) {
+	public WriterBean insert(WriterBean writerBean) {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try {
 			session.beginTransaction();
 			session.saveOrUpdate(writerBean);
 			session.getTransaction().commit();
+			return writerBean;
 		} catch (RuntimeException ex) {
 			session.getTransaction().rollback();
-			throw ex;
+			ex.printStackTrace();
+			return null;	
 		}
 	}
 
 	@Override
-	public void update(WriterBean writerBean) {
+	public WriterBean update(WriterBean writerBean) {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try {
 			session.beginTransaction();
 			session.saveOrUpdate(writerBean);
 			session.getTransaction().commit();
+			return writerBean;
 		} catch (RuntimeException ex) {
 			session.getTransaction().rollback();
-			throw ex;
+			ex.printStackTrace();
+			return null;	
 		}
+		
 	}
 
 	@Override
-	public void delete(int id) {
+	public boolean delete(int id) {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		boolean result = false;
 		try {
 			session.beginTransaction();
 			WriterBean writerBean = new WriterBean();
 			writerBean.setId(id);
 			session.delete(writerBean);
 			session.getTransaction().commit();
+			result = true;
 		} catch (RuntimeException ex) {
 			session.getTransaction().rollback();
 			throw ex;
 		}
+		return result;
 	}
 
 	@Override
@@ -87,8 +95,10 @@ public class WriterDAOHibernate implements WriterDAOInterface {
 
 	public static void main(String[] args) {
 		WriterDAOHibernate dao = new WriterDAOHibernate();
-//		FontBean bean = new FontBean();
-		
+//		WriterBean wbean = new WriterBean();
+//		wbean.setName("fdsfsf");
+//		WriterBean www = dao.insert(wbean);
+//		System.out.println(www.getName());
 		List<WriterBean> list = dao.selectAll();
 		for (WriterBean bean : list) {
 			System.out.print(bean.getId() + ",");

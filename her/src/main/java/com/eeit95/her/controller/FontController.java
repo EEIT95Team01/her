@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.eeit95.her.model.dao.font.FontDAOjdbc;
+import com.eeit95.her.model.dao.font.FontDAOHibernate;
 import com.eeit95.her.model.font.FontBean;
 
 @WebServlet("/font")
@@ -20,7 +20,7 @@ public class FontController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
 		
-		FontDAOjdbc fontDAO = new FontDAOjdbc();
+		FontDAOHibernate fontDAO = new FontDAOHibernate();
 		List<FontBean> fontBeans = fontDAO.selectAll();
 		
 		request.setAttribute("fontBeans", fontBeans);
