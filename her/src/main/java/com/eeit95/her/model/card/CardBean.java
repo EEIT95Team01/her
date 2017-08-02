@@ -23,7 +23,7 @@ public class CardBean implements Serializable {
 	private String id;
 	private String name;
 	private double price;
-	private byte[] cover;
+	private String cover;
 	private int viewCount;
 	private int salesCount;
 	private Boolean	status;
@@ -84,12 +84,12 @@ public class CardBean implements Serializable {
 	}
 
 
-	public byte[] getCover() {
+	public String getCover() {
 		return cover;
 	}
 
 
-	public void setCover(byte[] cover) {
+	public void setCover(String cover) {
 		this.cover = cover;
 	}
 

@@ -3,7 +3,7 @@ package com.eeit95.her.model.pack;
 import java.sql.Date;
 
 public class PackBean implements java.io.Serializable {
-
+	
 	private static final long serialVersionUID = 1L;
 	
 	private String id;					//  1
@@ -29,10 +29,6 @@ public class PackBean implements java.io.Serializable {
 	private String senderDistrict;		// 21
 	private String senderAddr;			// 22
 	private int status;					// 23
-	
-	public PackBean() {
-		super();
-	}
 	
 	public String getId() {
 		return id;

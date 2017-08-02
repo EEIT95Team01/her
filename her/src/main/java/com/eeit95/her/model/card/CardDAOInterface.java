@@ -9,5 +9,6 @@ public interface CardDAOInterface {
 	public abstract CardBean update(CardBean bean);
 	public abstract boolean delete(String id);
 	public abstract List <CardBean> selectAll();
-	public abstract List <CardBean> selectAll(int n,String type);
+	public abstract List <CardBean> selectAll(int n,String type,String desc);
+	public abstract List <CardBean> selectBetween(String type,double lo,double hi);
 }

@@ -11,9 +11,11 @@ import java.util.Set;
 
 import javax.sql.DataSource;
 
+import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 
 import com.eeit95.her.model.card.CardBean;
 import com.eeit95.her.model.card.CardDAOInterface;
@@ -38,24 +40,24 @@ public class CardDAOhibernate implements CardDAOInterface {
 		System.out.println("SELECT 一筆資料 & PRINT");
 		System.out.println(bean);
 
-		System.out.println("===================================================");
-
-		// INSERT 一筆資料 & PRINT
-		bean.setId("c01707280001");
-		bean = cdj.insert(bean);
-		System.out.println("INSERT 一筆資料 & PRINT");
-		System.out.println(bean);
-
-		System.out.println("===================================================");
-
-		// UPDATE 一筆資料 & PRINT
-		bean.setName("史奴比");
-		System.out.println("snoopy");
-		cdj.update(bean);
-		System.out.println("UPDATE 一筆資料 & PRINT");
-		System.out.println(bean);
-
-		System.out.println("===================================================");
+//		System.out.println("===================================================");
+//
+//		// INSERT 一筆資料 & PRINT
+//		bean.setId("c01707280001");
+//		bean = cdj.insert(bean);
+//		System.out.println("INSERT 一筆資料 & PRINT");
+//		System.out.println(bean);
+//
+//		System.out.println("===================================================");
+//
+//		// UPDATE 一筆資料 & PRINT
+//		bean.setName("史奴比");
+//		System.out.println("snoopy");
+//		cdj.update(bean);
+//		System.out.println("UPDATE 一筆資料 & PRINT");
+//		System.out.println(bean);
+//
+//		System.out.println("===================================================");
 
 //		// DELETE 一筆資料 & PRINT
 //		System.out.println("DELETE 一筆資料 & PRINT");
@@ -64,43 +66,56 @@ public class CardDAOhibernate implements CardDAOInterface {
 //		System.out.println("===================================================");
 
 //		// SELECT TopN & PRINT
-//		List<CardBean> result = cdj.selectAll(3,"viewCount");
-//		System.out.println("SELECT 所有資料 & PRINT");
-//		for (CardBean bean1 : result) {
-//			System.out.println(bean1);
-//		}
-		
-		System.out.println("===================================================");
-
-		// SELECT 所有資料 & PRINT
-		List<CardBean> beans = cdj.selectAll();
+		List<CardBean> result = cdj.selectAll(0,"viewCount","asc");
 		System.out.println("SELECT 所有資料 & PRINT");
+		for (CardBean bean1 : result) {
+			System.out.println(bean1);
+		}
+		
+//		System.out.println("===================================================");
+//
+//		// SELECT 所有資料 & PRINT
+		List<CardBean> beans = cdj.selectBetween("price",40	,55);
+		System.out.println("SELECT Between & PRINT");
 		for (CardBean bean1 : beans) {
 			System.out.println(bean1);
-			Set<CardDescriptionBean> desc =bean1.getDesc();
-			for(CardDescriptionBean BEAN2:desc) {
-				System.out.println(BEAN2);
-			}
+//			Set<CardDescriptionBean> desc =bean1.getDesc();
+//			for(CardDescriptionBean BEAN2:desc) {
+//				System.out.println(BEAN2);
+//			}
 		}
+//		
+//		List<CardBean> beans1 = cdj.selectAll();
+//		System.out.println("SELECT 所有資料 & PRINT");
+//		for (CardBean bean1 : beans1) {
+//			System.out.println(bean1);
+////			Set<CardDescriptionBean> desc =bean1.getDesc();
+////			for(CardDescriptionBean BEAN2:desc) {
+////				System.out.println(BEAN2);
+////			}
+//		}
 
 	}
 
 	@Override
-	public List<CardBean> selectAll(int n, String type) {
+	public List<CardBean> selectAll(int n,String type,String desc) {
 		String Select_All_TopN = null;
-		if (n == 0) {
-			Select_All_TopN = "FROM CardBean WHERE status = 1 ORDER BY " + type + " DESC";
-		} else {
-			Select_All_TopN = "SELECT  TOP " + n + " * FROM ard WHERE status = 1 ORDER BY " + type + " DESC";
-		}
+		Select_All_TopN = "from CardBean where status = 1 ORDER BY " + type +" "+ desc;
 		System.out.println(Select_All_TopN);
 		List<CardBean> result = null;
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		session.beginTransaction();
 		try {
-			session.beginTransaction();
-			Query query = session.createSQLQuery(Select_All_TopN);
+			if(n>0) {
+			Query query=session.createQuery(Select_All_TopN);
+			query.setMaxResults(n);
 			result = query.list();
 			session.getTransaction().commit();
+			}else {
+				Query query=session.createQuery(Select_All_TopN);
+				result = query.list();
+				session.getTransaction().commit();
+			}
 		} catch (RuntimeException ex) {
 			session.getTransaction().rollback();
 			throw ex;
@@ -193,6 +208,26 @@ public class CardDAOhibernate implements CardDAOInterface {
 			throw ex;
 		}
 		return false;
+	}
+
+	@Override
+	public List<CardBean> selectBetween(String type,double lo, double hi) {
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		List<CardBean> list = null;
+		try {
+			Criteria query = session.createCriteria(CardBean.class);
+			query.add(Restrictions.between(type, lo,hi));
+			query.add(Restrictions.eq("status", true));
+			list = query.list();
+			session.getTransaction().commit();
+			
+		}catch(RuntimeException ex) {
+			session.getTransaction().rollback();
+			throw ex;
+		}
+		
+		return list;
 	}
 
 }
