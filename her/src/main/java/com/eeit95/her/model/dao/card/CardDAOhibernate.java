@@ -75,7 +75,7 @@ public class CardDAOhibernate implements CardDAOInterface {
 //		System.out.println("===================================================");
 //
 //		// SELECT 所有資料 & PRINT
-		List<CardBean> beans = cdj.selectBetween(40	,55);
+		List<CardBean> beans = cdj.selectBetween("price",40	,55);
 		System.out.println("SELECT Between & PRINT");
 		for (CardBean bean1 : beans) {
 			System.out.println(bean1);
@@ -211,13 +211,14 @@ public class CardDAOhibernate implements CardDAOInterface {
 	}
 
 	@Override
-	public List<CardBean> selectBetween(double lo, double hi) {
+	public List<CardBean> selectBetween(String type,double lo, double hi) {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		session.beginTransaction();
 		List<CardBean> list = null;
 		try {
 			Criteria query = session.createCriteria(CardBean.class);
-			query.add(Restrictions.between("price", lo,hi));
+			query.add(Restrictions.between(type, lo,hi));
+			query.add(Restrictions.eq("status", true));
 			list = query.list();
 			session.getTransaction().commit();
 			
