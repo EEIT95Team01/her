@@ -13,6 +13,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
+import com.eeit95.her.model.pack.PackBean;
+
 @Entity
 @Table(name = "font")
 public class FontBean implements java.io.Serializable{
@@ -33,7 +35,8 @@ public class FontBean implements java.io.Serializable{
 	private Set<FontDescriptionBean> fontDescriptions = new HashSet<FontDescriptionBean>();
 	@OneToMany( mappedBy="fontBean")
 	private Set<FontTagBean> fontTags = new HashSet<FontTagBean>();
-	
+	@OneToMany( mappedBy="fontBean")
+	private Set<PackBean> packs = new HashSet<PackBean>();
 
 	public FontBean() {
 		
@@ -103,7 +106,12 @@ public class FontBean implements java.io.Serializable{
 		this.fontTags = fontTags;
 	}
 
-	
-	
-	
+	public Set<PackBean> getPacks() {
+		return packs;
+	}
+
+	public void setPacks(Set<PackBean> packs) {
+		this.packs = packs;
+	}
+
 }

@@ -1,9 +1,12 @@
 package com.eeit95.her.model.pack;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -15,6 +18,9 @@ public class OrderformPackStatusBean implements Serializable{
 	@SequenceGenerator(name = "psid", allocationSize = 1)
 	private int packStatus;
 	private String statusName;
+	@OneToMany(mappedBy="orderformPackStatusBean")
+	private Set<OrderformPackBean> orderformPacks = new HashSet<OrderformPackBean>();
+	
 	
 	public int getPackStatus() {
 		return packStatus;

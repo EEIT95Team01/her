@@ -252,7 +252,8 @@ public class GiftHibernateDAO implements GiftDAOInterface{
 			System.out.print(gVO.getCost() + ",");
 			System.out.print(gVO.getGpratio() + ",");
 			System.out.print(gVO.getStock() + ",");
-			System.out.print(gVO.getCategoryId().getId() + ",");
+			System.out.print(gVO.getCategoryId().getId() + ","); 
+			System.out.print(gVO.getCategoryId().getSubName());
 			System.out.println();				
 		}	
 	

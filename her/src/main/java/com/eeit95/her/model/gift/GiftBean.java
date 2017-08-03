@@ -1,11 +1,17 @@
 package com.eeit95.her.model.gift;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.eeit95.her.model.pack.PackGiftBean;
 
 @Entity
 @Table(name="gift")
@@ -23,6 +29,7 @@ public class GiftBean implements java.io.Serializable{
 	private double gpratio;			//資料庫型態是money，要用double
 	private Integer stock;			//資料庫型態為smallint(-2^15~2^15-1),與short範圍相同。
 	private CategoryBean categoryId;	//FOREIGN KEY REFERENCES [category](id)
+	private Set<PackGiftBean> packGifts = new HashSet<PackGiftBean>();
 	
 	public GiftBean(){
 		
@@ -128,4 +135,15 @@ public class GiftBean implements java.io.Serializable{
 		this.categoryId = categoryId;
 	}
 
+	@OneToMany(mappedBy= "giftBean")
+	public Set<PackGiftBean> getPackGifts() {
+		return packGifts;
+	}
+
+	public void setPackGifts(Set<PackGiftBean> packGifts) {
+		this.packGifts = packGifts;
+	}
+
+	
+	
 }

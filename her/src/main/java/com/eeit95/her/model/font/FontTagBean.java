@@ -15,11 +15,11 @@ public class FontTagBean implements java.io.Serializable{
 	private static final long serialVersionUID = 1L;
 	@Id
 	@ManyToOne
-	@JoinColumn(name="fontId")
+	@JoinColumn(name = "fontId")
 	private FontBean fontBean;
 	@Id
 	@ManyToOne
-	@JoinColumn(name="tagId")
+	@JoinColumn(name = "tagId")
 	private TagBean tagBean;
 	
 	public FontTagBean(){

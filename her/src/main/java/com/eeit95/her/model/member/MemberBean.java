@@ -3,6 +3,7 @@ package com.eeit95.her.model.member;
 import java.sql.Date;
 
 public class MemberBean implements java.io.Serializable{
+	
 	private String id;
 	private String email;
 	private String password;
@@ -12,6 +13,7 @@ public class MemberBean implements java.io.Serializable{
 	private String district;
 	private String addr;
 	private java.sql.Date birthday;
+
 	
 	public MemberBean(String email, String password, String name, String phone, String city, String district,
 			String addr, Date birthday) {

@@ -138,6 +138,15 @@ public class FontDAOHibernate implements FontDAOInterface {
 		return list;
 	}
 
+	
+	
+	@Override
+	public List<FontBean> select(String id, String name, double lowPrice, double highPrice, String writer,
+			String column, int topN, String ascOrDesc) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	@Override
 	public List<FontBean> selectAll() {
 		List<FontBean> list = null;
