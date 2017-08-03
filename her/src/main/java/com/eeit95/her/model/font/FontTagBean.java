@@ -6,12 +6,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.eeit95.her.model.tag.TagBean;
+
 @Entity
 @Table(name = "font_tag")
 public class FontTagBean implements java.io.Serializable{
-	/**
-	 * 
-	 */
 	
 	private static final long serialVersionUID = 1L;
 	@Id
@@ -19,14 +18,14 @@ public class FontTagBean implements java.io.Serializable{
 	@JoinColumn(name="fontId")
 	private FontBean fontBean;
 	@Id
-	private int tagId;
+	@ManyToOne
+	@JoinColumn(name="tagId")
+	private TagBean tagBean;
 	
-	
-	
-	@Override
-	public String toString() {
-		return "FontTagBean [fontBean=" + fontBean + ", tagId=" + tagId + "]";
+	public FontTagBean(){
+		
 	}
+	
 	
 	public FontBean getFontBean() {
 		return fontBean;
@@ -35,13 +34,12 @@ public class FontTagBean implements java.io.Serializable{
 	public void setFontBean(FontBean fontBean) {
 		this.fontBean = fontBean;
 	}
+	
+	public TagBean getTagBean() {
+		return tagBean;
+	}
 
-	public int getTagId() {
-		return tagId;
+	public void setTagBean(TagBean tagBean) {
+		this.tagBean = tagBean;
 	}
-	public void setTagId(int tagId) {
-		this.tagId = tagId;
-	}
-	
-	
 }

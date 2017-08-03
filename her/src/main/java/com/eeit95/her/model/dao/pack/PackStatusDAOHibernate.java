@@ -13,31 +13,29 @@ import hibernate.util.HibernateUtil;
 public class PackStatusDAOHibernate implements PackStatusDAOInterface {
 
 	private String SELECT_ALL = "from PackStatusBean";
-	
+
 	@Override
 	public List<PackStatusBean> selectAll() {
 		List<PackStatusBean> packStatusList = null;
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-		
+
 		try {
 			session.beginTransaction();
-			
 			Query query = session.createQuery(SELECT_ALL);
 			packStatusList = query.list();
 			session.getTransaction().commit();
-		} catch(RuntimeException e) {
+		} catch (RuntimeException e) {
 			session.getTransaction().rollback();
 			e.printStackTrace();
 		}
-		
 		return packStatusList;
 	}
-	
+
 	public static void main(String[] args) {
 		PackStatusDAOHibernate dao = new PackStatusDAOHibernate();
-		
+
 		List<PackStatusBean> packStatusList = dao.selectAll();
-		for(PackStatusBean bean : packStatusList) {
+		for (PackStatusBean bean : packStatusList) {
 			System.out.println(bean.getPackStatus() + ", " + bean.getStatusName());
 		}
 	}

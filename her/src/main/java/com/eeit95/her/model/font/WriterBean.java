@@ -19,23 +19,22 @@ import javax.persistence.Table;
 @Table(name = "writer")
 public class WriterBean implements java.io.Serializable{
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
+	@Id
+	@SequenceGenerator(name="wid", allocationSize=1)
+	@GeneratedValue(strategy = GenerationType.IDENTITY, generator="wid")
 	private int id;
 	private String name;
 	private String cover;
 	private String description;
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER, mappedBy="writerBean")
 	private Set<FontBean> fonts = new HashSet<FontBean>();
 	
-	@Override
-	public String toString() {
-		return "WriterBean [id=" + id + ", name=" + name + ", cover=" + cover + ", description=" + description + "]";
+	public WriterBean() {
+		
 	}
-	@Id
-	@SequenceGenerator(name="wid", allocationSize=1)
-	@GeneratedValue(strategy = GenerationType.IDENTITY, generator="wid")
+	
+	
 	public int getId() {
 		return id;
 	}
@@ -61,8 +60,7 @@ public class WriterBean implements java.io.Serializable{
 		this.description = description;
 	}
 	
-	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER, mappedBy="writerBean")
-	@OrderBy("id,asc")
+	
 	public Set<FontBean> getFonts() {
 		return fonts;
 	}

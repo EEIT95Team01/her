@@ -1,30 +1,36 @@
 package com.eeit95.her.model.font;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "font_description")
 public class FontDescriptionBean implements java.io.Serializable{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
-	private String fontId;
+	@Id
+	@ManyToOne
+	@JoinColumn(name = "fontId")
+	private FontBean fontBean;
+	@Id
 	private int orderNo;
 	private String text;
 	private String image;
 	
-	
-	
-	@Override
-	public String toString() {
-		return "FontDescriptionBean [fontId=" + fontId + ", orderNo=" + orderNo + ", text=" + text + ", image=" + image
-				+ "]";
-	}
-	public String getFontId() {
-		return fontId;
-	}
-	public void setFontId(String fontId) {
-		this.fontId = fontId;
+	public FontDescriptionBean() {
+		
 	}
 	
+	
+	public FontBean getFontBean() {
+		return fontBean;
+	}
+	public void setFontBean(FontBean fontBean) {
+		this.fontBean = fontBean;
+	}
 	public int getOrderNo() {
 		return orderNo;
 	}
