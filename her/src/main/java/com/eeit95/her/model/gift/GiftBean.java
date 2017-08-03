@@ -2,6 +2,7 @@ package com.eeit95.her.model.gift;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -15,13 +16,13 @@ public class GiftBean implements java.io.Serializable{
 	private String name;
 	private double price;			//資料庫型態是money，要用double
 	private byte[] cover;			//資料庫型態是varbinary(max)，參考網址：https://goo.gl/6ThJ2r。
-	private Integer viewCount;
-	private Integer salesCount;
+	private int viewCount;
+	private int salesCount;
 	private boolean status;			//資料庫型態是bit，參考網址：https://goo.gl/6ThJ2r。
 	private String manufacturer;
 	private double cost;			//資料庫型態是money，要用double
 	private double gpratio;			//資料庫型態是money，要用double
-	private Integer stock;			//資料庫型態為smallint(-2^15~2^15-1),與short範圍相同。
+	private int stock;			//資料庫型態為smallint(-2^15~2^15-1),與short範圍相同。
 	private CategoryBean categoryId;	//FOREIGN KEY REFERENCES [category](id)
 	
 	public GiftBean(){
@@ -62,18 +63,18 @@ public class GiftBean implements java.io.Serializable{
 	}
 	
 	@Column(name="viewCount")
-	public Integer getViewCount() {
+	public int getViewCount() {
 		return viewCount;
 	}
-	public void setViewCount(Integer viewCount) {
+	public void setViewCount(int viewCount) {
 		this.viewCount = viewCount;
 	}
 	
 	@Column(name="salesCount")
-	public Integer getSalesCount() {
+	public int getSalesCount() {
 		return salesCount;
 	}
-	public void setSalesCount(Integer salesCount) {
+	public void setSalesCount(int salesCount) {
 		this.salesCount = salesCount;
 	}
 	
@@ -110,10 +111,10 @@ public class GiftBean implements java.io.Serializable{
 	}
 	
 	@Column(name="stock")
-	public Integer getStock() {
+	public int getStock() {
 		return stock;
 	}
-	public void setStock(Integer stock) {
+	public void setStock(int stock) {
 		this.stock = stock;
 	}
 
@@ -122,7 +123,6 @@ public class GiftBean implements java.io.Serializable{
 	public CategoryBean getCategoryId() {
 		return categoryId;
 	}
-
 
 	public void setCategoryId(CategoryBean categoryId) {
 		this.categoryId = categoryId;

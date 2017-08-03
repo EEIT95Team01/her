@@ -12,7 +12,7 @@ import javax.persistence.Table;
 @Table(name = "category_main")
 public class CategoryMainBean implements java.io.Serializable{
 
-	private Integer id;	//資料庫型態為smallint(-2^15~2^15-1),與short範圍相同。
+	private int id;	//資料庫型態為smallint(-2^15~2^15-1),與short範圍相同。
 	private String name;
 	
 	public CategoryMainBean(){
@@ -23,10 +23,10 @@ public class CategoryMainBean implements java.io.Serializable{
 	@Column(name = "id")
 	@SequenceGenerator(name="idNum", allocationSize=1) //1.先用@SequenceGenerator建立一個generator
 	@GeneratedValue(strategy = GenerationType.IDENTITY, generator="idNum")   //2.再用@GeneratedValue的generator屬性指定要用哪個generator //【strategy的GenerationType, 有四種值: AUTO, IDENTITY, SEQUENCE, TABLE】 
-	public Integer getId() {
+	public int getId() {
 		return id;
 	}
-	public void setId(Integer id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 	

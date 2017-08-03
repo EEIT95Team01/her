@@ -41,7 +41,7 @@ public class CategoryHibernateDAO implements CategoryDAOInterface {
 	}
 
 	@Override
-	public boolean delete(Integer id) {
+	public boolean delete(int id) {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		session.beginTransaction();
 		CategoryBean result = null;
@@ -62,7 +62,7 @@ public class CategoryHibernateDAO implements CategoryDAOInterface {
 	}
 
 	@Override
-	public CategoryBean selectById(Integer id) {
+	public CategoryBean selectById(int id) {
 		CategoryBean categoryVO = null;
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try {
@@ -134,22 +134,26 @@ public class CategoryHibernateDAO implements CategoryDAOInterface {
 //		dao.delete(11); //輸入Category的Id，此數值是由系統流水好自動建立。
 
 		//● 查詢-4 selectById(Git測試OK)
-//		CategoryBean categoryVO = dao.selectById(3);
-//		System.out.print(categoryVO.getId() + ",");
-//		System.out.print(categoryVO.getMainId().getId() + ",");
-//		System.out.print(categoryVO.getSubName());
-//		System.out.println("\n-----------------");		
+		CategoryBean categoryVO = dao.selectById(3);
+		for(GiftBean bean : categoryVO.getGifts()) { //可供查詢join Gift表格的資料
+			System.out.print(categoryVO.getId() + ",");
+			System.out.print(categoryVO.getMainId().getId() + ",");
+			System.out.print(categoryVO.getSubName()  + ",");
+			System.out.print(bean.getName()  + ",");
+			System.out.println(bean.getPrice());
+		}
+		System.out.println("\n-----------------");		
 
 		//● 查詢-5 getAll(Git測試OK)
-		CategoryMainBean cmVO = new CategoryMainBean();
-		cmVO.setId(1); //如果輸入的值在category_main表格中尚未建立，就無法查詢。
-		List<CategoryBean> list = dao.selectByMainId(cmVO);
-		for (CategoryBean catVO : list) {
-		System.out.print(catVO.getMainId().getId() + ",");
-		System.out.print(catVO.getId() + ",");
-		System.out.print(catVO.getSubName());
-		System.out.println();
-		}
+//		CategoryMainBean cmVO = new CategoryMainBean();
+//		cmVO.setId(1); //如果輸入的值在category_main表格中尚未建立，就無法查詢。
+//		List<CategoryBean> list = dao.selectByMainId(cmVO);
+//		for (CategoryBean catVO : list) {
+//		System.out.print(catVO.getMainId().getId() + ",");
+//		System.out.print(catVO.getId() + ",");
+//		System.out.print(catVO.getSubName());
+//		System.out.println();
+//		}
 		
 		
 		//● 查詢-6 getAll(Git測試OK)
