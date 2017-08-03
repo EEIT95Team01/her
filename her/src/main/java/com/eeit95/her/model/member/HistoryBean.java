@@ -14,7 +14,8 @@ public class HistoryBean implements java.io.Serializable{
 	private String productId;
 	private java.sql.Timestamp viewtime;
 	
-	@Id
+//	@Id
+//  待處理的問題
 	@ManyToOne
 	@JoinColumn(name = "memberId")
 	public MemberBean getMemberbean() {
