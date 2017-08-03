@@ -12,7 +12,7 @@ import hibernate.util.HibernateUtil;
 
 public class OrderformPackStatusDAOHibernate implements OrderformPackStatusDAOInterface {
 
-	private String SELECT_ALL_STATEMENT = "from OrderformPackStatusBean";
+	private String SELECT_ALL = "from OrderformPackStatusBean";
 
 	@Override
 	public List<OrderformPackStatusBean> selectAll() {
@@ -21,7 +21,7 @@ public class OrderformPackStatusDAOHibernate implements OrderformPackStatusDAOIn
 		try {
 			session.beginTransaction();
 			
-			Query query = session.createQuery(SELECT_ALL_STATEMENT);
+			Query query = session.createQuery(SELECT_ALL);
 			orderformPackStatusList = query.list();
 			session.getTransaction().commit();
 		} catch (RuntimeException e) {

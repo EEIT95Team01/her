@@ -42,6 +42,7 @@
 		<mapping class="com.eeit95.her.model.pack.PackStatusBean" />
 		<mapping class="com.eeit95.her.model.pack.OrderformPackStatusBean" />
 		<mapping class="com.eeit95.her.model.pack.PackBean" />
+		<mapping class="com.eeit95.her.model.pack.OrderformBean" />
 
 	</session-factory>
 	

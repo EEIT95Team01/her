@@ -1,8 +1,9 @@
 package com.eeit95.her.model.pack;
 
-import java.sql.Date;
+import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
@@ -11,6 +12,7 @@ public class PackBean implements java.io.Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
+	@Id
 	private String id;					//  1
 	private String name;				//  2
 	private String memberId;			//  3

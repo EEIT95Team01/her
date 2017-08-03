@@ -12,7 +12,7 @@ import hibernate.util.HibernateUtil;
 
 public class PackStatusDAOHibernate implements PackStatusDAOInterface {
 
-	private String SELECT_ALL_STATEMENT = "from PackStatusBean";
+	private String SELECT_ALL = "from PackStatusBean";
 
 	@Override
 	public List<PackStatusBean> selectAll() {
@@ -21,15 +21,13 @@ public class PackStatusDAOHibernate implements PackStatusDAOInterface {
 
 		try {
 			session.beginTransaction();
-
-			Query query = session.createQuery(SELECT_ALL_STATEMENT);
+			Query query = session.createQuery(SELECT_ALL);
 			packStatusList = query.list();
 			session.getTransaction().commit();
 		} catch (RuntimeException e) {
 			session.getTransaction().rollback();
 			e.printStackTrace();
 		}
-
 		return packStatusList;
 	}
 
