@@ -15,6 +15,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "MEMBER")
 public class MemberBean implements java.io.Serializable{
+	
 	private String id;
 	private String email;
 	private String password;
@@ -24,10 +25,11 @@ public class MemberBean implements java.io.Serializable{
 	private String district;
 	private String addr;
 	private java.sql.Date birthday;
+
 	private Set<RecipientBean> rbs = new HashSet<RecipientBean>();
 	private Set<MessageBean> mbs = new HashSet<MessageBean>();
 	private Set<HistoryBean> hb = new HashSet<HistoryBean>();
-	
+
 	public MemberBean(){		
 	}
 	

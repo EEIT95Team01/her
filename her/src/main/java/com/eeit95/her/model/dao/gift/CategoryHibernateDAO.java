@@ -135,6 +135,7 @@ public class CategoryHibernateDAO implements CategoryDAOInterface {
 
 		//● 查詢-4 selectById(Git測試OK)
 		CategoryBean categoryVO = dao.selectById(3);
+
 		for(GiftBean bean : categoryVO.getGifts()) { //可供查詢join Gift表格的資料
 			System.out.print(categoryVO.getId() + ",");
 			System.out.print(categoryVO.getMainId().getId() + ",");
