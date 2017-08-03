@@ -7,10 +7,15 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h2>看美美的圖片</h2>
-<form action="../IdCatchServlet" method="GET"> 
-輸入圖片ID：<input type="text" name="Id">
-<button type="submit">按這裡看美美的圖片</button>
+
+<form action="../UploadImage" method="post" enctype="multipart/form-data">
+<input type="text" name="name" />
+<input type="file" name="cover" /> 
+<br />
+<input type="submit" value="確認送出" />
 </form>
+<br />
+<div>${success}</div>
+
 </body>
 </html>
