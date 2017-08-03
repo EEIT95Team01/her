@@ -1,10 +1,15 @@
 package com.eeit95.her.model.gift;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -14,10 +19,21 @@ public class CategoryMainBean implements java.io.Serializable{
 
 	private int id;	//資料庫型態為smallint(-2^15~2^15-1),與short範圍相同。
 	private String name;
+	private Set<CategoryBean> categorys =new HashSet<CategoryBean>();
 	
 	public CategoryMainBean(){
 		
 	}
+
+	@OneToMany(fetch=FetchType.EAGER, mappedBy = "mainId")
+	public Set<CategoryBean> getCategorys() {
+		return categorys;
+	}
+
+	public void setCategorys(Set<CategoryBean> categorys) {
+		this.categorys = categorys;
+	}
+
 	
 	@Id
 	@Column(name = "id")

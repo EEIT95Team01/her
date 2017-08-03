@@ -15,14 +15,17 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-@Entity
-@Table(name = "category")
+@Entity //要加上@Entity才能成為JPA的一個Entity類別
+@Table(name = "category") //代表這個class是對應到資料庫的實體table，目前對應的table是category 
 public class CategoryBean implements java.io.Serializable{
 	private CategoryMainBean mainId;
 	private int id;		//資料庫型態為smallint(-2^15~2^15-1),與short範圍相同。
 	private String subName;
 	private Set<GiftBean> gifts =new HashSet<GiftBean>();
 	
+	public CategoryBean(){
+		//必需有一個不傳參數建構子(JavaBean基本知識)
+	}
 	
 	@OneToMany(fetch=FetchType.EAGER, mappedBy = "categoryId")
 	public Set<GiftBean> getGifts() {
@@ -32,15 +35,11 @@ public class CategoryBean implements java.io.Serializable{
 	public void setGifts(Set<GiftBean> gifts) {
 		this.gifts = gifts;
 	}
-
-	public CategoryBean(){
-		
-	}
 	
-	@Id
-	@Column(name = "id")
+	@Id //@Id代表這個屬性是這個Entity的唯一識別屬性，並且對映到Table的主鍵
+	@Column(name = "id") //@Column指這個屬性是對應到資料庫Table的哪一個欄位   //【非必要，但當欄位名稱與屬性名稱不同時則一定要用】
 	@SequenceGenerator(name="idNum", allocationSize=1) //1.先用@SequenceGenerator建立一個generator
-	@GeneratedValue(strategy = GenerationType.IDENTITY, generator="idNum")   //2.再用@GeneratedValue的generator屬性指定要用哪個generator //【strategy的GenerationType, 有四種值: AUTO, IDENTITY, SEQUENCE, TABLE】 
+	@GeneratedValue(strategy = GenerationType.IDENTITY, generator="idNum") //2.再用@GeneratedValue的generator屬性指定要用哪個generator //【strategy的GenerationType, 有四種值: AUTO, IDENTITY, SEQUENCE, TABLE】 
 	public int getId() {
 		return id;
 	}
