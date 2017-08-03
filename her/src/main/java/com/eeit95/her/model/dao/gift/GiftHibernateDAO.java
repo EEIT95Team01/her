@@ -1,6 +1,7 @@
 package com.eeit95.her.model.dao.gift;
 
 import org.hibernate.*;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import com.eeit95.her.model.gift.GiftDAOInterface;
 import com.eeit95.her.model.gift.GiftBean;
@@ -8,12 +9,10 @@ import hibernate.util.HibernateUtil;
 import java.util.*;
 
 public class GiftHibernateDAO implements GiftDAOInterface{
-
-//	private static int n = 0;
-//	private static String type = null;
 	
 	private static final String delete = "delete from GiftBean where id=?";
 	private static final String selectAll = "from GiftBean order by id";
+	private static String selectTopN = "from GiftBean where status = 1 order by ";
 
 	@Override
 	public void insert(GiftBean giftVO) {
@@ -94,22 +93,19 @@ public class GiftHibernateDAO implements GiftDAOInterface{
 	}
 
 	@Override
-	public List<GiftBean> selectAll(int n,String type,String desc) {
-		String Select_All_TopN = null;
-		Select_All_TopN = 
-				"from GiftBean where status = 1 ORDER BY " + type +" "+ desc;
-		System.out.println(Select_All_TopN);
+	public List<GiftBean> selectTopN(int n,String column,String ascOrDesc) {
+//		System.out.println(selectTopN + " "+ type + " " + ascOrDesc);
 		List<GiftBean> result = null;
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		session.beginTransaction();
 		try {
 			if(n>0) {
-			Query query=session.createQuery(Select_All_TopN);
+			Query query=session.createQuery(selectTopN + " "+ column + " " + ascOrDesc);
 			query.setMaxResults(n);
 			result = query.list();
 			session.getTransaction().commit();
 			}else {
-				Query query=session.createQuery(Select_All_TopN);
+				Query query=session.createQuery(selectAll);
 				result = query.list();
 				session.getTransaction().commit();
 			}
@@ -121,13 +117,42 @@ public class GiftHibernateDAO implements GiftDAOInterface{
 	}
 	
 	@Override
-	public List<GiftBean> selectBetween(double lo, double hi) {
+	public List<GiftBean> selectWithBetween(String column, double lo, double hi, String ascOrDesc) {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		session.beginTransaction();
 		List<GiftBean> list = null;
 		try {
 			Criteria query = session.createCriteria(GiftBean.class);
-			query.add(Restrictions.between("price", lo,hi));
+			query.add(Restrictions.between(column, lo,hi));
+			if(ascOrDesc.equalsIgnoreCase("desc")){
+				query.addOrder(Order.desc(column));
+			}else {
+				query.addOrder(Order.asc(column));
+			} 
+			list = query.list();
+			session.getTransaction().commit();
+			
+		}catch(RuntimeException ex) {
+			session.getTransaction().rollback();
+			throw ex;
+		}
+		
+		return list;
+	}
+	
+	@Override
+	public List<GiftBean> selectWithBetween(String column, int lo, int hi, String ascOrDesc) {
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		List<GiftBean> list = null;
+		try {
+			Criteria query = session.createCriteria(GiftBean.class);
+			query.add(Restrictions.between(column, lo,hi));
+			if(ascOrDesc.equalsIgnoreCase("desc")){
+				query.addOrder(Order.desc(column));
+			}else {
+				query.addOrder(Order.asc(column));
+			} 
 			list = query.list();
 			session.getTransaction().commit();
 			
@@ -139,8 +164,6 @@ public class GiftHibernateDAO implements GiftDAOInterface{
 		return list;
 	}
 
-	
-	
 
 	public static void main(String[] args) {
 		GiftHibernateDAO dao = new GiftHibernateDAO();
@@ -218,10 +241,9 @@ public class GiftHibernateDAO implements GiftDAOInterface{
 //		System.out.println();
 //		}
 		
-//		//● 查詢 -6 SELECT TopN & PRINT(Git測試OK)
-//		List<GiftBean> result = dao.selectAll(0,"viewCount","asc");
-//		System.out.println("SELECT 所有資料 & PRINT");
-//		for (GiftBean gVO : result) {
+//		//● 查詢 -6 selectTopN(Git測試OK)
+//		List<GiftBean> list = dao.selectTopN(3, "gpratio", "desc");
+//		for (GiftBean gVO : list) {
 //			System.out.print(gVO.getId() + ",");
 //			System.out.print(gVO.getName() + ",");
 //			System.out.print(gVO.getPrice() + ",");
@@ -237,10 +259,27 @@ public class GiftHibernateDAO implements GiftDAOInterface{
 //			System.out.println();
 //			}
 		
-//		//● 查詢 -7 SELECT 所有資料 & PRINT(Git測試OK)
-		List<GiftBean> beans = dao.selectBetween(50	,100);
-		System.out.println("SELECT Between & PRINT");
-		for (GiftBean gVO : beans) {
+//		//● 查詢 -7 selectWithBetween(Git測試OK)(查詢double型別的資料)
+//		List<GiftBean> list = dao.selectWithBetween("price",50,100,"asc");
+//		for (GiftBean gVO : list) {
+//			System.out.print(gVO.getId() + ",");
+//			System.out.print(gVO.getName() + ",");
+//			System.out.print(gVO.getPrice() + ",");
+//			System.out.print(gVO.getCover() + ",");
+//			System.out.print(gVO.getViewCount() + ",");
+//			System.out.print(gVO.getSalesCount() + ",");
+//			System.out.print(gVO.isStatus() + ",");
+//			System.out.print(gVO.getManufacturer() + ",");
+//			System.out.print(gVO.getCost() + ",");
+//			System.out.print(gVO.getGpratio() + ",");
+//			System.out.print(gVO.getStock() + ",");
+//			System.out.print(gVO.getCategoryId().getId() + ",");
+//			System.out.println();				
+//		}	
+		
+//		//● 查詢 -8 selectWithBetween(Git測試OK)(查詢integer型別的資料)
+		List<GiftBean> list = dao.selectWithBetween("viewCount", 1000, 2000, "asc");
+		for (GiftBean gVO : list) {
 			System.out.print(gVO.getId() + ",");
 			System.out.print(gVO.getName() + ",");
 			System.out.print(gVO.getPrice() + ",");
@@ -252,7 +291,7 @@ public class GiftHibernateDAO implements GiftDAOInterface{
 			System.out.print(gVO.getCost() + ",");
 			System.out.print(gVO.getGpratio() + ",");
 			System.out.print(gVO.getStock() + ",");
-			System.out.print(gVO.getCategoryId().getId() + ","); 
+			System.out.print(gVO.getCategoryId().getId() + ",");
 			System.out.print(gVO.getCategoryId().getSubName());
 			System.out.println();				
 		}	

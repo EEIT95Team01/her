@@ -9,6 +9,7 @@ public interface GiftDAOInterface {
 	public boolean delete(String id);
 	public GiftBean selectById(String id);
 	public List<GiftBean> selectAll();
-	public List<GiftBean> selectAll(int n,String type,String desc); 
-	public abstract List <GiftBean> selectBetween(double lo,double hi);
+	public List<GiftBean> selectTopN(int n,String column,String ascOrDesc); 
+	public  List <GiftBean> selectWithBetween(String column,double lo,double hi, String ascOrDesc);
+	public  List <GiftBean> selectWithBetween(String column, int lo, int hi, String ascOrDesc);
 }

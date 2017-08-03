@@ -12,7 +12,7 @@ import javax.persistence.Table;
 public class GiftDescriptionBean implements java.io.Serializable{
 	
 	private GiftBean giftId;
-	private Integer orderNo;  //資料庫型態是tinyint，參考網址：https://goo.gl/6ThJ2r。
+	private int orderNo;  //資料庫型態是tinyint，參考網址：https://goo.gl/6ThJ2r。
 	private String text;
 	private String image;	  //資料庫的型態是varbinary(max)，參考網址：https://goo.gl/6ThJ2r。
 
@@ -32,10 +32,10 @@ public class GiftDescriptionBean implements java.io.Serializable{
 	
 	@Id
 	@Column(name = "orderNo")
-	public Integer getOrderNo() {
+	public int getOrderNo() {
 		return orderNo;
 	}
-	public void setOrderNo(Integer orderNo) {
+	public void setOrderNo(int orderNo) {
 		this.orderNo = orderNo;
 	}
 	

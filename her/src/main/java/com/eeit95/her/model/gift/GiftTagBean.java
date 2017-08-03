@@ -11,7 +11,7 @@ import javax.persistence.Table;
 @Table(name = "gift_tag")
 public class GiftTagBean implements java.io.Serializable{
 	private GiftBean giftId;
-	private Integer tagId;		//資料庫型態為smallint(-2^15~2^15-1),與short範圍相同。
+	private int tagId;		//資料庫型態為smallint(-2^15~2^15-1),與short範圍相同。
 	
 	public GiftTagBean(){
 		
@@ -29,10 +29,10 @@ public class GiftTagBean implements java.io.Serializable{
 	
 	@Id
 	@Column(name = "tagId")
-	public Integer getTagId() {
+	public int getTagId() {
 		return tagId;
 	}
-	public void setTagId(Integer tagId) {
+	public void setTagId(int tagId) {
 		this.tagId = tagId;
 	}
 	

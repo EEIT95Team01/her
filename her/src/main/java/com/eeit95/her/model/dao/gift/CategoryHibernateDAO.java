@@ -41,7 +41,7 @@ public class CategoryHibernateDAO implements CategoryDAOInterface {
 	}
 
 	@Override
-	public boolean delete(Integer id) {
+	public boolean delete(int id) {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		session.beginTransaction();
 		CategoryBean result = null;
@@ -62,7 +62,7 @@ public class CategoryHibernateDAO implements CategoryDAOInterface {
 	}
 
 	@Override
-	public CategoryBean selectById(Integer id) {
+	public CategoryBean selectById(int id) {
 		CategoryBean categoryVO = null;
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try {
@@ -135,9 +135,14 @@ public class CategoryHibernateDAO implements CategoryDAOInterface {
 
 		//● 查詢-4 selectById(Git測試OK)
 		CategoryBean categoryVO = dao.selectById(3);
-		System.out.print(categoryVO.getId() + ",");
-		System.out.print(categoryVO.getMainId().getId() + ",");
-		System.out.print(categoryVO.getSubName());
+
+		for(GiftBean bean : categoryVO.getGifts()) { //可供查詢join Gift表格的資料
+			System.out.print(categoryVO.getId() + ",");
+			System.out.print(categoryVO.getMainId().getId() + ",");
+			System.out.print(categoryVO.getSubName()  + ",");
+			System.out.print(bean.getName()  + ",");
+			System.out.println(bean.getPrice());
+		}
 		System.out.println("\n-----------------");		
 
 		//● 查詢-5 getAll(Git測試OK)

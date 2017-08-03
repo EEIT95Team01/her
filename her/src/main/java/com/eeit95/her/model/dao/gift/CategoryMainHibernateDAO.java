@@ -3,6 +3,7 @@ package com.eeit95.her.model.dao.gift;
 import org.hibernate.*;
 import com.eeit95.her.model.gift.CategoryMainDAOInterface;
 import com.eeit95.her.model.gift.GiftBean;
+import com.eeit95.her.model.gift.CategoryBean;
 import com.eeit95.her.model.gift.CategoryMainBean;
 import hibernate.util.HibernateUtil;
 import java.util.*;
@@ -109,11 +110,17 @@ public class CategoryMainHibernateDAO implements CategoryMainDAOInterface{
 		//●刪除-3 (Git測試OK)
 //		dao.delete(6); //輸入id
 
-		//● 查詢-selectById(Git測試OK)
+//		● 查詢-selectById(Git測試OK)
 //		CategoryMainBean categoryMainBean = dao.selectById(2);
-//		System.out.print(categoryMainBean.getId() + ",");
-//		System.out.print(categoryMainBean.getName() + ",");
-//		System.out.println("\n-----------------");		
+//		System.out.println("Id: " + categoryMainBean.getId() + " ");
+//		System.out.println("Name: " + categoryMainBean.getName() + " ");
+//		System.out.println("----以下為分類商品別----");
+//		for(CategoryBean bean :categoryMainBean.getCategorys()) { //可供查詢join Category表格的資料
+//			System.out.println("CategoryId: " + bean.getId() + " ");
+//			System.out.println("CategoryName: " + bean.getSubName() + " ");
+//			System.out.println("-----------------");
+//		}
+	
 
 		//● 查詢-selectAll(Git測試OK)
 		List<CategoryMainBean> list = dao.selectAll();
