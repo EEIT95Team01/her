@@ -1,5 +1,8 @@
 package com.eeit95.her.model.font;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -15,24 +18,27 @@ import javax.persistence.Table;
 public class FontBean implements java.io.Serializable{
 	
 	private static final long serialVersionUID = 1L;
+	@Id
 	private String id;
 	private String name;
 	private double price;
+	@ManyToOne //(fetch = FetchType.LAZY)
+	@JoinColumn(name = "writerId") 
 	private WriterBean writerBean;
 	private String cover;
 	private int viewCount;
 	private int salesCount;
 	private boolean status;
+	@OneToMany( mappedBy="fontBean")//cascade=CascadeType.ALL, fetch=FetchType.EAGER,
+	private Set<FontDescriptionBean> fontDescriptions = new HashSet<FontDescriptionBean>();
+	@OneToMany( mappedBy="fontBean")
+	private Set<FontTagBean> fontTags = new HashSet<FontTagBean>();
 	
-	
-	
-	
-	@Override
-	public String toString() {
-		return "FontBean [id=" + id + ", name=" + name + ", price=" + price + ", writerBean=" + writerBean + ", cover="
-				+ cover + ", viewCount=" + viewCount + ", salesCount=" + salesCount + ", status=" + status + "]";
+
+	public FontBean() {
+		
 	}
-	@Id
+	
 	public String getId() {
 		return id;
 	}
@@ -51,8 +57,7 @@ public class FontBean implements java.io.Serializable{
 	public void setPrice(double price) {
 		this.price = price;
 	}
-	@ManyToOne //(fetch = FetchType.LAZY)
-	@JoinColumn(name = "writerId") 
+	
 	public WriterBean getWriterBean() {
 		return writerBean;
 	}
@@ -82,6 +87,20 @@ public class FontBean implements java.io.Serializable{
 	}
 	public void setStatus(boolean status) {
 		this.status = status;
+	}
+	
+	public Set<FontDescriptionBean> getFontDescriptions() {
+		return fontDescriptions;
+	}
+	public void setFontDescriptions(Set<FontDescriptionBean> fontDescriptions) {
+		this.fontDescriptions = fontDescriptions;
+	}
+	@OneToMany( mappedBy="fontBean")
+	public Set<FontTagBean> getFontTags() {
+		return fontTags;
+	}
+	public void setFontTags(Set<FontTagBean> fontTags) {
+		this.fontTags = fontTags;
 	}
 
 	

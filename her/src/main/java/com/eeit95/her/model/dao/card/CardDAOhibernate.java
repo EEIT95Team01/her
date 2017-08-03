@@ -66,7 +66,7 @@ public class CardDAOhibernate implements CardDAOInterface {
 //		System.out.println("===================================================");
 
 //		// SELECT TopN & PRINT
-		List<CardBean> result = cdj.selectAll(0,"viewCount");
+		List<CardBean> result = cdj.selectAll(0,"viewCount","asc");
 		System.out.println("SELECT 所有資料 & PRINT");
 		for (CardBean bean1 : result) {
 			System.out.println(bean1);
@@ -75,8 +75,8 @@ public class CardDAOhibernate implements CardDAOInterface {
 //		System.out.println("===================================================");
 //
 //		// SELECT 所有資料 & PRINT
-		List<CardBean> beans = cdj.selectAll();
-		System.out.println("SELECT 所有資料 & PRINT");
+		List<CardBean> beans = cdj.selectBetween("price",40	,55);
+		System.out.println("SELECT Between & PRINT");
 		for (CardBean bean1 : beans) {
 			System.out.println(bean1);
 //			Set<CardDescriptionBean> desc =bean1.getDesc();
@@ -84,13 +84,23 @@ public class CardDAOhibernate implements CardDAOInterface {
 //				System.out.println(BEAN2);
 //			}
 		}
+//		
+//		List<CardBean> beans1 = cdj.selectAll();
+//		System.out.println("SELECT 所有資料 & PRINT");
+//		for (CardBean bean1 : beans1) {
+//			System.out.println(bean1);
+////			Set<CardDescriptionBean> desc =bean1.getDesc();
+////			for(CardDescriptionBean BEAN2:desc) {
+////				System.out.println(BEAN2);
+////			}
+//		}
 
 	}
 
 	@Override
-	public List<CardBean> selectAll(int n, String type) {
+	public List<CardBean> selectAll(int n,String type,String desc) {
 		String Select_All_TopN = null;
-		Select_All_TopN = "from CardBean where status = 1 ORDER BY " + type + " DESC";
+		Select_All_TopN = "from CardBean where status = 1 ORDER BY " + type +" "+ desc;
 		System.out.println(Select_All_TopN);
 		List<CardBean> result = null;
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
@@ -198,6 +208,26 @@ public class CardDAOhibernate implements CardDAOInterface {
 			throw ex;
 		}
 		return false;
+	}
+
+	@Override
+	public List<CardBean> selectBetween(String type,double lo, double hi) {
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		List<CardBean> list = null;
+		try {
+			Criteria query = session.createCriteria(CardBean.class);
+			query.add(Restrictions.between(type, lo,hi));
+			query.add(Restrictions.eq("status", true));
+			list = query.list();
+			session.getTransaction().commit();
+			
+		}catch(RuntimeException ex) {
+			session.getTransaction().rollback();
+			throw ex;
+		}
+		
+		return list;
 	}
 
 }

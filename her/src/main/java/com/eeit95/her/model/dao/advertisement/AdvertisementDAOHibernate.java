@@ -1,59 +1,71 @@
-package com.eeit95.her.model.dao.font;
+package com.eeit95.her.model.dao.advertisement;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-import org.hibernate.*;
+import org.hibernate.Criteria;
+import org.hibernate.Query;
+import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
-import com.eeit95.her.model.font.AdvertisementBean;
-import com.eeit95.her.model.font.AdvertisementDAOInterface;
+import com.eeit95.her.model.advertisement.AdvertisementBean;
+import com.eeit95.her.model.advertisement.AdvertisementDAOInterface;
 
 import hibernate.util.HibernateUtil;
 
 public class AdvertisementDAOHibernate implements AdvertisementDAOInterface {
 
+	private static final String SELECT_ALL ="from AdvertisementBean order by id";
+	
 	@Override
-	public void insert(AdvertisementBean advertisementBean) {
+	public AdvertisementBean insert(AdvertisementBean advertisementBean) {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try {
 			session.beginTransaction();
 			session.saveOrUpdate(advertisementBean);
 			session.getTransaction().commit();
+			return advertisementBean;
 		} catch (RuntimeException ex) {
 			session.getTransaction().rollback();
-			throw ex;
+			ex.printStackTrace();
+			return null;
 		}
-
 	}
 
 	@Override
-	public void update(AdvertisementBean advertisementBean) {
+	public AdvertisementBean update(AdvertisementBean advertisementBean) {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try {
 			session.beginTransaction();
 			session.saveOrUpdate(advertisementBean);
 			session.getTransaction().commit();
+			return advertisementBean;
 		} catch (RuntimeException ex) {
 			session.getTransaction().rollback();
-			throw ex;
+			ex.printStackTrace();
+			return null;
 		}
+		
 	}
 
 	@Override
-	public void delete(int id) {
+	public boolean delete(int id) {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		boolean result = false;
 		try {
 			session.beginTransaction();
 			AdvertisementBean advertisementBean = new AdvertisementBean();
 			advertisementBean.setId(id);
 			session.delete(advertisementBean);
 			session.getTransaction().commit();
+			result = true;
 		} catch (RuntimeException ex) {
 			session.getTransaction().rollback();
 			throw ex;
 		}
+		return result;
 	}
 
 	@Override
@@ -76,8 +88,9 @@ public class AdvertisementDAOHibernate implements AdvertisementDAOInterface {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		List<AdvertisementBean> list = null;
 		try {
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 			String s = sdf.format(new Date());
+			System.out.println(s);
 			java.sql.Date today = java.sql.Date.valueOf(s);
 			session.beginTransaction();
 			Criteria criteria = session.createCriteria(AdvertisementBean.class);
@@ -95,12 +108,24 @@ public class AdvertisementDAOHibernate implements AdvertisementDAOInterface {
 
 	@Override
 	public List<AdvertisementBean> selectAll() {
-		// TODO Auto-generated method stub
-		return null;
+		List<AdvertisementBean> list = null;
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		try {
+			session.beginTransaction();
+			Query query = session.createQuery(SELECT_ALL);
+			list = query.list();
+			session.getTransaction().commit();
+		}catch(RuntimeException ex) {
+			session.getTransaction().rollback();
+			throw ex;
+		}
+		return list;
 	}
 
 	public static void main(String[] args) {
 		AdvertisementDAOHibernate dao = new AdvertisementDAOHibernate();
+//		boolean b = dao.delete(1);
+//		System.out.println(b);
 		List<AdvertisementBean> list = dao.selectByDate();
 		for(AdvertisementBean bean: list) {
 			System.out.println(bean.getName());
