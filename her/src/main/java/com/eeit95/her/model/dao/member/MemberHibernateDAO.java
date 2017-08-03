@@ -110,17 +110,17 @@ public class MemberHibernateDAO implements MemberDAOInterface {
 		MemberHibernateDAO dao = new MemberHibernateDAO();
 
 		// 新增
-		// MemberBean bean = new MemberBean();
-		// bean.setId("M000test");
-		// bean.setEmail("0731test@google.com");
-		// bean.setPassword("123");
-		// bean.setName("米小鼠");
-		// bean.setPhone("0912121212");
-		// bean.setCity("台北");
-		// bean.setDistrict("大安");
-		// bean.setAddr("大安");
-		// bean.setBirthday(java.sql.Date.valueOf("2017-7-31"));
-		// dao.insert(bean);
+//		 MemberBean bean = new MemberBean();
+//		 bean.setId("M000test");
+//		 bean.setEmail("0731test@google.com");
+//		 bean.setPassword("123");
+//		 bean.setName("米小鼠");
+//		 bean.setPhone("0912121212");
+//		 bean.setCity("台北");
+//		 bean.setDistrict("大安");
+//		 bean.setAddr("大安");
+//		 bean.setBirthday(java.sql.Date.valueOf("2017-7-31"));
+//		 dao.insert(bean);
 
 		// 修改
 		// MemberBean bean = new MemberBean();
@@ -145,13 +145,13 @@ public class MemberHibernateDAO implements MemberDAOInterface {
 		// System.out.print(mb.getEmail());
 
 		// 查詢全部會員
-		// List<MemberBean> list2 = dao.getAll();
-		// for (MemberBean mb : list2) {
-		// System.out.print(mb.getId() + ",");
-		// System.out.print(mb.getEmail() + ",");
-		// System.out.print(mb.getName());
-		// System.out.println();
-		// }
+		 List<MemberBean> list2 = dao.getAll();
+		 for (MemberBean mb : list2) {
+		 System.out.print(mb.getId() + ",");
+		 System.out.print(mb.getEmail() + ",");
+		 System.out.print(mb.getName());
+		 System.out.println();
+		 }
 
 		// --------------------------------------
 

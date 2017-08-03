@@ -29,7 +29,8 @@ public class MemberBean implements java.io.Serializable{
 	private Set<RecipientBean> rbs = new HashSet<RecipientBean>();
 	private Set<MessageBean> mbs = new HashSet<MessageBean>();
 	private Set<HistoryBean> hb = new HashSet<HistoryBean>();
-
+	private Set<CollectionBean> cb = new HashSet<CollectionBean>();
+	
 	public MemberBean(){		
 	}
 	
@@ -135,5 +136,17 @@ public class MemberBean implements java.io.Serializable{
 	public void setHb(Set<HistoryBean> hb) {
 		this.hb = hb;
 	}
+
+	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.EAGER,mappedBy="memberbean")
+	public Set<CollectionBean> getCb() {
+		return cb;
+	}
+
+	public void setCb(Set<CollectionBean> cb) {
+		this.cb = cb;
+	}
+	
+	
+	
 	
 }

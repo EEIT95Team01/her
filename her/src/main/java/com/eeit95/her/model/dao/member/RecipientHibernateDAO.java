@@ -97,17 +97,16 @@ public class RecipientHibernateDAO implements RecipientDAOInterface {
 		MemberBean mb = new MemberBean();
 		mb.setId("M000test");
 
-		//
-		// RecipientBean bean = new RecipientBean();
-		// bean.setId("test");
-		// bean.setMemberbean(mb);
-		// bean.setName("七三一測試");
-		// bean.setPhone("0912121212");
-		// bean.setCity("台北");
-		// bean.setDistrict("大安");
-		// bean.setAddr("大安");
-		// bean.setBirthday(java.sql.Date.valueOf("2017-7-31"));
-		// dao.insert(bean);
+//		 RecipientBean bean = new RecipientBean();
+//		 bean.setId("test0803");
+//		 bean.setMemberbean(mb);
+//		 bean.setName("八零三測試");
+//		 bean.setPhone("0912121212");
+//		 bean.setCity("台北");
+//		 bean.setDistrict("大安");
+//		 bean.setAddr("大安");
+//		 bean.setBirthday(java.sql.Date.valueOf("2017-8-3"));
+//		 dao.insert(bean);
 
 		// 修改
 		// RecipientBean bean = new RecipientBean();

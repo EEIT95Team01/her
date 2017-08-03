@@ -10,6 +10,7 @@ import org.hibernate.Session;
 
 import com.eeit95.her.model.member.HistoryBean;
 import com.eeit95.her.model.member.HistoryDAOInterface;
+import com.eeit95.her.model.member.MemberBean;
 
 import hibernate.util.HibernateUtil;
 
@@ -122,43 +123,45 @@ public class HistoryHibernateDAO implements HistoryDAOInterface {
 
 		HistoryHibernateDAO dao = new HistoryHibernateDAO();
 		long dateTime = System.currentTimeMillis();
+		MemberBean mb = new MemberBean();
+		mb.setId("M456");
 
 		// 新增
-		// HistoryBean bean = new HistoryBean();
-		// bean.setMemberid("M456");
-		// bean.setProductId("c123");
-		// bean.setViewtime(new Timestamp(dateTime));
-		// dao.insert(bean);
+//		 HistoryBean bean = new HistoryBean();
+//		 bean.setMemberbean(mb);
+//		 bean.setProductId("TEST0803");
+//		 bean.setViewtime(new Timestamp(dateTime));
+//		 dao.insert(bean);
 
 		// 刪除
 		// dao.delete("M123");
 
 		// 用memberId找資料
 		// List<HistoryBean> MBLIST=dao.findByMemberId("M123");
-		// for(HistoryBean mb : MBLIST){
-		// System.out.print(mb.getMemberid()+",");
-		// System.out.print(mb.getProductId()+",");
-		// System.out.print(mb.getViewtime());
+		// for(HistoryBean hb : MBLIST){
+		// System.out.print(hb.getMemberbean().getId()+",");
+		// System.out.print(hb.getProductId()+",");
+		// System.out.print(hb.getViewtime());
 		// System.out.println();
 		// }
 
 		// 用productId找資料
 		// List<HistoryBean> PLIST=dao.findByProductId("c123");
-		// for(HistoryBean mb : PLIST){
-		// System.out.print(mb.getMemberid()+",");
-		// System.out.print(mb.getProductId()+",");
-		// System.out.print(mb.getViewtime());
+		// for(HistoryBean hb : PLIST){
+		// System.out.print(hb.getMemberbean().getId()+",");
+		// System.out.print(hb.getProductId()+",");
+		// System.out.print(hb.getViewtime());
 		// System.out.println();
 		// }
 
 		// 用PK找資料
-		// List<HistoryBean> PKLIST=dao.findByPrimaryKey("M123","c123");
-		// for(HistoryBean mb : PKLIST){
-		// System.out.print(mb.getMemberid()+",");
-		// System.out.print(mb.getProductId()+",");
-		// System.out.print(mb.getViewtime());
-		// System.out.println();
-		// }
+//		 List<HistoryBean> PKLIST=dao.findByPrimaryKey("M123","c123");
+//		 for(HistoryBean hb : PKLIST){
+//		 System.out.print(hb.getMemberbean().getId()+",");
+//		 System.out.print(hb.getProductId()+",");
+//		 System.out.print(hb.getViewtime());
+//		 System.out.println();
+//		 }
 
 		// 查詢全部
 		List<HistoryBean> list2 = dao.getAll();

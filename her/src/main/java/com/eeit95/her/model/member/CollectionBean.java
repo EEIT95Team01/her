@@ -2,22 +2,29 @@ package com.eeit95.her.model.member;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "COLLECTION")
 public class CollectionBean implements java.io.Serializable{
 	
-	private String memberId;
+	private MemberBean memberbean;
 	private String productId;
 	private java.sql.Timestamp addTime;
-	@Id
-	public String getMemberId() {
-		return memberId;
+	
+//	@Id
+//  待處理的問題
+	@ManyToOne
+	@JoinColumn(name = "memberId")
+	public MemberBean getMemberbean() {
+		return memberbean;
 	}
-	public void setMemberId(String memberId) {
-		this.memberId = memberId;
+	public void setMemberbean(MemberBean memberbean) {
+		this.memberbean = memberbean;
 	}
+	
 	@Id
 	public String getProductId() {
 		return productId;

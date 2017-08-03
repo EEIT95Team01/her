@@ -10,6 +10,7 @@ import org.hibernate.Session;
 
 import com.eeit95.her.model.member.CollectionBean;
 import com.eeit95.her.model.member.CollectionDAOInterface;
+import com.eeit95.her.model.member.MemberBean;
 
 import hibernate.util.HibernateUtil;
 
@@ -140,16 +141,18 @@ public class CollectionHibernateDAO implements CollectionDAOInterface {
 
 		CollectionHibernateDAO dao = new CollectionHibernateDAO();
 		long dateTime = System.currentTimeMillis();
+		MemberBean mb=new MemberBean();
+		mb.setId("M123");
 
 		// 新增
-		// CollectionBean bean = new CollectionBean();
-		// bean.setMemberId("M456");
-		// bean.setProductId("c123");
-		// bean.setAddTime(new Timestamp(dateTime));
-		// dao.insert(bean);
+//		 CollectionBean bean = new CollectionBean();
+//		 bean.setMemberbean(mb);
+//		 bean.setProductId("c654");
+//		 bean.setAddTime(new Timestamp(dateTime));
+//		 dao.insert(bean);
 
 		// 修改
-		dao.update("M123", "c123");
+//		dao.update("M123", "c123");
 
 		// 刪除
 		// dao.delete("M123");
@@ -157,7 +160,7 @@ public class CollectionHibernateDAO implements CollectionDAOInterface {
 		// 用memberId找資料
 		// List<CollectionBean> MBLIST=dao.findByMemberId("M123");
 		// for(CollectionBean cb : MBLIST){
-		// System.out.print(cb.getMemberId()+",");
+		// System.out.print(cb.getMemberbean().getId()+",");
 		// System.out.print(cb.getProductId()+",");
 		// System.out.print(cb.getAddTime());
 		// System.out.println();
@@ -166,7 +169,7 @@ public class CollectionHibernateDAO implements CollectionDAOInterface {
 		// 用productId找資料
 		// List<CollectionBean> PLIST=dao.findByProductId("c123");
 		// for(CollectionBean cb : PLIST){
-		// System.out.print(cb.getMemberId()+",");
+		// System.out.print(cb.getMemberbean().getId()+",");
 		// System.out.print(cb.getProductId()+",");
 		// System.out.print(cb.getAddTime());
 		// System.out.println();
@@ -175,7 +178,7 @@ public class CollectionHibernateDAO implements CollectionDAOInterface {
 		// 用PK找資料
 		// List<CollectionBean> PKLIST=dao.findByPrimaryKey("M123","c123");
 		// for(CollectionBean cb : PKLIST){
-		// System.out.print(cb.getMemberId()+",");
+		// System.out.print(cb.getMemberbean().getId()+",");
 		// System.out.print(cb.getProductId()+",");
 		// System.out.print(cb.getAddTime());
 		// System.out.println();
@@ -184,7 +187,7 @@ public class CollectionHibernateDAO implements CollectionDAOInterface {
 		// 查詢全部
 		List<CollectionBean> list2 = dao.getAll();
 		for (CollectionBean cb : list2) {
-			System.out.print(cb.getMemberId() + ",");
+			System.out.print(cb.getMemberbean().getId() + ",");
 			System.out.print(cb.getProductId() + ",");
 			System.out.print(cb.getAddTime());
 			System.out.println();
