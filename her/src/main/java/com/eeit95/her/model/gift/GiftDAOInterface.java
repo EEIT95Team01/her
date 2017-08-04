@@ -12,4 +12,11 @@ public interface GiftDAOInterface {
 	public List<GiftBean> selectTopN(int n,String column,String ascOrDesc); 
 	public  List <GiftBean> selectWithBetween(String column,double lo,double hi, String ascOrDesc);
 	public  List <GiftBean> selectWithBetween(String column, int lo, int hi, String ascOrDesc);
+
+//	public List <GiftBean> selectAllFC
+//	(String name, double price, int viewCount, int salesCount, String manufacturer, double cost, 
+//		CategoryBean categoryId,String ascOrDesc);
+//	public List <GiftBean> selectAllFM
+//	(String name, double price, int viewCount, int salesCount, String manufacturer, double cost, 
+//		double gpratio, int stock, CategoryBean categoryId,String ascOrDesc,String column,int status);
 }

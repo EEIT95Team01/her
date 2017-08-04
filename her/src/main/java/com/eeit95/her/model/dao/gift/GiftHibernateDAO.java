@@ -4,9 +4,12 @@ import org.hibernate.*;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import com.eeit95.her.model.gift.GiftDAOInterface;
+import com.eeit95.her.model.gift.CategoryBean;
 import com.eeit95.her.model.gift.GiftBean;
 import hibernate.util.HibernateUtil;
 import java.util.*;
+
+import javax.lang.model.element.Name;
 
 public class GiftHibernateDAO implements GiftDAOInterface{
 	
@@ -163,6 +166,39 @@ public class GiftHibernateDAO implements GiftDAOInterface{
 		
 		return list;
 	}
+	
+	
+//	@Override
+//	public List<GiftBean> selectAllFC(String name, double price, int viewCount, int salesCount, 
+//									  String manufacturer, double cost, CategoryBean categoryId,
+//									  String ascOrDesc) {
+//		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+//		session.beginTransaction();
+//		List<GiftBean> list = null;
+//		try {
+//			Criteria query = session.createCriteria(GiftBean.class);
+//			query.add(Restrictions.ilike(name, "%*%"));
+//			query.add(Restrictions.idEq(price));
+//			query.add(Restrictions.idEq(viewCount));
+//			query.add(Restrictions.idEq(salesCount));
+//			query.add(Restrictions.idEq(manufacturer));
+//			query.add(Restrictions.idEq(cost));
+//			query.add(Restrictions.idEq(categoryId));
+//			if(ascOrDesc.equalsIgnoreCase("desc")){
+//				query.addOrder(Order.desc(column));
+//			}else {
+//				query.addOrder(Order.asc(column));
+//			} 
+//			list = query.list();
+//			session.getTransaction().commit();
+//			
+//		}catch(RuntimeException ex) {
+//			session.getTransaction().rollback();
+//			throw ex;
+//		}
+//		
+//		return list;
+//	}
 
 
 	public static void main(String[] args) {
@@ -221,7 +257,7 @@ public class GiftHibernateDAO implements GiftDAOInterface{
 //		System.out.print(giftBean.getGpratio() + ",");
 //		System.out.print(giftBean.getStock() + ",");
 //		System.out.print(giftBean.getCategoryId().getId() + ",");
-//		System.out.println("\n-----------------");		
+//		System.out.println("\n-----------------");
 
 		//● 查詢-5 selectAll(Git測試OK)
 //		List<GiftBean> list = dao.selectAll();
@@ -277,24 +313,24 @@ public class GiftHibernateDAO implements GiftDAOInterface{
 //			System.out.println();				
 //		}	
 		
-//		//● 查詢 -8 selectWithBetween(Git測試OK)(查詢integer型別的資料)
-		List<GiftBean> list = dao.selectWithBetween("viewCount", 1000, 2000, "asc");
-		for (GiftBean gVO : list) {
-			System.out.print(gVO.getId() + ",");
-			System.out.print(gVO.getName() + ",");
-			System.out.print(gVO.getPrice() + ",");
-			System.out.print(gVO.getCover() + ",");
-			System.out.print(gVO.getViewCount() + ",");
-			System.out.print(gVO.getSalesCount() + ",");
-			System.out.print(gVO.isStatus() + ",");
-			System.out.print(gVO.getManufacturer() + ",");
-			System.out.print(gVO.getCost() + ",");
-			System.out.print(gVO.getGpratio() + ",");
-			System.out.print(gVO.getStock() + ",");
-			System.out.print(gVO.getCategoryId().getId() + ",");
-			System.out.print(gVO.getCategoryId().getSubName());
-			System.out.println();				
-		}	
+		//● 查詢 -8 selectWithBetween(Git測試OK)(查詢integer型別的資料)
+//		List<GiftBean> list = dao.selectWithBetween("price", 10.0, 2000.0, "asc");
+//		for (GiftBean gVO : list) {
+//			System.out.print(gVO.getId() + ",");
+//			System.out.print(gVO.getName() + ",");
+//			System.out.print(gVO.getPrice() + ",");
+//			System.out.print(gVO.getCover() + ",");
+//			System.out.print(gVO.getViewCount() + ",");
+//			System.out.print(gVO.getSalesCount() + ",");
+//			System.out.print(gVO.isStatus() + ",");
+//			System.out.print(gVO.getManufacturer() + ",");
+//			System.out.print(gVO.getCost() + ",");
+//			System.out.print(gVO.getGpratio() + ",");
+//			System.out.print(gVO.getStock() + ",");
+//			System.out.print(gVO.getCategoryId().getId() + ",");
+//			System.out.print(gVO.getCategoryId().getSubName());
+//			System.out.println();				
+//		}	
 	
 	}
 }

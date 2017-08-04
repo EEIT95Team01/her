@@ -15,7 +15,7 @@ public class GiftBean implements java.io.Serializable{
 	private String id;
 	private String name;
 	private double price;			//資料庫型態是money，要用double
-	private byte[] cover;			//資料庫型態是varbinary(max)，參考網址：https://goo.gl/6ThJ2r。
+	private String cover;			//資料庫型態是varbinary(max)，參考網址：https://goo.gl/6ThJ2r。
 	private int viewCount;
 	private int salesCount;
 	private boolean status;			//資料庫型態是bit，參考網址：https://goo.gl/6ThJ2r。
@@ -55,10 +55,10 @@ public class GiftBean implements java.io.Serializable{
 	}
 	
 	@Column(name="cover")
-	public byte[] getCover() {
+	public String getCover() {
 		return cover;
 	}
-	public void setCover(byte[] cover) {
+	public void setCover(String cover) {
 		this.cover = cover;
 	}
 	
