@@ -13,6 +13,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.eeit95.her.model.pack.PackBean;
+
 
 
 
@@ -33,6 +35,10 @@ public class CardBean implements Serializable {
 	private int stock;
 	private int maxWordCount;
 	private Set<CardDescriptionBean> desc = new HashSet<CardDescriptionBean>();
+	private Set<PackBean> packs = new HashSet<PackBean>();
+	
+	
+	
 	
 	
 	@OneToMany(mappedBy="cardBean")
@@ -45,7 +51,15 @@ public class CardBean implements Serializable {
 		this.desc = desc;
 	}
 
-
+	@OneToMany(mappedBy="cardBean")
+	public Set<PackBean> getPacks() {
+		return packs;
+	}
+	
+	public void setPacks(Set<PackBean> packs) {
+		this.packs = packs;
+	}
+	
 	public CardBean() {
 	}
 

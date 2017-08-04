@@ -331,6 +331,26 @@ public class GiftHibernateDAO implements GiftDAOInterface{
 //			System.out.print(gVO.getCategoryId().getSubName());
 //			System.out.println();				
 //		}	
+
+//		//● 查詢 -8 selectWithBetween(Git測試OK)(查詢integer型別的資料)
+		List<GiftBean> list = dao.selectWithBetween("viewCount", 1000, 2000, "asc");
+		for (GiftBean gVO : list) {
+			System.out.print(gVO.getId() + ",");
+			System.out.print(gVO.getName() + ",");
+			System.out.print(gVO.getPrice() + ",");
+			System.out.print(gVO.getCover() + ",");
+			System.out.print(gVO.getViewCount() + ",");
+			System.out.print(gVO.getSalesCount() + ",");
+			System.out.print(gVO.isStatus() + ",");
+			System.out.print(gVO.getManufacturer() + ",");
+			System.out.print(gVO.getCost() + ",");
+			System.out.print(gVO.getGpratio() + ",");
+			System.out.print(gVO.getStock() + ",");
+			System.out.print(gVO.getCategoryId().getId() + ",");
+			System.out.print(gVO.getCategoryId().getSubName());
+			System.out.println();				
+		}	
+
 	
 	}
 }

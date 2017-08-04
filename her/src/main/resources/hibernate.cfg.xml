@@ -50,6 +50,14 @@
 		<mapping class="com.eeit95.her.model.pack.OrderformPackStatusBean" />
 		<mapping class="com.eeit95.her.model.pack.PackBean" />
 		<mapping class="com.eeit95.her.model.pack.OrderformBean" />
+		<mapping class="com.eeit95.her.model.pack.OrderformPackBean" />
+		<mapping class="com.eeit95.her.model.pack.PackGiftBean" />
+
+		<mapping class="com.eeit95.her.model.member.CollectionBean" />
+		<mapping class="com.eeit95.her.model.member.HistoryBean" />
+		<mapping class="com.eeit95.her.model.member.MemberBean" />
+		<mapping class="com.eeit95.her.model.member.MessageBean" />
+		<mapping class="com.eeit95.her.model.member.RecipientBean" />
 
 	</session-factory>
 
