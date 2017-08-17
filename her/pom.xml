@@ -72,12 +72,14 @@
 		</dependency>
 
 		<!-- JDBC Driver 4.2 -->
+
 <!-- 		<dependency> -->
 <!-- 			<groupId>com.microsoft.sqlserver.jdbc</groupId> -->
 <!-- 			<artifactId>sqljdbc</artifactId> -->
 <!-- 			<version>42</version> -->
 <!-- 			<scope>runtime</scope> -->
 <!-- 		</dependency> -->
+
 
 		<!-- Hibernate -->
 		<dependency>

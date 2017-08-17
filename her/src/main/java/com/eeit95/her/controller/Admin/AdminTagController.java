@@ -25,7 +25,7 @@ import com.eeit95.her.model.tag.TagSelectBean;
 
 
 @Controller
-@RequestMapping("/api")
+@RequestMapping("/admin")
 public class AdminTagController { // implements CardServiceInterface
 	
 	

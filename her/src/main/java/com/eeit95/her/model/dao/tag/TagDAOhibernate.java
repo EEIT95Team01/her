@@ -41,36 +41,38 @@ public class TagDAOhibernate implements TagDAOInterface {
 	private static final String selectAll = "from TagBean";
 	private static final String Delete = "delete from TagBean where id = ?";
 
-//	public static void main(String[] args) {
-//		ApplicationContext context = new AnnotationConfigApplicationContext(SpringJavaConfiguration.class);
-//		SessionFactory sessionFactory = (SessionFactory) context.getBean("sessionFactory");
-//
-//		TagDAOhibernate cdj = (TagDAOhibernate) context.getBean("tagDAOhibernate");
-//		TagBean bean = null;
-//		List<TagBean> list = null;
-//		try {
-//			sessionFactory.getCurrentSession().beginTransaction();
-////			bean = cdj.selectById(8);
-////			list = cdj.selectAll();
-//
-//			TagBean bean1 = new TagBean();
-//			bean1.setName("Text~~~");
-//			bean1.setDiscount(0.8);
-////			bean.setName("text2!!!!");
-//			cdj.insert(bean1);
-////			cdj.update(bean);
-////			cdj.delete(bean.getId());
-//			sessionFactory.getCurrentSession().getTransaction().commit();
-//		} catch (RuntimeException ex) {
-//			sessionFactory.getCurrentSession().getTransaction().rollback();
-//			throw ex;
-//		} finally {
-//			((ConfigurableApplicationContext) context).close();
-//		}
-////		for (TagBean bean : list) {
-////			System.out.println(bean.getId());
-////		}
-//	}
+	// public static void main(String[] args) {
+	// ApplicationContext context = new
+	// AnnotationConfigApplicationContext(SpringJavaConfiguration.class);
+	// SessionFactory sessionFactory = (SessionFactory)
+	// context.getBean("sessionFactory");
+	//
+	// TagDAOhibernate cdj = (TagDAOhibernate) context.getBean("tagDAOhibernate");
+	// TagBean bean = null;
+	// List<TagBean> list = null;
+	// try {
+	// sessionFactory.getCurrentSession().beginTransaction();
+	//// bean = cdj.selectById(8);
+	//// list = cdj.selectAll();
+	//
+	// TagBean bean1 = new TagBean();
+	// bean1.setName("Text~~~");
+	// bean1.setDiscount(0.8);
+	//// bean.setName("text2!!!!");
+	// cdj.insert(bean1);
+	//// cdj.update(bean);
+	//// cdj.delete(bean.getId());
+	// sessionFactory.getCurrentSession().getTransaction().commit();
+	// } catch (RuntimeException ex) {
+	// sessionFactory.getCurrentSession().getTransaction().rollback();
+	// throw ex;
+	// } finally {
+	// ((ConfigurableApplicationContext) context).close();
+	// }
+	//// for (TagBean bean : list) {
+	//// System.out.println(bean.getId());
+	//// }
+	// }
 
 	@Override
 	public TagBean selectById(int id) {
@@ -88,7 +90,7 @@ public class TagDAOhibernate implements TagDAOInterface {
 			}
 		}
 		return false;
-		
+
 	}
 
 	@Override
@@ -118,7 +120,7 @@ public class TagDAOhibernate implements TagDAOInterface {
 	}
 
 	@Override
-	
+
 	public List<TagBean> selectAll() {
 		List<TagBean> list = null;
 		Session session = this.getSession();
@@ -133,16 +135,19 @@ public class TagDAOhibernate implements TagDAOInterface {
 		List<TagBean> list = null;
 		Session session = this.getSession();
 		Criteria query = session.createCriteria(TagBean.class);
-		if(tagSelectBean.getId()!=0) {
-			query.add(Restrictions.eq("tagId", tagSelectBean.getId()));
+		if (tagSelectBean.getId() != 0) {
+			query.add(Restrictions.eq("id", tagSelectBean.getId()));
+		} else {
+			if (tagSelectBean.getName() != null) {
+				query.add(Restrictions.like("name", "%" + tagSelectBean.getName() + "%"));
+			}
+			if (tagSelectBean.getHighDiscount() != 0) {
+				query.add(Restrictions.between("discount", tagSelectBean.getLowDiscount(),
+						tagSelectBean.getHighDiscount()));
+			}
 		}
-		if(tagSelectBean.getName()!=null) {
-			query.add(Restrictions.like("name", "%"+tagSelectBean.getName()+"%"));
-		}
-		query.add(Restrictions.between("discount", tagSelectBean.getLowDiscount(), tagSelectBean.getHighDiscount()));
 		list = query.list();
 		return list;
 	}
-
 
 }

@@ -3,5 +3,9 @@
 	<Resource name="jdbc/her" auth="Container" type="javax.sql.DataSource"
                maxTotal="100" maxIdle="30" maxWaitMillis="10000"
                username="sa" password="sa123456" driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver"
+<<<<<<< HEAD
                url="jdbc:sqlserver://localhost:1433;database=her"/>
+=======
+               url="jdbc:sqlserver://192.168.23.12:1433;database=her"/>
+>>>>>>> branch 'master' of https://github.com/EEIT95Team01/her.git
 </Context>

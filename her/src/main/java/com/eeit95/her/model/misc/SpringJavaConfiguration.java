@@ -33,6 +33,7 @@ import com.eeit95.her.model.member.AdminUserBean;
 import com.eeit95.her.model.member.CollectionBean;
 import com.eeit95.her.model.member.MemberBean;
 import com.eeit95.her.model.member.RecipientBean;
+import com.eeit95.her.model.pack.PackBean;
 import com.eeit95.her.model.pack.PackStatusBean;
 import com.eeit95.her.model.tag.TagBean;
 
@@ -41,22 +42,22 @@ import com.eeit95.her.model.tag.TagBean;
 public class SpringJavaConfiguration {
 	@Bean
 	public DataSource dataSource() {
-		DriverManagerDataSource dmds = new DriverManagerDataSource();
-		dmds.setDriverClassName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-		dmds.setUrl("jdbc:sqlserver://localhost:1433;database=her");
-		dmds.setUsername("sa");
-		dmds.setPassword("sa123456");
-		return dmds;
-		
-//		DataSource dataSource=null;
-//		try {
-//			Context tx = new InitialContext();
-//			dataSource = (DataSource) tx.lookup("java:/comp/env/jdbc/her");
-//		} catch (NamingException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		return dataSource;
+//		DriverManagerDataSource dmds = new DriverManagerDataSource();
+//		dmds.setDriverClassName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+//		dmds.setUrl("jdbc:sqlserver://localhost:1433;database=her");
+//		dmds.setUsername("sa");
+//		dmds.setPassword("sa123456");
+//		return dmds;
+//		
+		DataSource dataSource=null;
+		try {
+			Context tx = new InitialContext();
+			dataSource = (DataSource) tx.lookup("java:/comp/env/jdbc/her");
+		} catch (NamingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return dataSource;
 	}
 	@Bean
 	public SessionFactory sessionFactory() {
@@ -72,7 +73,7 @@ public class SpringJavaConfiguration {
 				TagBean.class,AdvertisementBean.class,FontBean.class,FontDescriptionBean.class,
 				FontTagBean.class,WriterBean.class,CardBean.class,CategoryMainBean.class,CategoryBean.class,
 				GiftBean.class,GiftDescriptionBean.class,GiftTagBean.class,PackStatusBean.class,MemberBean.class,
-				RecipientBean.class,AdminUserBean.class,CollectionBean.class);
+				RecipientBean.class,AdminUserBean.class,CollectionBean.class,PackBean.class);
 		
 		return builder.buildSessionFactory();
 		

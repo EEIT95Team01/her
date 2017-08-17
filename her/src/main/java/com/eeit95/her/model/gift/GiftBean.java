@@ -22,7 +22,7 @@ public class GiftBean implements java.io.Serializable{
 	private String cover;			//資料庫型態是varbinary(max)，參考網址：https://goo.gl/6ThJ2r。
 	private int viewCount;
 	private int salesCount;
-	private boolean status;			//資料庫型態是bit，參考網址：https://goo.gl/6ThJ2r。
+	private int status;			//資料庫型態是bit，參考網址：https://goo.gl/6ThJ2r。
 	private String manufacturer;
 	private double cost;			//資料庫型態是money，要用double
 	private double gpratio;			//資料庫型態是money，要用double
@@ -89,10 +89,10 @@ public class GiftBean implements java.io.Serializable{
 	}
 	
 	
-	public boolean isStatus() {
+	public int isStatus() {
 		return status;
 	}
-	public void setStatus(boolean status) {
+	public void setStatus(int status) {
 		this.status = status;
 	}
 	

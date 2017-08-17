@@ -6,11 +6,11 @@ import com.eeit95.her.model.tag.TagBean;
 public interface GiftTagDAOInterface {
 
 	public List<GiftTagBean> insert(List<GiftTagBean> beans);
-	public boolean delete(GiftBean giftId, TagBean tagId);
-	public boolean deleteById(GiftBean giftId);
-	public boolean deleteByTagId(TagBean tagId);
-	public List<GiftTagBean> selectById(GiftBean giftId);
-	public List<GiftTagBean> selectByTagId(TagBean tagId);
+	public boolean delete(String giftId, int tagId);
+	public boolean deleteById(String giftId);
+	public boolean deleteByTagId(int tagId);
+	public List<GiftTagBean> selectById(String giftId);
+	public List<GiftTagBean> selectByTagId(int tagId);
 	public List<GiftTagBean> selectAll();
 	
 }

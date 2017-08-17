@@ -1,8 +1,9 @@
 package com.eeit95.her.model.pack;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
@@ -12,7 +13,7 @@ public class PackStatusBean implements java.io.Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@SequenceGenerator(name = "psid", allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int packStatus;
 	private String statusName;
 	

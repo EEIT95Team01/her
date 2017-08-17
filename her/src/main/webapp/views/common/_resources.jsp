@@ -16,6 +16,19 @@
 
 <!-- javascript -->
 <script src='${pageContext.request.contextPath}/js/jquery-3.2.1.js' type='text/javascript'></script>
+<<<<<<< HEAD
 <script src='${pageContext.request.contextPath}/jQuery_UI/jquery-ui.js'></script>
 <script src='${pageContext.request.contextPath}/jQuery_UI/jquery-ui.min.js'></script>
 <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+=======
+<script src='${pageContext.request.contextPath}/js/tablesort.js' type='text/javascript'></script>
+<script src='${pageContext.request.contextPath}/jQuery_UI/jquery-ui.js'></script>
+<script src='${pageContext.request.contextPath}/jQuery_UI/jquery-ui.min.js'></script>
+<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+<script>
+const serverUrl = 'http://localhost:8080/her' // -> http://localhost:8080
+const webapp = '/her' // -> /her
+
+const imgurUrl = 'https://api.imgur.com/3/image'
+</script>
+>>>>>>> branch 'master' of https://github.com/EEIT95Team01/her.git

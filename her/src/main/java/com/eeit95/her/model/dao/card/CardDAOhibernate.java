@@ -370,16 +370,20 @@ public class CardDAOhibernate implements CardDAOInterface {
 		System.out.println(cardSelectBean);
 		Session session = this.getSession();
 		Criteria criteria = session.createCriteria(CardBean.class);
-		if (cardSelectBean.getId() != null&&cardSelectBean.getId().length()!=0) {
+
+		if (cardSelectBean.getId() != null &&cardSelectBean.getId().length()!=0) {
+			System.out.println("GET　ＣａｒｄＩＤ～～");
 			criteria.add(Restrictions.eq("id", cardSelectBean.getId()));
+		} else {
+			// criteria.add(Restrictions.eq("status", cardSelectBean.getStatus()));
+			String name = cardSelectBean.getName();
+			if (cardSelectBean.getName() != null && cardSelectBean.getName().trim().length() != 0) {
+				criteria.add(Restrictions.like("name", "%" + name + "%"));
+			}
+			criteria.add(Restrictions.between("price", cardSelectBean.getLowPrice(), cardSelectBean.getHighPrice()));
+			criteria.add(Restrictions.between("cost", cardSelectBean.getLowCost(), cardSelectBean.getHighCost()));
 		}
-		// criteria.add(Restrictions.eq("status", cardSelectBean.getStatus()));
-		String name = cardSelectBean.getName();
-		if (cardSelectBean.getName() != null && cardSelectBean.getName().trim().length() != 0) {
-			criteria.add(Restrictions.like("name", "%" + name + "%"));
-		}
-		criteria.add(Restrictions.between("price", cardSelectBean.getLowPrice(), cardSelectBean.getHighPrice()));
-		criteria.add(Restrictions.between("cost", cardSelectBean.getLowCost(), cardSelectBean.getHighCost()));
+
 		list = criteria.list();
 
 		return list;

@@ -4,14 +4,17 @@ import java.util.List;
 
 public interface PackDAOInterface {
 	
-	public List<String> getPackageIds(String memberId, int status);
+	public List<PackBean> selectByMIdAndStatus(String memberId, int status);
 	
 	public PackBean selectById(String id);
 	
-	public PackBean insert(PackBean packagebean);
+	public PackBean insert(PackBean bean);
 	
-	public PackBean update(PackBean packageBean);
+	public PackBean update(PackBean bean);
 	
-	public int deleteById(String id);
+	public boolean deleteById(String id);
+	
+	public List<PackBean> selectAllFM(PackSelectBean packSelectBean);
+
 	
 }

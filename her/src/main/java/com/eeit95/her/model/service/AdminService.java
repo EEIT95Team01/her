@@ -39,9 +39,14 @@ import com.eeit95.her.model.gift.GiftDAOInterface;
 import com.eeit95.her.model.gift.GiftDescriptionBean;
 import com.eeit95.her.model.gift.GiftDescriptionDAOInterface;
 import com.eeit95.her.model.gift.GiftIUBean;
+import com.eeit95.her.model.gift.GiftSelectAllBean;
+import com.eeit95.her.model.gift.GiftSelectBean;
 import com.eeit95.her.model.gift.GiftTagBean;
 import com.eeit95.her.model.gift.GiftTagDAOInterface;
 import com.eeit95.her.model.misc.SpringJavaConfiguration;
+import com.eeit95.her.model.pack.PackBean;
+import com.eeit95.her.model.pack.PackDAOInterface;
+import com.eeit95.her.model.pack.PackSelectBean;
 
 @Service
 public class AdminService {
@@ -51,28 +56,36 @@ public class AdminService {
 	// SessionFactory sessionFactory = (SessionFactory)
 	// context.getBean("sessionFactory");
 
-	
-	@Autowired
-	private GiftDescriptionDAOInterface giftDesc;
 	@Autowired
 	private CardDAOInterface card;
 	@Autowired
 	private CardTagInterface cardTag;
 	@Autowired
 	private CardDescriptionDAOInterface cardDesc;
+	
 	@Autowired
 	private FontDAOInterface font;
 	@Autowired
 	private FontTagDAOInterface fontTag;
 	@Autowired
 	private FontDescriptionDAOInterface fontDesc;
-
 	@Autowired
 	private WriterDAOInterface writer;
-
 	@Autowired
 	private AdvertisementDAOInterface advertisement;
+	
+	@Autowired
+	private GiftDAOInterface gift;
+	@Autowired
+	private GiftTagDAOInterface giftTag;
+	@Autowired
+	private GiftDescriptionDAOInterface giftDesc;
+	
+	@Autowired
+	private PackDAOInterface pack;	
+		
 
+/*-----------------------------------------------------------------------------------------------------------------------------------*/
 	// Card
 	public CardSelectAllBean selectCard(CardSelectBean cardSelectBean) {
 		System.out.println("進入Select Service");
@@ -86,7 +99,7 @@ public class AdminService {
 			if(!list.isEmpty()) {
 			System.out.println("進入Select Service-2");
 			List<CardTagBean> tagBeans = cardTag.selectBycardId(cardSelectBean.getId());
-			 System.out.println(tagBeans.get(1));
+//			 System.out.println(tagBeans.get(0));
 			 String[] tagIds = new String[tagBeans.size()];
 			for(CardTagBean bean1:tagBeans ) {
 				tagIds[tagBeans.indexOf(bean1)] = bean1.toString();
@@ -399,8 +412,143 @@ public class AdminService {
 				System.out.println(f.getPrice());
 			}
 		}
-	
-	
+		/*--------------------------------------------------------------------------------------------------------*/	
+		
+		//Gift	
+			//新增 - insert(0815-test OK)
+			public boolean insert(GiftIUBean giftIUBean) {
+				
+				String id = gift.getNewId();
+				if(giftIUBean != null) {
+					giftIUBean.getGift().setId(id);
+					System.out.println("0=========================0");
+					System.out.println("Id: " + giftIUBean.getGift().getId());
+					System.out.println("0=========================0");
+					
+					GiftBean result1 = gift.insert(giftIUBean.getGift());
+					System.out.println("1=========================1");
+					System.out.println(result1);
+					System.out.println("1=========================1");
+					
+					List<GiftTagBean>  result2 = new ArrayList<GiftTagBean>();
+					
+					for(int i = 0; i < giftIUBean.getTagIds().length; i++) {
+						GiftTagBean result3 = new GiftTagBean();
+						result3.setGiftId(giftIUBean.getGift().getId());
+						result3.setTagId(Integer.parseInt(giftIUBean.getTagIds()[i]));
+						System.out.println("2=========================2");
+						System.out.println(result3.getTagId());
+						System.out.println("2=========================1");
+						
+						result2.add(result3);
+					}
+					System.out.println("3=========================3");
+					System.out.println(result2);
+					System.out.println("3=========================3");
+					
+					List<GiftDescriptionBean> result4 = giftIUBean.getDescriptions();
+					for(GiftDescriptionBean bean : result4) {
+						bean.setGiftId(id);
+					}
+					System.out.println("4=========================4");
+					System.out.println(result4);
+					System.out.println("4=========================4");
+					
+					
+					List<GiftTagBean>  result5 =giftTag.insert(result2);
+					System.out.println("5=========================5");
+					System.out.println(result5);
+					System.out.println("5=========================5");
+					
+					List<GiftDescriptionBean>  result6 =giftDesc.insert(giftIUBean.getDescriptions());
+					if(result1 != null && result5 != null && result6 != null ) {
+						return true;
+					}
+				}
+				return false ;
+			}
+			
+
+			//更新 - update(0815-test OK)
+			public boolean update(GiftIUBean giftIUBean) {
+			
+			if (giftIUBean != null) {
+				System.out.println(" ID = " + giftIUBean.getGift().getId());
+				
+				GiftBean result1 = gift.update(giftIUBean.getGift());
+				
+				List<GiftTagBean> result3 = new ArrayList<GiftTagBean>();
+				
+				for (int i = 0; i < giftIUBean.getTagIds().length; i++) {
+					GiftTagBean result2 = new GiftTagBean();
+					result2.setGiftId(giftIUBean.getGift().getId());
+					result2.setTagId(Integer.parseInt(giftIUBean.getTagIds()[i]));
+					System.out.println(result2.getTagId());
+					result3.add(result2);
+				}
+				
+				giftTag.deleteById(giftIUBean.getGift().getId());
+				List<GiftTagBean> result5 = giftTag.insert(result3);
+				giftDesc.delete(giftIUBean.getGift().getId());
+				List<GiftDescriptionBean> result6 = giftDesc.insert(giftIUBean.getDescriptions());
+				System.out.println(result1);
+				System.out.println(result6);
+				System.out.println(result5);
+				if (result1 != null && result5 != null && result6 != null) {
+					return true;
+				}
+			}
+			return false;
+		}
+			
+			
+//			//複合式查詢 - select(0815-test OK)
+			public GiftSelectAllBean selectGift(GiftSelectBean giftSelectBean) {
+				
+				System.out.println("進入Select Service");
+				GiftSelectAllBean bean = new GiftSelectAllBean();
+				List<GiftBean> list = new ArrayList<GiftBean>();
+				if(giftSelectBean.getId()!=null && giftSelectBean.getId().length() != 0) {
+					
+					System.out.println("進入Select Service-1");
+					list = gift.selectAllFM(giftSelectBean);
+					System.out.println(list.toString());
+					
+					bean.setGift(list);
+					if(!list.isEmpty()) {
+						
+					System.out.println("進入Select Service-2");
+					List<GiftTagBean> tagBeans = giftTag.selectById(giftSelectBean.getId());
+					System.out.println(tagBeans.get(1));
+					 
+					String[] tagIds = new String[tagBeans.size()];
+					for(GiftTagBean bean1 : tagBeans) {
+						tagIds[tagBeans.indexOf(bean1)] = bean1.toString();
+					}
+					bean.setTagIds(tagIds);
+					bean.setDescriptions(giftDesc.selectById(giftSelectBean.getId()));
+					}
+				}else {
+					
+					System.out.println("進入SelectAll Service-1");
+					bean.setGift(gift.selectAllFM(giftSelectBean));
+				}
+				return bean;
+			}	
+
+			/*--------------------------------------------------------------------------------------------------*/	
+			
+			
+			//Pack	
+			//複合式查詢 - select(0815-Test-OK)
+			public List<PackBean> selectPack(PackSelectBean packSelectBean) {
+				List<PackBean> beans = null;
+					beans = pack.selectAllFM(packSelectBean);
+					for(PackBean bean : beans) {
+						System.out.println(bean.getName());
+					}	
+				return beans;
+			}		
 	
 
 }

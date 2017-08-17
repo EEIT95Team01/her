@@ -1,20 +1,26 @@
 package com.eeit95.her.model.gift;
 
+import java.util.Arrays;
 import java.util.List;
 
-import com.eeit95.her.model.card.CardDescriptionBean;
 
 public class GiftIUBean  {
 	private GiftBean gift;
 	private String[] tagIds;
 	private List<GiftDescriptionBean> descriptions;
+
+	
+	@Override
+	public String toString() {
+		return "GiftIUBean [gift=" + gift + ", tagIds=" + Arrays.toString(tagIds) + ", descriptions=" + descriptions
+				+ "]";
+	}
 	
 	
-	
-	public GiftBean getGiftBean() {
+	public GiftBean getGift() {
 		return gift;
 	}
-	public void setGiftBean(GiftBean gift) {
+	public void setGift(GiftBean gift) {
 		this.gift = gift;
 	}
 	public String[] getTagIds() {

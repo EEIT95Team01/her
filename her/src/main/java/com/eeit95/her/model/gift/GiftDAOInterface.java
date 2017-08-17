@@ -21,10 +21,9 @@ public interface GiftDAOInterface {
 	(String name, double loPrice, double hiPrice, int loSaleCount, int hiSaleCount, 
 	String manufacturer, CategoryBean categoryId,String ascOrDesc, String column);
 	
-	public List <GiftBean> selectAllFM
-	(String id, String name, double loPrice, double hiPrice , int loViewCount, int hiViewCount, 
-			int loSaleCount, int hiSaleCount, String manufacturer, double loCost, double hiCost, 
-			double loGPratio, double hiGPratio, int loStock, int hiStock, CategoryBean categoryId,
-			String ascOrDesc,String column, int status);
+
+	public List <GiftBean> selectAllFM(GiftSelectBean giftSelectBean);
+	
+	public String getNewId();
 
 }

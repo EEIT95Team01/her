@@ -34,18 +34,17 @@ public class GiftTaghibernateDAO implements GiftTagDAOInterface{
 	@Override
 	public List<GiftTagBean> insert(List<GiftTagBean> beans) {
 		Session session = this.getSession();
-		if(beans != null) {
+		if(!beans.isEmpty()) {
+			
 			for(GiftTagBean bean : beans) {
-				session.save(bean);
+				session.saveOrUpdate(bean);
 			}
-			//session.getTransaction().commit();
-			return beans;
 		}
 		return beans;
 	}
 
 	@Override
-	public boolean delete(GiftBean giftId, TagBean tagId) {
+	public boolean delete(String giftId, int tagId) {
 		Session session = this.getSession();
 		Query result = null;
 		result = session.createQuery("from GiftTagBean where giftId=?");
@@ -61,7 +60,7 @@ public class GiftTaghibernateDAO implements GiftTagDAOInterface{
 	}
 	
 	@Override
-	public boolean deleteById(GiftBean giftId) {
+	public boolean deleteById(String giftId) {
 		Session session = this.getSession();
 		Query result = null;
 		result = session.createQuery("from GiftTagBean where giftId= ? ");
@@ -77,7 +76,7 @@ public class GiftTaghibernateDAO implements GiftTagDAOInterface{
 	}
 	
 	@Override
-	public boolean deleteByTagId(TagBean tagId) {
+	public boolean deleteByTagId(int tagId) {
 		Session session = this.getSession();
 		Query result = null;
 		result = session.createQuery("from GiftTagBean where tagId=?");
@@ -92,7 +91,7 @@ public class GiftTaghibernateDAO implements GiftTagDAOInterface{
 	}
 
 	@Override
-	public List<GiftTagBean> selectById(GiftBean giftId) {
+	public List<GiftTagBean> selectById(String giftId) {
 		List<GiftTagBean> result = null;
 		Session session = this.getSession();
 		Query query = session.createQuery(selectById);
@@ -102,7 +101,7 @@ public class GiftTaghibernateDAO implements GiftTagDAOInterface{
 	}
 	
 	@Override
-	public List<GiftTagBean> selectByTagId(TagBean tagId) {
+	public List<GiftTagBean> selectByTagId(int tagId) {
 		List<GiftTagBean> result = null;
 		Session session = this.getSession();
 		Query query = session.createQuery(selectByTagId);

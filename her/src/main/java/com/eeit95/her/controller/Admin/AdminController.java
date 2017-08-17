@@ -36,7 +36,14 @@ import com.eeit95.her.model.font.MsgSelectFontBean;
 import com.eeit95.her.model.font.MsgSelectWriterBean;
 import com.eeit95.her.model.font.PriceRangeFontBean;
 import com.eeit95.her.model.font.WriterBean;
+
+import com.eeit95.her.model.gift.GiftDescriptionBean;
+import com.eeit95.her.model.gift.GiftIUBean;
+import com.eeit95.her.model.gift.GiftSelectBean;
+import com.eeit95.her.model.gift.MsgSelectGiftBean;
 import com.eeit95.her.model.misc.PrimitiveNumberEditor;
+import com.eeit95.her.model.pack.MsgSelectPackBean;
+import com.eeit95.her.model.pack.PackSelectBean;
 import com.eeit95.her.model.service.AdminFontService;
 import com.eeit95.her.model.service.AdminService;
 import com.eeit95.her.model.service.AdminTagService;
@@ -45,16 +52,11 @@ import com.eeit95.her.model.tag.MsgSelectTagBean;
 import com.eeit95.her.model.tag.TagSelectBean;
 
 @Controller
-@RequestMapping("/api")
+@RequestMapping("/admin")
 public class AdminController {
 
 	@Autowired
-	private CardService card;
-	@Autowired
 	private AdminService AS;
-
-	@Autowired
-	private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
 	@InitBinder
 	public void initializePropertyEditor(WebDataBinder webDataBinder) {
@@ -337,5 +339,114 @@ public class AdminController {
 		}
 
 
+/*-------------------------------------------------------------------------------*/
+
+	//Gift
+	//新增 - insert (POST - 0815 TEST-OK)
+	@RequestMapping(value = "/gift", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
+	public @ResponseBody MsgBean giftinsert(@RequestBody GiftIUBean giftIUBean) {
+		System.out.println("insert測試1:" + giftIUBean.toString());
+
+		MsgBean msg = new MsgBean();
+		List<GiftDescriptionBean> result1 = giftIUBean.getDescriptions();
+		// 驗證資料
+		if (giftIUBean.getGift().getId() != null) {
+			msg.setMessage("error");
+			msg.setSuccess("false");
+			return msg;
+		}
+		
+		for (GiftDescriptionBean bean : result1) {
+			if (bean.getGiftId() != null) {
+				msg.setMessage("error");
+				msg.setSuccess("false");
+				return msg;
+			}
+		}
+		boolean result = AS.insert(giftIUBean);
+		// 判斷回傳值是否正確
+		if (result) {
+			msg.setMessage("success");
+			msg.setSuccess("true");
+		} else {
+			msg.setMessage("error");
+			msg.setSuccess("false");
+		}
+		return msg;
+	}
+	
+	
+	//修改 - update (PUT - 0815 TEST-OK)
+	@RequestMapping(value = "/gift", method = RequestMethod.PUT, consumes = "application/json", produces = "application/json")
+	public @ResponseBody MsgBean giftupdate(@RequestBody GiftIUBean giftIUBean) {
+		System.out.println("update測試1:" + giftIUBean.toString());
+		MsgBean msg = new MsgBean();
+		List<GiftDescriptionBean> result1 = giftIUBean.getDescriptions();
+		
+		// 驗證資料
+		if (giftIUBean.getGift().getId() == null) {
+			System.out.println("update測試2");
+			msg.setMessage("error");
+			msg.setSuccess("false");
+			System.out.println("update測試3");
+			return msg;
+			
+		}
+		for (GiftDescriptionBean bean : result1) {
+			if (bean.getGiftId() == null ) {
+				System.out.println("bean.getGiftId() == null");
+				msg.setMessage("error");
+				msg.setSuccess("false");
+				return msg;
+			}else if(bean.getGiftId().length() == 0) {
+				System.out.println("bean.getGiftId().length() == 0");
+				msg.setMessage("error");
+				msg.setSuccess("false");
+				return msg;
+			}
+		}
+
+		boolean result = AS.update(giftIUBean);
+		
+		// 判斷回傳值是否正確
+		if (result) {
+			System.out.println("boolean result = true");
+			msg.setMessage("success");
+			msg.setSuccess("true");
+		} else {
+			System.out.println("boolean result = false");
+			msg.setMessage("error");
+			msg.setSuccess("false");
+		}
+		return msg;
+	}
+	
+	//複合式查詢 - select (GET - 0815 TEST-OK)
+		@RequestMapping(value = "/gift", method = RequestMethod.GET , produces = "application/json")
+		public @ResponseBody MsgSelectGiftBean giftselect(GiftSelectBean giftSelectBean) {
+			System.out.println("giftSelectBean = " + giftSelectBean.toString());
+			MsgSelectGiftBean msg = new MsgSelectGiftBean();
+			msg.setMessage("success");
+			msg.setSuccess("true");
+			msg.setData(AS.selectGift(giftSelectBean));
+			System.out.println("setData = " + AS.selectGift(giftSelectBean).toString());
+			System.out.println("setData = " + msg.toString());
+			return msg;
+		}
+		/*-------------------------------------------------------------------------------*/
+
+
+		//複合式查詢 - select (GET)
+		@RequestMapping(value = "/pack", method = RequestMethod.GET , produces = "application/json")
+		public @ResponseBody MsgSelectPackBean packselect(PackSelectBean packSelectBean) {
+			System.out.println("packSelectBean = " + packSelectBean.toString());
+			MsgSelectPackBean msg = new MsgSelectPackBean();
+			msg.setMessage("success");
+			msg.setSuccess("true");
+			msg.setData(AS.selectPack(packSelectBean));
+			System.out.println("setData = " + msg.toString());
+			return msg;
+		}		
+				
 
 }

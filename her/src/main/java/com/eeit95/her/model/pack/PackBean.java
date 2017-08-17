@@ -1,20 +1,32 @@
 package com.eeit95.her.model.pack;
 
-import java.sql.Date;
 
+import java.util.Date;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+
+@Entity
+@Table(name="pack")
 public class PackBean implements java.io.Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
+	
+	@Id
 	private String id;					//  1
 	private String name;				//  2
 	private String memberId;			//  3
 	private String cardId;				//  4
-	private Double cardPrice;			//  5
+	private double cardPrice;			//  5
 	private String fontId;				//  6
-	private Double fontPrice;			//  7
-	private Double giftSum;				//  8
-	private Double sum;					//  9
+	private double fontPrice;			//  7
+	private double giftSum;				//  8
+	private double sum;					//  9
 	private String content;				// 10
 	private String recipientId;			// 11
 	private String recipientName;		// 12
@@ -22,6 +34,7 @@ public class PackBean implements java.io.Serializable {
 	private String recipientCity;		// 14
 	private String recipientDistrict;	// 15
 	private String recipientAddr;		// 16
+	@Temporal(TemporalType.DATE)
 	private Date dateMailed;			// 17
 	private String senderName;			// 18		
 	private String senderPhone;			// 19
@@ -29,7 +42,6 @@ public class PackBean implements java.io.Serializable {
 	private String senderDistrict;		// 21
 	private String senderAddr;			// 22
 	private int status;					// 23
-	
 	public String getId() {
 		return id;
 	}
@@ -54,10 +66,10 @@ public class PackBean implements java.io.Serializable {
 	public void setCardId(String cardId) {
 		this.cardId = cardId;
 	}
-	public Double getCardPrice() {
+	public double getCardPrice() {
 		return cardPrice;
 	}
-	public void setCardPrice(Double cardPrice) {
+	public void setCardPrice(double cardPrice) {
 		this.cardPrice = cardPrice;
 	}
 	public String getFontId() {
@@ -66,22 +78,22 @@ public class PackBean implements java.io.Serializable {
 	public void setFontId(String fontId) {
 		this.fontId = fontId;
 	}
-	public Double getFontPrice() {
+	public double getFontPrice() {
 		return fontPrice;
 	}
-	public void setFontPrice(Double fontPrice) {
+	public void setFontPrice(double fontPrice) {
 		this.fontPrice = fontPrice;
 	}
-	public Double getGiftSum() {
+	public double getGiftSum() {
 		return giftSum;
 	}
-	public void setGiftSum(Double giftSum) {
+	public void setGiftSum(double giftSum) {
 		this.giftSum = giftSum;
 	}
-	public Double getSum() {
+	public double getSum() {
 		return sum;
 	}
-	public void setSum(Double sum) {
+	public void setSum(double sum) {
 		this.sum = sum;
 	}
 	public String getContent() {
@@ -168,4 +180,5 @@ public class PackBean implements java.io.Serializable {
 	public void setStatus(int status) {
 		this.status = status;
 	}
+	
 }

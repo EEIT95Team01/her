@@ -9,9 +9,14 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.stereotype.Repository;
 import com.eeit95.her.model.gift.GiftDAOInterface;
+
+import com.eeit95.her.model.gift.GiftSelectBean;
 import com.eeit95.her.model.misc.SpringJavaConfiguration;
+import com.eeit95.her.model.card.CardSelectAllBean;
 import com.eeit95.her.model.category.CategoryBean;
 import com.eeit95.her.model.gift.GiftBean;
+
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Repository
@@ -34,6 +39,7 @@ public class GiftHibernateDAO implements GiftDAOInterface{
 			GiftBean result = session.get(GiftBean.class, bean.getId());
 			if(result == null){
 				session.save(bean);
+				return bean;
 			}
 		}
 		
@@ -175,41 +181,62 @@ public class GiftHibernateDAO implements GiftDAOInterface{
 		 }
 	
 	@Override
-	 public List <GiftBean> selectAllFM
-		(String id, String name, double loPrice, double hiPrice , int loViewCount, int hiViewCount, 
-				int loSaleCount, int hiSaleCount, String manufacturer, double loCost, double hiCost, 
-				double loGPratio, double hiGPratio, int loStock, int hiStock, CategoryBean categoryId,
-				String ascOrDesc,String column, int status) {
+	 public List <GiftBean> selectAllFM(GiftSelectBean giftSelectBean){
 		List<GiftBean> result = null;
 		Session session = this.getSession();
 		Criteria criteria = session.createCriteria(GiftBean.class);
-		  if ("desc".equalsIgnoreCase(ascOrDesc)) {
-		   criteria.addOrder(Order.desc(column));
-		  } else {
-		   criteria.addOrder(Order.asc(column));
+		  if (giftSelectBean.getId() != null && giftSelectBean.getId().length() != 0) {
+				criteria.add(Restrictions.eq("id", giftSelectBean.getId()));
 		  }
-		  if (id != null) {
-				criteria.add(Restrictions.eq("id", id));
-		  }
-		  if (name != null) {
-		   criteria.add(Restrictions.like("name", "%name%"));
+		  
+		  String name = giftSelectBean.getName();
+		  if (name != null && giftSelectBean.getName().trim().length() != 0) {
+			  	criteria.add(Restrictions.like("name", "%"+ name + "%"));
 		  }
 
-		  criteria.add(Restrictions.between("price", loPrice, hiPrice));
-		  criteria.add(Restrictions.between("salesCount", loViewCount, hiViewCount));
-		  criteria.add(Restrictions.between("salesCount", loSaleCount, hiSaleCount));
-		  criteria.add(Restrictions.between("cost", loCost, hiCost));
-		  criteria.add(Restrictions.between("gpratio", loGPratio, hiGPratio));
-		  criteria.add(Restrictions.between("gpratio", loStock, hiStock));
-		  if(manufacturer != null) {
-			  criteria.add(Restrictions.like("manufacturer", "%manufacturer%"));
+		  criteria.add(Restrictions.between("price", giftSelectBean.getLowPrice(), giftSelectBean.getHighPrice()));
+		  criteria.add(Restrictions.between("cost", giftSelectBean.getLowCost(), giftSelectBean.getHighCost()));
+		  
+		  String manufacturer = giftSelectBean.getManufacturer();
+		  if(manufacturer != null && giftSelectBean.getManufacturer().trim().length() != 0) {
+			  	criteria.add(Restrictions.like("manufacturer", "%" + manufacturer + "%"));
 		  }
-		  if(categoryId != null) {
-			  criteria.add(Restrictions.idEq(categoryId));
+		  
+		  if(giftSelectBean.getStatus() == 0) {
+			  criteria.add(Restrictions.eq("status",0));
+		  }else if(giftSelectBean.getStatus() == 1) {
+			  criteria.add(Restrictions.eq("status",1));
 		  }
+
+		  
 		  result = criteria.list();
 		  return result;
 		 }	
+	
+	@Override
+	 public String getNewId() {
+	  Session session = this.getSession();
+	  SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd");//设置日期格式
+	  String newsNo = "g"+df.format(new Date()).substring(1, 8);
+	  System.out.println("newsNo = "+newsNo);
+	  String temp2= null;  
+	  String temp3= null;
+	  Query query = session.createSQLQuery("SELECT top 1 g.id from gift as g order by id desc");
+	  String no = (String) query.uniqueResult();
+	  String temp =no.substring(1, 8);
+	  System.out.println("temp = " +temp);
+	  if(temp.equalsIgnoreCase(df.format(new Date()).substring(1, 8))) {
+	   temp2=no.substring(no.length()-4);
+	   System.out.println("temp2 = " +temp2);
+	   int no2=Integer.parseInt(temp2);
+	   temp3 = newsNo+("000"+(no2+1)).substring(("000"+(no2+1)).length()-4);
+	   System.out.println("temp3 = " +temp3);
+	  }else {
+	   temp3 = newsNo+"0001";
+	   System.out.println("temp3 = " +temp3);
+	  }
+	  return temp3;
+	 }
 
 
 

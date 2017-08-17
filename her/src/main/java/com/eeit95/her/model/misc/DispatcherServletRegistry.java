@@ -15,7 +15,7 @@ public class DispatcherServletRegistry extends AbstractAnnotationConfigDispatche
 
 	@Override
 	protected String[] getServletMappings() {
-		return new String[] {"/member/*","/admin/*","/user/*"};
+		return new String[] {"/api/*"};
 		//有哪些controller要給DispatcherServlet管
 	}
 

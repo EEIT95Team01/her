@@ -47,8 +47,10 @@ public class AdminTagService {
 	public List<TagBean> select(TagSelectBean tagSelectBean) {
 		List<TagBean> result = null;
 		if (tagSelectBean.getId() != 0&& tagSelectBean.getId() !=0 ) {
+			System.out.println("拿到TagId了~~");
 			result = tag.selectFM(tagSelectBean);
 		} else {
+			System.out.println("沒拿到TagId了~~");
 			result = tag.selectFM(tagSelectBean);
 
 		}

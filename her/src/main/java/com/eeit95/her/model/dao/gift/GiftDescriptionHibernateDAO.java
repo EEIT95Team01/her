@@ -26,7 +26,7 @@ public class GiftDescriptionHibernateDAO  implements GiftDescriptionDAOInterface
 	
 	
 	private static final String delete = 
-			"delete from GiftDescriptionBean where giftId=? and orderNo=?";
+			"delete from GiftDescriptionBean where giftId=?";
 	private static final String selectById = "from GiftDescriptionBean where giftId = ?";
 	private static final String selectByNo = "from GiftDescriptionBean where orderNo = ?";
 //	private static final String selectAll = "from GiftDescriptionBean order by orderNo";
@@ -43,12 +43,11 @@ public class GiftDescriptionHibernateDAO  implements GiftDescriptionDAOInterface
 	}
 
 	@Override
-	public boolean delete(GiftBean giftId, int orderNo) {
+	public boolean delete(String giftId) {
 		Session session = this.getSession();
 		if(giftId != null){
 			Query query =session.createQuery(delete);
 			query.setParameter(0,giftId);
-			query.setParameter(1, orderNo);
 			int i = query.executeUpdate();
 			if(i > 0) {
 				System.out.println("刪除筆數:" + i);
@@ -59,7 +58,7 @@ public class GiftDescriptionHibernateDAO  implements GiftDescriptionDAOInterface
 	}
 
 	@Override
-	public List<GiftDescriptionBean> selectById(GiftBean giftId) {
+	public List<GiftDescriptionBean> selectById(String giftId) {
 		List<GiftDescriptionBean> result = null;
 		Session session = this.getSession();
 		Query query = session.createQuery(selectById);
