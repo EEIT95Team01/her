@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="home" class="org.springframework.web.servlet.view.InternalResourceView">
+		<property name="url" value="/front/home_page.jsp"></property>
+	</bean>
+	<!-- 後端  card -->
+	<bean id="card_insert" class="org.springframework.web.servlet.view.InternalResourceView">
+		<property name="url" value="/views/card.jsp"></property>
+	</bean>
+	
+	<bean id="cardselect" class="org.springframework.web.servlet.view.InternalResourceView">
+		<property name="url" value="/views/cardDisplay.jsp"></property>
+	</bean>
+       <!-- 前端 card_select-->
+	<bean id="cards_select" class="org.springframework.web.servlet.view.InternalResourceView">
+		<property name="url" value="/card/cardpage.jsp"></property>
+	</bean>
+	<!-- 	後端  分類目錄 -->
+	<bean id="cm_insert" class="org.springframework.web.servlet.view.InternalResourceView">
+		<property name="url" value="/views/categoryMain.jsp"></property>
+	</bean>
+	<!-- 後端  Tag -->
+	<bean id="tag_insert" class="org.springframework.web.servlet.view.InternalResourceView">
+		<property name="url" value="/views/tagAdmin.jsp"></property>
+	</bean>
+	<bean id="tag_select" class="org.springframework.web.servlet.view.InternalResourceView">
+		<property name="url" value="/views/tagDisplay.jsp"></property>
+	</bean>
+	
+	<!-- 	前端 字體 -->
+	<bean id="fonts_select"	class="org.springframework.web.servlet.view.InternalResourceView">
+		<property name="url" value="/font/fontpage.jsp"></property>
+	</bean>
+	<!-- 	前端 作者 -->
+	<bean id="writers_select"
+		class="org.springframework.web.servlet.view.InternalResourceView">
+		<property name="url" value="/admin/insertFont.jsp"></property>
+	</bean>
+<!-- 	<bean id="card_input" class="org.springframework.web.servlet.view.RedirectView"> -->
+<!-- 		<property name="contextRelative" value="true"></property> -->
+<!-- 		<property name="url" value="/view/ShowCard.jsp"></property> -->
+<!-- 	</bean> -->
+
+
+
+
+
+
+
+
+
+
+
+
+</beans>

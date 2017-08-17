@@ -1,0 +1,7 @@
+$(function() {
+	setCards()
+})
+
+function setCards() {
+
+}
