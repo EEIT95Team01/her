@@ -1,8 +1,6 @@
-<<<<<<< HEAD
-const baseUrl = 'http://localhost:8080/her/admin/api/tag?lowDiscount=0&highDiscount=1'
-=======
+
 const baseUrl = serverUrl + '/api/admin/tag'
->>>>>>> branch 'master' of https://github.com/EEIT95Team01/her.git
+
 
 $(function() {
   function split(val) {
