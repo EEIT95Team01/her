@@ -25,35 +25,7 @@
 			<div id='Logo'></div>
 		</div>
 		<div class='box500 flex_spacebetween chi_20'>
-<<<<<<< HEAD
-			<a href='${pageContext.request.contextPath}/views/home'>
-				<span class='chi_20 bgc_black'>HOME</span>
-			</a>
-			<a href='${pageContext.request.contextPath}/views/card'>
-				<span class='bgc_black'>CARD</span>
-			</a>
-			<a href='${pageContext.request.contextPath}/views/font'>
-				<span class='bgc_black'>FONT</span>
-			</a>
-			<a href='${pageContext.request.contextPath}/views/gift'>
-				<span class='bgc_black'>GIFT</span>
-			</a>
-			<a href='#'>
-				<span class='bgc_black'>ABOUT</span>
-			</a>
-		</div>
-		<div class='box200 flex_right'>
-			<a href='#'>
-				<span class='bgc_black'>管理員登入</span>
-			</a>
-		</div>
-		<div class='box200 flex_center'>
-			
-		</div>
-	</div>
-</div>
-<div class='block20'></div>
-=======
+
 			<a href='${pageContext.request.contextPath}/home'>
 				<span class='chi_20 bgc_black'>HOME</span>
 			</a>
@@ -81,4 +53,4 @@
 	</div>
 </div>
 <div class='block20'></div>
->>>>>>> branch 'master' of https://github.com/EEIT95Team01/her.git
+
