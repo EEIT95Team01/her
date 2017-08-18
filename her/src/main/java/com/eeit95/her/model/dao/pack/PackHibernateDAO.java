@@ -2,6 +2,7 @@ package com.eeit95.her.model.dao.pack;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Criteria;
@@ -32,7 +33,7 @@ public class PackHibernateDAO implements PackDAOInterface{
 	}
 	
 	
-	private String selectByMIdAndStatus = "from PackBean where id = ? and status = ?";
+	private String selectByMIdAndStatus = "from PackBean where memberId = ? and status = ?";
 
 	
 	@Override
@@ -57,8 +58,7 @@ public class PackHibernateDAO implements PackDAOInterface{
 		Session session = this.getSession();
 		if(bean != null){
 			PackBean result = session.get(PackBean.class, bean.getId());
-			if(result == null) {
-				
+			if(result == null) {	
 				session.save(bean);
 				return bean;
 			}
@@ -156,6 +156,31 @@ public class PackHibernateDAO implements PackDAOInterface{
 		result = criteria.list();
 		return result;
 	}
+	
+	@Override
+	 public String getNewId() {
+	  Session session = this.getSession();
+	  SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd");//设置日期格式
+	  String newNo = "p"+df.format(new Date()).substring(1, 8);
+	  System.out.println("newNo = "+newNo);
+	  String temp2= null;  
+	  String temp3= null;
+	  Query query = session.createSQLQuery("SELECT top 1 p.id from pack as p order by id desc");
+	  String no = (String) query.uniqueResult();
+	  String temp =no.substring(1, 8);
+	  System.out.println("temp = " +temp);
+	  if(temp.equalsIgnoreCase(df.format(new Date()).substring(1, 8))) {
+	   temp2=no.substring(no.length()-4);
+	   System.out.println("temp2 = " +temp2);
+	   int no2=Integer.parseInt(temp2);
+	   temp3 = newNo+("000"+(no2+1)).substring(("000"+(no2+1)).length()-4);
+	   System.out.println("temp3 = " +temp3);
+	  }else {
+	   temp3 = newNo+"0001";
+	   System.out.println("temp3 = " +temp3);
+	  }
+	  return temp3;
+	 }
 
 	public static void main(String[] args) {
 		ApplicationContext context = new AnnotationConfigApplicationContext(SpringJavaConfiguration.class);

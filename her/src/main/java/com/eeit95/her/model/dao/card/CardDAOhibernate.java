@@ -455,4 +455,22 @@ public class CardDAOhibernate implements CardDAOInterface {
 		return temp3;
 	}
 
+	@Override
+	public List<CardBean> selectTop3() {
+		Session session = this.getSession();
+		List<CardBean> list = null;
+		Query query =session.createSQLQuery("select top 3 * from card order by id desc");
+		list = query.list();
+		return list;
+	}
+
+	@Override
+	public List<CardBean> selectTop2() {
+		Session session = this.getSession();
+		List<CardBean> list = null;
+		Query query =session.createSQLQuery("select top 2 * from card order by viewCount desc");
+		list = query.list();
+		return list;
+	}
+
 }

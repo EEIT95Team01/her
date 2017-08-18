@@ -25,41 +25,6 @@
 			<div id='Logo'></div>
 		</div>
 		<div class='box500 flex_spacebetween chi_20'>
-<<<<<<< HEAD
-			<a href='${pageContext.request.contextPath}/views/home'>
-				<span class='chi_20 bgc_white'>HOME</span>
-			</a>
-			<a href='${pageContext.request.contextPath}/views/card'>
-				<span class='bgc_white'>CARD</span>
-			</a>
-			<a href='${pageContext.request.contextPath}/views/font'>
-				<span class='bgc_white'>FONT</span>
-			</a>
-			<a href='${pageContext.request.contextPath}/views/gift'>
-				<span class='bgc_white'>GIFT</span>
-			</a>
-			<a href='#'>
-				<span class='bgc_white'>ABOUT</span>
-			</a>
-		</div>
-		<div class='box200 flex_right'>
-			<a href='#'>
-				<span class='bgc_white'>登入</span>
-			</a>
-		</div>
-		<div class='box200 flex_center'>
-			<a href='#' 
-			   class='flex_center'>
-				<span class='bgc_white'>郵寄箱</span>
-				<img src='${pageContext.request.contextPath}/images/_for_views/_header/icon_mailbox.png' 
-					 width='40' 
-					 height='40'/>
-			</a>
-		</div>
-	</div>
-</div>
-<div class='block20'></div>
-=======
 			<a href='${pageContext.request.contextPath}/home'>
 				<span class='chi_20 bgc_white'>HOME</span>
 			</a>
@@ -95,4 +60,3 @@
 	</div>
 </div>
 <div class='block20'></div>
->>>>>>> branch 'master' of https://github.com/EEIT95Team01/her.git

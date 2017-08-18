@@ -1,6 +1,5 @@
 package com.eeit95.her.model.pack;
 
-
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -42,6 +41,20 @@ public class PackBean implements java.io.Serializable {
 	private String senderDistrict;		// 21
 	private String senderAddr;			// 22
 	private int status;					// 23
+	
+	
+	
+	@Override
+	public String toString() {
+		return "PackBean [id=" + id + ", name=" + name + ", memberId=" + memberId + ", cardId=" + cardId
+				+ ", cardPrice=" + cardPrice + ", fontId=" + fontId + ", fontPrice=" + fontPrice + ", giftSum="
+				+ giftSum + ", sum=" + sum + ", content=" + content + ", recipientId=" + recipientId
+				+ ", recipientName=" + recipientName + ", recipientPhone=" + recipientPhone + ", recipientCity="
+				+ recipientCity + ", recipientDistrict=" + recipientDistrict + ", recipientAddr=" + recipientAddr
+				+ ", dateMailed=" + dateMailed + ", senderName=" + senderName + ", senderPhone=" + senderPhone
+				+ ", senderCity=" + senderCity + ", senderDistrict=" + senderDistrict + ", senderAddr=" + senderAddr
+				+ ", status=" + status + "]";
+	}
 	public String getId() {
 		return id;
 	}
@@ -180,5 +193,6 @@ public class PackBean implements java.io.Serializable {
 	public void setStatus(int status) {
 		this.status = status;
 	}
+	
 	
 }

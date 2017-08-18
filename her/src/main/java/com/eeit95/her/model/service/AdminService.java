@@ -157,6 +157,12 @@ public class AdminService {
 		List<CardTagBean> result6 = null;
 		if (cardIUBean != null) {
 			System.out.println(" ID = " + cardIUBean.getCard().getId());
+			String id = cardIUBean.getCard().getId();
+			cardIUBean.getCard().setViewCount(card.selectById(id).getViewCount());
+			cardIUBean.getCard().setSalesCount(card.selectById(id).getSalesCount());
+			if(cardIUBean.getCard().getCover()==null) {
+				cardIUBean.getCard().setCover(card.selectById(id).getCover());
+			}
 			result1 = card.update(cardIUBean.getCard());
 			for (int i = 0; i < cardIUBean.getTagIds().length; i++) {
 				result2 = new CardTagBean();
@@ -178,6 +184,7 @@ public class AdminService {
 		}
 		return false;
 	}
+	
 	//---------------------------------------------------------------------------------------------------------
 	// advertisement
 
@@ -277,6 +284,12 @@ public class AdminService {
 			boolean result = false;
 			if (fontIUBean != null) {
 				FontBean fontBean = fontIUBean.getFont().get(0);
+				String id = fontBean.getId();
+				fontBean.setViewCount(font.selectById(id).getViewCount());
+				fontBean.setSalesCount(font.selectById(id).getSalesCount());
+				if(fontBean.getCover()==null) {
+					fontBean.setCover(card.selectById(id).getCover());
+				}
 				FontBean FResult = font.update(fontBean);
 				if (FResult != null) {
 					List<FontTagBean> fontTagBeans = fontTag.selectByFontId(FResult.getId());
@@ -397,21 +410,7 @@ public class AdminService {
 			return fontDescriptionBeans;
 		}
 
-		public static void main(String[] args) {
-			AdminService test = new AdminService();
-			FontBean bean = new FontBean();
-			bean.setId("f01701110001");
-			// bean.setName("sfsfgg");
-			// bean.setStatus(false);
-			// test.insert(bean);
-
-			List<FontBean> list = test.select(bean);
-			for (FontBean f : list) {
-				System.out.println(f.getId());
-				System.out.println(f.getName());
-				System.out.println(f.getPrice());
-			}
-		}
+		
 		/*--------------------------------------------------------------------------------------------------------*/	
 		
 		//Gift	
@@ -474,13 +473,19 @@ public class AdminService {
 			
 			if (giftIUBean != null) {
 				System.out.println(" ID = " + giftIUBean.getGift().getId());
-				
+				String id = giftIUBean.getGift().getId();
+				giftIUBean.getGift().setViewCount(gift.selectById(id).getViewCount());
+				giftIUBean.getGift().setSalesCount(gift.selectById(id).getSalesCount());
+				if(giftIUBean.getGift().getCover()==null) {
+					giftIUBean.getGift().setCover(gift.selectById(id).getCover());
+				}
 				GiftBean result1 = gift.update(giftIUBean.getGift());
 				
 				List<GiftTagBean> result3 = new ArrayList<GiftTagBean>();
 				
 				for (int i = 0; i < giftIUBean.getTagIds().length; i++) {
 					GiftTagBean result2 = new GiftTagBean();
+					
 					result2.setGiftId(giftIUBean.getGift().getId());
 					result2.setTagId(Integer.parseInt(giftIUBean.getTagIds()[i]));
 					System.out.println(result2.getTagId());

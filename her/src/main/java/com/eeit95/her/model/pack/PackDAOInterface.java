@@ -15,6 +15,7 @@ public interface PackDAOInterface {
 	public boolean deleteById(String id);
 	
 	public List<PackBean> selectAllFM(PackSelectBean packSelectBean);
-
+	
+	public String getNewId();
 	
 }

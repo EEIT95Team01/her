@@ -33,7 +33,10 @@ import com.eeit95.her.model.member.AdminUserBean;
 import com.eeit95.her.model.member.CollectionBean;
 import com.eeit95.her.model.member.MemberBean;
 import com.eeit95.her.model.member.RecipientBean;
+import com.eeit95.her.model.orderform.OrderformBean;
+import com.eeit95.her.model.orderform.OrderformPackBean;
 import com.eeit95.her.model.pack.PackBean;
+import com.eeit95.her.model.pack.PackGiftBean;
 import com.eeit95.her.model.pack.PackStatusBean;
 import com.eeit95.her.model.tag.TagBean;
 
@@ -73,7 +76,8 @@ public class SpringJavaConfiguration {
 				TagBean.class,AdvertisementBean.class,FontBean.class,FontDescriptionBean.class,
 				FontTagBean.class,WriterBean.class,CardBean.class,CategoryMainBean.class,CategoryBean.class,
 				GiftBean.class,GiftDescriptionBean.class,GiftTagBean.class,PackStatusBean.class,MemberBean.class,
-				RecipientBean.class,AdminUserBean.class,CollectionBean.class,PackBean.class);
+				RecipientBean.class,AdminUserBean.class,CollectionBean.class,PackBean.class,OrderformBean.class,
+			    OrderformPackBean.class,PackGiftBean.class);
 		
 		return builder.buildSessionFactory();
 		

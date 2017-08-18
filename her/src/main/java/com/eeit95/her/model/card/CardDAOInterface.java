@@ -20,4 +20,6 @@ public interface CardDAOInterface {
 	public List<CardBean> selectAllOrderBySales();
     public List<CardBean> selectAllOrderByPrice(String ascOrDesc);
     public List<CardBean> selectAllStatus(boolean tOrF);
+    public List <CardBean> selectTop3();
+    public List <CardBean> selectTop2();
 }
