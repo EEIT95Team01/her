@@ -15,6 +15,12 @@ import com.eeit95.her.model.dao.font.FontDAOHibernate;
 import com.eeit95.her.model.dao.tag.TagDAOhibernate;
 import com.eeit95.her.model.font.FontBean;
 import com.eeit95.her.model.font.FontDAOInterface;
+import com.eeit95.her.model.font.FontDescriptionBean;
+import com.eeit95.her.model.font.FontDescriptionDAOInterface;
+import com.eeit95.her.model.font.FontSBean;
+import com.eeit95.her.model.font.FontTagBean;
+import com.eeit95.her.model.font.FontTagDAOInterface;
+import com.eeit95.her.model.font.PriceRangeFontBean;
 import com.eeit95.her.model.misc.SpringJavaConfiguration;
 
 @Service
@@ -24,6 +30,11 @@ public class FontService {
 //	SessionFactory sessionFactory = (SessionFactory) context.getBean("sessionFactory");
 	@Autowired
 	private FontDAOInterface fontDAO;
+	@Autowired
+	private FontTagDAOInterface fontTag;
+	@Autowired
+	private FontDescriptionDAOInterface fontDesc;
+	
 	
 	public FontService() {
 		
@@ -39,6 +50,14 @@ public class FontService {
 //	 @Autowired
 //	 private FontDAOInterface fontDAO ;
 
+//	public List<FontBean> select(FontSBean fontSBean){
+//		
+//		
+//	}
+	
+	
+	
+	
 	public List<FontBean> selectOrderBy(String option) {
 
 //		try {
@@ -66,6 +85,23 @@ public class FontService {
 //			throw ex;
 //		}
 	}
+	
+	public String[] selectTagById(FontSBean fontSBean) {
+
+		List<FontTagBean> fontTagBeans = fontTag.selectByFontId(fontSBean.getId());
+		String[] tagArray = new String[fontTagBeans.size()];
+		for (FontTagBean bean : fontTagBeans) {
+			tagArray[fontTagBeans.indexOf(bean)] = String.valueOf(bean.getTagId());
+		}
+		return tagArray;
+	}
+	
+	public List<FontDescriptionBean> selectDescById(FontSBean fontSBean) {
+
+		List<FontDescriptionBean> fontDescriptionBeans = fontDesc.selectById(fontSBean.getId());
+		return fontDescriptionBeans;
+	}
+	
 
 	public static void main(String[] args) {
 //		FontService test = new FontService();

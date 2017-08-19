@@ -15,13 +15,27 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.eeit95.her.model.card.CardBean;
 import com.eeit95.her.model.card.CardDAOInterface;
+import com.eeit95.her.model.card.CardDescriptionBean;
+import com.eeit95.her.model.card.CardDescriptionDAOInterface;
+import com.eeit95.her.model.card.CardSBean;
 import com.eeit95.her.model.card.CardSelectBean;
+import com.eeit95.her.model.card.CardTagBean;
+import com.eeit95.her.model.card.CardTagInterface;
+import com.eeit95.her.model.font.FontDescriptionBean;
+import com.eeit95.her.model.font.FontDescriptionDAOInterface;
+import com.eeit95.her.model.font.FontSBean;
+import com.eeit95.her.model.font.FontTagBean;
+import com.eeit95.her.model.font.FontTagDAOInterface;
 import com.eeit95.her.model.misc.SpringJavaConfiguration;
 
 @Service
 public class CardService {
 	@Autowired
 	private CardDAOInterface cardDAO;
+	@Autowired
+	private CardTagInterface cardTag;
+	@Autowired
+	private CardDescriptionDAOInterface cardDesc;
 
 	/* 在  controller 做好資料的檢查，確保傳入的參數無誤 */
 	
@@ -112,6 +126,24 @@ public class CardService {
 //			throw ex;
 //		}
 	}
+	
+	
+	public String[] selectTagById(CardSBean cardSBean) {
+
+		List<CardTagBean> cardTagBeans = cardTag.selectBycardId(cardSBean.getId());
+		String[] tagArray = new String[cardTagBeans.size()];
+		for (CardTagBean bean : cardTagBeans) {
+			tagArray[cardTagBeans.indexOf(bean)] = String.valueOf(bean.getTagId());
+		}
+		return tagArray;
+	}
+	
+	public List<CardDescriptionBean> selectDescById(CardSBean cardSBean) {
+
+		List<CardDescriptionBean> cardDescriptionBeans = cardDesc.selectById(cardSBean.getId());
+		return cardDescriptionBeans;
+	}
+	
 	
 //	public static void main(String[] args) {
 //		//
