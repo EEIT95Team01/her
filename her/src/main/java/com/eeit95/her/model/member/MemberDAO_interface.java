@@ -13,4 +13,6 @@ public interface MemberDAO_interface {
      public String findIdFromEmail(String email);
      public List<MemberBean> getAll();
      public String getNewId();
+     public void getMemberPassword(String email);
+     public void sendEmail(String memberEmail, String newPassword);
 }

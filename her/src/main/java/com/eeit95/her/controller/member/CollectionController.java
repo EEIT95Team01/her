@@ -24,7 +24,7 @@ import com.eeit95.her.model.service.CollectionService;
 import sun.dc.pr.PRError;
 
 @Controller
-@RequestMapping("/api")
+@RequestMapping("/member")
 public class CollectionController {
 	@InitBinder
 	 public void initializePropertyEditor(WebDataBinder webDataBinder) {

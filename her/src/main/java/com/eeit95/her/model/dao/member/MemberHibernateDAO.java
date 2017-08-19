@@ -1,25 +1,26 @@
 package com.eeit95.her.model.dao.member;
 
-import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
+import java.util.Properties;
 
-import org.hibernate.HibernateException;
+import javax.mail.Authenticator;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.stereotype.Repository;
 
 import com.eeit95.her.model.member.MemberBean;
 import com.eeit95.her.model.member.MemberDAO_interface;
-import com.eeit95.her.model.member.RecipientBean;
-import com.eeit95.her.model.misc.SpringJavaConfiguration;
 
 @Repository
 public class MemberHibernateDAO implements MemberDAO_interface {
@@ -160,7 +161,72 @@ public class MemberHibernateDAO implements MemberDAO_interface {
 
 		return list;
 	}
+	
+	@Override
+	public void getMemberPassword(String email){
+		 List<MemberBean> list = this.getAll();
+		 for(MemberBean mb :list){
+			 if(mb.getEmail().equals(email.trim())){
+				 String newPassword = this.randomPassword();
+				 mb.setPassword(newPassword);
+				 this.update(mb);
+				 this.sendEmail(email, newPassword);
+			 }
+		 }
+	}
+	
+	//產生亂數密碼的方法
+	public String randomPassword(){
+		String newPassword = "";
+		int pwlength = 8;
+		String[] RegSNContent = { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F", "G",
+				"H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "a", "b",
+				"c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w",
+				"x", "y", "z" };
+		for (int i = 0; i < pwlength; i++) {
+			newPassword += RegSNContent[(int) (Math.random() * RegSNContent.length)];
+		}
+		return newPassword;
+	}
+	
 
+	@Override
+	public void sendEmail(String memberEmail, String newPassword){
+        String host = "smtp.gmail.com";
+		int port = 587;
+		final String username = "shouxiedewarmdo@gmail.com";
+		final String password = "eeit9501her";// your password
+
+		Properties props = new Properties();
+		props.put("mail.smtp.host", host);
+		props.put("mail.smtp.auth", "true");
+		props.put("mail.smtp.starttls.enable", "true");
+		props.put("mail.smtp.port", port);
+		javax.mail.Session session = javax.mail.Session.getInstance(props, new Authenticator() {
+			protected PasswordAuthentication getPasswordAuthentication() {
+				return new PasswordAuthentication(username, password);
+			}
+		});
+
+		try {
+
+			Message message = new MimeMessage(session);
+			message.setFrom(new InternetAddress("shouxiedewarmdo@gmail.com"));
+			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(memberEmail));
+			message.setSubject("HandWriting取回密碼通知信");
+			message.setText("親愛的  "+ memberEmail +" 用戶 \n\n 您的新密碼為  "+ newPassword);
+
+			Transport transport = session.getTransport("smtp");
+			transport.connect(host, port, username, password);
+
+			Transport.send(message);
+
+			System.out.println("寄送email結束");
+
+		} catch (MessagingException e) {
+			throw new RuntimeException(e);
+		}        
+}
 
 	
 	@Override

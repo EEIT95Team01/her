@@ -1,5 +1,7 @@
 package com.eeit95.her.controller.member;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.WebDataBinder;
@@ -17,7 +19,7 @@ import com.eeit95.her.model.service.AdminUserService;
 
 
 @Controller
-@RequestMapping("/api")
+@RequestMapping("/admin")
 @SessionAttributes(names = {"adminUser"})
 public class AdminUserController {
 	@InitBinder
@@ -30,8 +32,8 @@ public class AdminUserController {
 	@Autowired
 	private AdminUserService adminUserService;
 
-	@RequestMapping(value = "/adminUserLogin", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
-	public @ResponseBody MsgBean AdminUserLogin(@RequestBody AdminUserBean adminUserBean) {
+	@RequestMapping(value = "/login", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
+	public @ResponseBody MsgBean AdminUserLogin(@RequestBody AdminUserBean adminUserBean,HttpSession s) {
 		MsgBean msg = new MsgBean();
 
 		if (adminUserBean.getUsername().trim().length() == 0 || adminUserBean.getUsername() == null) {
@@ -47,6 +49,7 @@ public class AdminUserController {
 			if (ab != null) {
 				msg.setMessage("登入成功");
 				msg.setSuccess("true");
+				s.setAttribute("adminUser", ab);
 				return msg;
 			} else {
 				msg.setMessage("登入失敗，帳號密碼不符");

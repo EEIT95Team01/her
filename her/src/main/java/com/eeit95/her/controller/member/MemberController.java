@@ -3,8 +3,11 @@ package com.eeit95.her.controller.member;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -17,7 +20,7 @@ import com.eeit95.her.model.member.MsgBean;
 import com.eeit95.her.model.service.MemberService;
 
 @Controller
-@RequestMapping("/api")
+@RequestMapping("/member")
 @SessionAttributes(names = { "user_id", "user" })
 public class MemberController {
 
@@ -25,9 +28,9 @@ public class MemberController {
 	private MemberService memberService;
 	
 	
-	@RequestMapping(value = "/memberLogin", method = RequestMethod.POST,
+	@RequestMapping(value = "/login", method = RequestMethod.POST,
 			consumes = "application/json", produces = "application/json")
-	public @ResponseBody MsgBean MemberLogin(@RequestBody MemberBean memberBean) {
+	public @ResponseBody MsgBean MemberLogin(@RequestBody MemberBean memberBean , HttpSession s) {
 		MsgBean msg = new MsgBean();
 
 		if (memberBean.getEmail().trim().length() == 0 || memberBean.getEmail() == null) {
@@ -42,6 +45,7 @@ public class MemberController {
 		}else {
 			MemberBean mb = memberService.login(memberBean.getEmail(), memberBean.getPassword());
 			if (mb != null) {
+				s.setAttribute("user", mb);
 				msg.setMessage("登入成功");
 				msg.setSuccess("true");
 				return msg;
@@ -53,10 +57,16 @@ public class MemberController {
 		}
 	}
 	
-	
-	
-	
-	
+	@RequestMapping(value="/getPassword",method=RequestMethod.POST,consumes = "application/json", produces = "application/json" )
+	public @ResponseBody MsgBean password(@RequestBody MemberBean memberBean){
+		MsgBean msg = new MsgBean();
+
+		memberService.getPassword(memberBean.getEmail());
+		msg.setMessage("已寄出");
+		msg.setSuccess("true");
+
+		return msg;
+	}	
 	
 	@RequestMapping(value = "/member", method = RequestMethod.GET, produces = "application/json")
 	public @ResponseBody MsgBean MemberQuery(@RequestParam(value="id",required=false) String memberId) {

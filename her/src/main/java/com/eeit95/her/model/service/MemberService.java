@@ -26,7 +26,11 @@ public class MemberService {
 	public Session getSession() {
 		return sessionFactory.getCurrentSession();
 	}
-
+	
+	public void getPassword(String email){
+		MDAOI.getMemberPassword(email);
+	}
+	
 	public MemberBean login(String email, String password) {
 		String id = MDAOI.findIdFromEmail(email.trim());
 
@@ -81,7 +85,6 @@ public class MemberService {
 		String id =MDAOI.findIdFromEmail(email.trim());
 		return MDAOI.findByPrimaryKey(id);
 	}
-	
 
 	// 以下為測試程式===============================================
 	public static void main(String[] args) {
