@@ -22,7 +22,8 @@
 <script src='${pageContext.request.contextPath}/jQuery_UI/jquery-ui.min.js'></script>
 <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
 <script>
-const serverUrl = 'http://localhost:8080/her' // -> http://localhost:8080
+
+const serverUrl = 'http://localhost:8080/her' // -> http://localhost:8080/her
 const webapp = '/her' // -> /her
 
 const imgurUrl = 'https://api.imgur.com/3/image'

@@ -1,4 +1,5 @@
 <%@ page language='java' contentType='text/html; charset=UTF-8' pageEncoding='UTF-8'%>
+<%@ taglib prefix='c' uri="http://java.sun.com/jsp/jstl/core" %>
 
 <div class='block'>
 	<div class='block20 flex_right'>
@@ -25,16 +26,16 @@
 			<div id='Logo'></div>
 		</div>
 		<div class='box500 flex_spacebetween chi_20'>
-			<a href='${pageContext.request.contextPath}/home'>
+			<a href='${pageContext.request.contextPath}/home_page.jsp'>
 				<span class='chi_20 bgc_white'>HOME</span>
 			</a>
-			<a href='${pageContext.request.contextPath}/card'>
+			<a href='${pageContext.request.contextPath}/card_page.jsp'>
 				<span class='bgc_white'>CARD</span>
 			</a>
-			<a href='${pageContext.request.contextPath}/font'>
+			<a href='${pageContext.request.contextPath}/font_page.jsp'>
 				<span class='bgc_white'>FONT</span>
 			</a>
-			<a href='${pageContext.request.contextPath}/gift'>
+			<a href='${pageContext.request.contextPath}/gift_page.jsp'>
 				<span class='bgc_white'>GIFT</span>
 			</a>
 			<a href='#'>
@@ -42,11 +43,20 @@
 			</a>
 		</div>
 		<div class='box200 flex_right'>
-			<a href='#'>
-				<span
-					id='Login'
-					class='bgc_white'>登入</span>
-			</a>
+			<c:if test="${empty sessionScope.user}">
+				<a href='${pageContext.request.contextPath}/views/front/member_page/login.jsp'>
+					<span
+						id='Login'
+						class='bgc_white'>登入</span>
+				</a>
+			</c:if>
+			<c:if test="${!empty sessionScope.user}">
+				<a href='${pageContext.request.contextPath}/views/front/home_page.jsp'>
+					<span
+						id='Logout'
+						class='bgc_white'>登出</span>
+				</a>
+			</c:if>
 		</div>
 		<div class='box200 flex_center'>
 			<a href='#'

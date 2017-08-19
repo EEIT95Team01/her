@@ -8,7 +8,8 @@
 	<title>her - HOME</title>
 	<c:import url='/views/common/_resources.jsp' />
 
-
+	<script src='${pageContext.request.contextPath}/js/front_page_action.js' type='text/javascript'></script>
+	<script src='${pageContext.request.contextPath}/js/home_page.js' type='text/javascript'></script>
 </head>
 <body>
 	<div class='all chi_16_40 flex_block'>
@@ -24,10 +25,12 @@
 				<div class='rec_text_40'>人氣推薦｜RECOMMEND</div>
 			</div>
 			<div class='block400 flex_block'>
-				<div class='box700 flex_block'>
+				<div
+					id='js_recommend'
+					class='box700 flex_block'>
 <!-- top 2 viewed cards -->
-					<div class='square220'>
 <!-- card 1
+					<div class='square220'>
 						<img src='#'
 							 width='220'
 							 height='220'>
@@ -35,22 +38,10 @@
 								class='button_circle bgi_add_to_collection'></button>
 						<button type='button'
 								class='button_circle bgi_add_to_basket'></button>
--->
 					</div>
-					<div class='square220'>
+-->
 <!-- card 2
-						<img src='#'
-							 width='220'
-							 height='220'>
-						<button type='button'
-								class='button_circle bgi_add_to_collection'></button>
-						<button type='button'
-								class='button_circle bgi_add_to_basket'></button>
--->
-					</div>
-<!-- top 1 viewed font -->
 					<div class='square220'>
-<!-- font 1
 						<img src='#'
 							 width='220'
 							 height='220'>
@@ -58,59 +49,14 @@
 								class='button_circle bgi_add_to_collection'></button>
 						<button type='button'
 								class='button_circle bgi_add_to_basket'></button>
--->
 					</div>
-					<div class='block20'></div>
-<!-- top 4 viewed gifts -->
-					<div class='square160'>
-<!-- gift 1
-						<img src='#'
-							 width='160'
-							 height='160'>
-						<button type='button'
-								class='button_circle bgi_add_to_collection'></button>
-						<button type='button'
-								class='button_circle bgi_add_to_basket'></button>
+					...
 -->
-					</div>
-<!-- top 4 viewed gifts -->
-					<div class='square160'>
-<!-- gift 2
-						<img src='#'
-							 width='160'
-							 height='160'>
-						<button type='button'
-								class='button_circle bgi_add_to_collection'></button>
-						<button type='button'
-								class='button_circle bgi_add_to_basket'></button>
--->
-					</div>
-<!-- top 4 viewed gifts -->
-					<div class='square160'>
-<!-- gift 3
-						<img src='#'
-							 width='160'
-							 height='160'>
-						<button type='button'
-								class='button_circle bgi_add_to_collection'></button>
-						<button type='button'
-								class='button_circle bgi_add_to_basket'></button>
--->
-					</div>
-<!-- top 4 viewed gifts -->
-					<div class='square160'>
-<!-- gift 4
-						<img src='#'
-							 width='160'
-							 height='160'>
-						<button type='button'
-								class='button_circle bgi_add_to_collection'></button>
-						<button type='button'
-								class='button_circle bgi_add_to_basket'></button>
--->
-					</div>
+
 				</div>
-				<div class='box340'>
+				<div
+					id='js_ad'
+					class='box340'>
 
 				</div>
 			</div>
@@ -142,78 +88,23 @@
 			<div class='block40'>
 				<div class='rec_text_40'>新品推薦｜RECENT</div>
 			</div>
-			<div class='block412 flex_block'>
+			<div
+				id='js_new'
+				class='block412 flex_block'>
+			<!--
 				<div class='square196'>
-
+					<input
+						type='hidden'
+						value='' />
+					<img src='#'
+						 width='196'
+						 height='196'>
 					<button type='button'
 							class='button_circle bgi_add_to_collection'></button>
 					<button type='button'
 							class='button_circle bgi_add_to_basket'></button>
 				</div>
-				<div class='square196'>
-
-					<button type='button'
-							class='button_circle bgi_add_to_collection'></button>
-					<button type='button'
-							class='button_circle bgi_add_to_basket'></button>
-				</div>
-				<div class='square196'>
-
-					<button type='button'
-							class='button_circle bgi_add_to_collection'></button>
-					<button type='button'
-							class='button_circle bgi_add_to_basket'></button>
-				</div>
-				<div class='square196'>
-
-					<button type='button'
-							class='button_circle bgi_add_to_collection'></button>
-					<button type='button'
-							class='button_circle bgi_add_to_basket'></button>
-				</div>
-				<div class='square196'>
-
-					<button type='button'
-							class='button_circle bgi_add_to_collection'></button>
-					<button type='button'
-							class='button_circle bgi_add_to_basket'></button>
-				</div>
-				<div class='block20'></div>
-				<div class='square196'>
-
-					<button type='button'
-							class='button_circle bgi_add_to_collection'></button>
-					<button type='button'
-							class='button_circle bgi_add_to_basket'></button>
-				</div>
-				<div class='square196'>
-
-					<button type='button'
-							class='button_circle bgi_add_to_collection'></button>
-					<button type='button'
-							class='button_circle bgi_add_to_basket'></button>
-				</div>
-				<div class='square196'>
-
-					<button type='button'
-							class='button_circle bgi_add_to_collection'></button>
-					<button type='button'
-							class='button_circle bgi_add_to_basket'></button>
-				</div>
-				<div class='square196'>
-
-					<button type='button'
-							class='button_circle bgi_add_to_collection'></button>
-					<button type='button'
-							class='button_circle bgi_add_to_basket'></button>
-				</div>
-				<div class='square196'>
-
-					<button type='button'
-							class='button_circle bgi_add_to_collection'></button>
-					<button type='button'
-							class='button_circle bgi_add_to_basket'></button>
-				</div>
+			-->
 			</div>
 		</div>
 		<div class='block20'></div>

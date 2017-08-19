@@ -419,7 +419,7 @@ function setApiButtons() {
 
 								const x = cur.reduce((acc, cur, index) => {
 									if(index === 0 && (type === 'tag' || type === 'card' || type === 'writer' || type === 'font' || type === 'gift' || type === 'ad')) {
-										return (acc + '<td><button class="js_action">' + cur + '</button></td>')
+										return (acc + '<td><button class="js_action bgc_white chi_16_40">' + cur + '</button></td>')
 									} else
 										return (acc + '<td>' + cur + '</td>')
 								}
@@ -449,7 +449,7 @@ function setApiButtons() {
 							})
 							.then((response) => response.json())
 							.then((result) => {
-								window.location.replace(serverUrl + '/views/back/admin_page.jsp#' + type + '_manage_form')
+								window.location.replace(serverUrl + webapp + '/back/admin_page.jsp#' + type + '_manage_form')
 								const arrayOfData = result.data[0]
 								switch(type) {
 								case 'Tag':
@@ -471,7 +471,6 @@ function setApiButtons() {
 								}
 							})
 						})
-
 					} else {
 						alert('查無結果')
 					}
