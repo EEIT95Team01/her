@@ -10,7 +10,9 @@ import com.eeit95.her.model.tag.TagBean;
 @Entity
 @Table(name = "gift_tag")
 public class GiftTagBean implements java.io.Serializable{
-	
+
+
+
 	@Id
 	private String giftId;
 //	@ManyToOne //(雙向多對一/一對多)的多對一    //【原預設為 @ManyToOne(fetch=FetchType.LAZY)】--> 【是指原為lazy="true"之意】
@@ -28,7 +30,11 @@ public class GiftTagBean implements java.io.Serializable{
 		
 	}
 
-
+	
+	 @Override
+		public String toString() {
+			return ""+tagId;
+		}
 	public String getGiftId() {
 		return giftId;
 	}

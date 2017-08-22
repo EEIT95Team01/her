@@ -171,7 +171,10 @@ public class FontDAOHibernate implements FontDAOInterface {
 		if (name != null && name.length() != 0) {
 			criteria.add(Restrictions.like("name", "%" + name + "%"));
 		}
-		criteria.add(Restrictions.between("price", lowPrice, highPrice));
+		if(highPrice!=0) {
+			criteria.add(Restrictions.between("price", lowPrice, highPrice));
+		}
+		
 
 		if (writerId != 0) {
 			criteria.add(Restrictions.eq("writerId", writerId));
@@ -193,7 +196,7 @@ public class FontDAOHibernate implements FontDAOInterface {
 		}
 		if(status==1) {
 			criteria.add(Restrictions.eq("status", 1));
-		}else if(status==0) {
+		}else if(id ==null && status==0) { //要注意 請多注意 查ID
 			criteria.add(Restrictions.eq("status", 0));
 		}
 		list = criteria.list();

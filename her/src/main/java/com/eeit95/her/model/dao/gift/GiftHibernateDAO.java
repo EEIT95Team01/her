@@ -12,6 +12,7 @@ import com.eeit95.her.model.gift.GiftDAOInterface;
 
 import com.eeit95.her.model.gift.GiftSelectBean;
 import com.eeit95.her.model.misc.SpringJavaConfiguration;
+import com.eeit95.her.model.card.CardBean;
 import com.eeit95.her.model.card.CardSelectAllBean;
 import com.eeit95.her.model.category.CategoryBean;
 import com.eeit95.her.model.gift.GiftBean;
@@ -62,7 +63,6 @@ public class GiftHibernateDAO implements GiftDAOInterface{
 			result.setCost(bean.getCost());
 			result.setGpratio(bean.getGpratio());
 			result.setStock(bean.getStock());
-			result.setCategoryId(bean.getCategoryId());
 		}
 		return result;
 	}
@@ -182,35 +182,56 @@ public class GiftHibernateDAO implements GiftDAOInterface{
 	
 	@Override
 	 public List <GiftBean> selectAllFM(GiftSelectBean giftSelectBean){
-		List<GiftBean> result = null;
+		List<GiftBean> list = null;
+		System.out.println(giftSelectBean);
 		Session session = this.getSession();
 		Criteria criteria = session.createCriteria(GiftBean.class);
-		  if (giftSelectBean.getId() != null && giftSelectBean.getId().length() != 0) {
-				criteria.add(Restrictions.eq("id", giftSelectBean.getId()));
-		  }
-		  
-		  String name = giftSelectBean.getName();
-		  if (name != null && giftSelectBean.getName().trim().length() != 0) {
-			  	criteria.add(Restrictions.like("name", "%"+ name + "%"));
-		  }
 
-		  criteria.add(Restrictions.between("price", giftSelectBean.getLowPrice(), giftSelectBean.getHighPrice()));
-		  criteria.add(Restrictions.between("cost", giftSelectBean.getLowCost(), giftSelectBean.getHighCost()));
-		  
-		  String manufacturer = giftSelectBean.getManufacturer();
-		  if(manufacturer != null && giftSelectBean.getManufacturer().trim().length() != 0) {
-			  	criteria.add(Restrictions.like("manufacturer", "%" + manufacturer + "%"));
-		  }
-		  
-		  if(giftSelectBean.getStatus() == 0) {
-			  criteria.add(Restrictions.eq("status",0));
-		  }else if(giftSelectBean.getStatus() == 1) {
-			  criteria.add(Restrictions.eq("status",1));
-		  }
+		if (giftSelectBean.getId() != null &&giftSelectBean.getId().length()!=0) {
+			System.out.println("GET　ＣａｒｄＩＤ～～");
+			criteria.add(Restrictions.eq("id", giftSelectBean.getId()));
+		} else {
+			// criteria.add(Restrictions.eq("status", cardSelectBean.getStatus()));
+			String name = giftSelectBean.getName();
+			if (giftSelectBean.getName() != null && giftSelectBean.getName().trim().length() != 0) {
+				criteria.add(Restrictions.like("name", "%" + name + "%"));
+			}
+			criteria.add(Restrictions.between("price", giftSelectBean.getLowPrice(), giftSelectBean.getHighPrice()));
+			criteria.add(Restrictions.between("cost", giftSelectBean.getLowCost(), giftSelectBean.getHighCost()));
+		}
 
-		  
-		  result = criteria.list();
-		  return result;
+		list = criteria.list();
+		
+		
+//		List<GiftBean> result = null;
+//		Session session = this.getSession();
+//		Criteria criteria = session.createCriteria(GiftBean.class);
+//		  if (giftSelectBean.getId() != null && giftSelectBean.getId().length() != 0) {
+//				criteria.add(Restrictions.eq("id", giftSelectBean.getId()));
+//		  }else {
+//		  
+//		  String name = giftSelectBean.getName();
+//		  if (name != null && giftSelectBean.getName().trim().length() != 0) {
+//			  	criteria.add(Restrictions.like("name", "%"+ name + "%"));
+//		  }
+//
+//		  criteria.add(Restrictions.between("price", giftSelectBean.getLowPrice(), giftSelectBean.getHighPrice()));
+//		  criteria.add(Restrictions.between("cost", giftSelectBean.getLowCost(), giftSelectBean.getHighCost()));
+//		  
+//		  String manufacturer = giftSelectBean.getManufacturer();
+//		  if(manufacturer != null && giftSelectBean.getManufacturer().trim().length() != 0) {
+//			  	criteria.add(Restrictions.like("manufacturer", "%" + manufacturer + "%"));
+//		  }
+//		  
+//		  if(giftSelectBean.getStatus() == 0) {
+//			  criteria.add(Restrictions.eq("status",0));
+//		  }else if(giftSelectBean.getStatus() == 1) {
+//			  criteria.add(Restrictions.eq("status",1));
+//		  }}
+//
+//		  
+//		  result = criteria.list();
+		return list;
 		 }	
 	
 	@Override

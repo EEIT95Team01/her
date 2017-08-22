@@ -33,7 +33,7 @@ public class FontController {
 	private FontService fontService;
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
-
+	
 	@InitBinder
 	public void initializePropertyEditor(WebDataBinder webDataBinder) {
 		webDataBinder.registerCustomEditor(java.util.Date.class,
@@ -124,36 +124,9 @@ public class FontController {
 			msg.setSuccess("false");
 			msg.setData(fIUBean);
 		}
-
-		// if("T3".equalsIgnoreCase(cardSelectBean.getId())||"T2".equalsIgnoreCase(cardSelectBean.getId()))
-		// {
-		// List<Map<String,Object>> datals = jdbcTemplate.queryForList("select top 3 *
-		// from card order by id desc");
-		// List<CardBean> cblist = new ArrayList<CardBean>();
-		// CardSelectAllBean csAb = new CardSelectAllBean();
-		// for(Map<String,Object> bean:datals) {
-		// cardBean = new CardBean();
-		// System.out.println("ID = "+bean.get("id")+" cover = "+bean.get("cover"));
-		// System.out.println("name = "+bean.get("name")+" price = "+bean.get("price"));
-		// cardBean.setId((String) bean.get("id"));
-		// cardBean.setCover((String) bean.get("cover"));
-		// cardBean.setName( (String) bean.get("name"));
-		// cardBean.setPrice(((BigDecimal) bean.get("price")).doubleValue());
-		// cblist.add(cardBean);
-		// }
-		// csAb.setCard(cblist);
-		// msg.setData(csAb);
-
 		return msg;
 	}
 
-//	@RequestMapping(method = { RequestMethod.GET })
-//	public String method(Model model, @RequestParam(name = "orderSelect") String option) {
-//
-//		List<FontBean> beans = fontService.selectOrderBy(option);
-//		model.addAttribute("fontBeans", beans);
-//		model.addAttribute("orderSelect", option);
-//		return "fonts.select";
-//	}
+
 
 }

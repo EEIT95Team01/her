@@ -27,7 +27,7 @@ public class GiftBean implements java.io.Serializable{
 	private double cost;			//資料庫型態是money，要用double
 	private double gpratio;			//資料庫型態是money，要用double
 	private int stock;			//資料庫型態為smallint(-2^15~2^15-1),與short範圍相同。
-	private int categoryId;
+//	private int categoryId;
 //	@ManyToOne //(雙向多對一/一對多)的多對一    //【原預設為 @ManyToOne(fetch=FetchType.LAZY)】--> 【是指原為lazy="true"之意】
 //	@JoinColumn(name = "categoryId")  //指定用來join table的column
 //	private CategoryBean categoryId;	//FOREIGN KEY REFERENCES [category](id)
@@ -129,15 +129,15 @@ public class GiftBean implements java.io.Serializable{
 	}
 
 
-	public int getCategoryId() {
-		return categoryId;
-	}
-
-
-	public void setCategoryId(int categoryId) {
-		this.categoryId = categoryId;
-	}
-	
+//	public int getCategoryId() {
+//		return categoryId;
+//	}
+//
+//
+//	public void setCategoryId(int categoryId) {
+//		this.categoryId = categoryId;
+//	}
+//	
 
 //	public CategoryBean getCategoryId() {
 //		return categoryId;

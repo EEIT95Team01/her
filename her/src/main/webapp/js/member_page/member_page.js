@@ -85,17 +85,17 @@ function getMemberContent() {
 					   class='rec_lable'>地址</label>
 				<div id='Member_postal_code'
 					 name='sender_postal_code'
-					 class='rec_digit chi_16_20'>110</div>
-				<select id='Member_city'
-						name='sender_city'
-						class='rec_input113 border chi_16_30'>
-						<option value=''>臺北市</option>
-				</select>
-				<select id='Member_disrict'
-						name='sender_disrict'
-						class='rec_input113 border chi_16_30'>
-						<option value=''>中正區</option>
-				</select>
+					 class='rec_digit chi_16_20'></div>
+				<input
+					id='Member_city'
+					name='sender_city'
+					class='rec_input113 border chi_16_30'
+					value=${memberObject.city} />
+				<input
+					id='Member_disrict'
+					name='sender_disrict'
+					class='rec_input113 border chi_16_30'
+					value=${memberObject.district} />
 			</div>
 
 			<div class='block40 flex_left'>

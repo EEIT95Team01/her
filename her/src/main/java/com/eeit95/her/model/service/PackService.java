@@ -26,7 +26,29 @@ public class PackService {
 	@Autowired
 	private PackGiftDAOInterface packGift;
 	
-	
+	 //select(0821)
+
+	 public List<PackBean> selectByMIdnStatusnPId (PackBean bean) {
+	   if(bean.getMemberId() != null && bean.getStatus() != 0) {
+	    List<PackBean> results = 
+	      pack.selectByMIdAndStatus(bean.getMemberId(),bean.getStatus());
+	    return results;
+	   }
+	   return null;
+	 }
+	 
+	//selectByPid(0822)
+
+	 public PackBean selectById (PackBean bean) {
+	   if(bean.getId() != null) {
+	    PackBean result = 
+	      pack.selectById(bean.getId());
+	    return result;
+	   }
+	   return null;
+	 }
+	 
+	 
 	//insert(0816)
 	public PackBean insert(PackInsertBean pibean) {
 		String id = pack.getNewId();
@@ -37,7 +59,7 @@ public class PackService {
 			}else {
 				bean.setId(id);
 				bean.setMemberId(pibean.getMemberId());
-				bean.setName("包裹");
+				bean.setName("包裹"+id.substring(4,8)+id.substring(10));
 				bean.setCardId(pibean.getCard().getId());
 				bean.setCardPrice(pibean.getCard().getPrice());
 				bean.setFontId(pibean.getFont().getId());

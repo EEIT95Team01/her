@@ -23,8 +23,13 @@
 <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
 <script>
 
-const serverUrl = 'http://localhost:8080/her' // -> http://localhost:8080/her
-const webapp = '/her' // -> /her
+/* mac
+const serverUrl = 'http://localhost:3000'
+const webapp = '/views'
+*/
+
+const serverUrl = 'http://localhost:8080/her'
+const webapp = '/her'
 
 const imgurUrl = 'https://api.imgur.com/3/image'
 </script>

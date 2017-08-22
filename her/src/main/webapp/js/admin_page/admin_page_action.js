@@ -185,6 +185,7 @@ const productApis = {
 				manufacturer: $('#Card_manage_manufacturer').val(),
 				cost: $('#Card_manage_cost').val(),
 				stock: $('#Card_manage_stock').val(),
+				gpratio: ($('#Card_manage_price').val() - $('#Card_manage_cost').val()) / $('#Card_manage_price').val(),
 				maxWordCount: $('#Card_manage_maxWordCount').val(),
 				status: $('#Card_manage_status').val()
 			}),
@@ -196,7 +197,6 @@ const productApis = {
 					const text = cur.getElementsByTagName('textarea')[0].value
 
 					acc.push({
-						cardId: ('#Card_manage_id').val(),
 						orderNo: currentIndex + 1,
 						image: image,
 						text: text
@@ -217,6 +217,7 @@ const productApis = {
 				manufacturer: $('#Card_manage_manufacturer').val(),
 				cost: $('#Card_manage_cost').val(),
 				stock: $('#Card_manage_stock').val(),
+				gpratio: ($('#Card_manage_price').val() - $('#Card_manage_cost').val()) / $('#Card_manage_price').val(),
 				maxWordCount: $('#Card_manage_maxWordCount').val(),
 				status: $('#Card_manage_status').val()
 			}),
@@ -228,7 +229,7 @@ const productApis = {
 					const text = cur.getElementsByTagName('textarea')[0].value
 
 					acc.push({
-						cardId: ('#Card_manage_id').val(),
+						cardId: $('#Card_manage_id').val(),
 						orderNo: currentIndex + 1,
 						image: image,
 						text: text
@@ -256,7 +257,6 @@ const productApis = {
 					const text = cur.getElementsByTagName('textarea')[0].value
 
 					acc.push({
-						fontId: ('#Font_manage_id').val(),
 						orderNo: currentIndex + 1,
 						image: image,
 						text: text
@@ -285,7 +285,7 @@ const productApis = {
 					const text = cur.getElementsByTagName('textarea')[0].value
 
 					acc.push({
-						fontId: ('#Font_manage_id').val(),
+						fontId: $('#Font_manage_id').val(),
 						orderNo: currentIndex + 1,
 						image: image,
 						text: text
@@ -305,6 +305,7 @@ const productApis = {
 				manufacturer: $('#Gift_manage_manufacturer').val(),
 				cost: $('#Gift_manage_cost').val(),
 				stock: $('#Gift_manage_stock').val(),
+				gpratio: ($('#Gift_manage_price').val() - $('#Gift_manage_cost').val()) / $('#Gift_manage_price').val(),
 				status: $('#Gift_manage_status').val()
 			}),
 			tagIds: () => $('#Gift_manage_tagNames_id').val(),
@@ -315,7 +316,6 @@ const productApis = {
 					const text = cur.getElementsByTagName('textarea')[0].value
 
 					acc.push({
-						giftId: ('#Gift_manage_id').val(),
 						orderNo: currentIndex + 1,
 						image: image,
 						text: text
@@ -336,6 +336,7 @@ const productApis = {
 				manufacturer: $('#Gift_manage_manufacturer').val(),
 				cost: $('#Gift_manage_cost').val(),
 				stock: $('#Gift_manage_stock').val(),
+				gpratio: ($('#Gift_manage_price').val() - $('#Gift_manage_cost').val()) / $('#Gift_manage_price').val(),
 				status: $('#Gift_manage_status').val()
 			}),
 			tagIds: () => $('#Gift_manage_tagNames_id').val(),
@@ -346,7 +347,7 @@ const productApis = {
 					const text = cur.getElementsByTagName('textarea')[0].value
 
 					acc.push({
-						giftId: ('#Gift_manage_id').val(),
+						giftId: $('#Gift_manage_id').val(),
 						orderNo: currentIndex + 1,
 						image: image,
 						text: text
@@ -438,18 +439,19 @@ function setApiButtons() {
 						`
 
 						displayTable.append($(tableContent)).tablesort()
-						
+
 						$('.js_action').on('click', function() {
 							type = type[0].toUpperCase() + type.substring(1)
-							
+
 							console.log(baseUrl + 'id=' + $(this).text())
-							
+
 							fetch(baseUrl + 'id=' + $(this).text(), {
 								method: 'GET'
 							})
 							.then((response) => response.json())
 							.then((result) => {
-								window.location.replace(serverUrl + webapp + '/back/admin_page.jsp#' + type + '_manage_form')
+								$('a[href="#' + type + '_manage_form"]').click()
+								// window.location.replace(serverUrl + webapp + '/back/admin_page.jsp#' + type + '_manage_form')
 								const arrayOfData = result.data[0]
 								switch(type) {
 								case 'Tag':
@@ -457,16 +459,25 @@ function setApiButtons() {
 									$('#Tag_manage_name').val(arrayOfData.name)
 									$('#Tag_manage_discount').val(arrayOfData.discount)
 									break;
-								case 'Card':
 									/*
-									$('#Card_cover_preview').attr('src', arrayOrData.cover)
-									$('#Card_manage_id').attr('src', arrayOrData.id)
-									$('#Card_manage_name').attr('src', arrayOrData.name)
-									$('#Card_manage_price').attr('src', arrayOrData.price)
-									$('#Card_manage_manufacturer').attr('src', arrayOrData.manufacturer)
-									$('#Card_manage_cost').attr('src', arrayOrData.cost)
-									$('#Card_manage_stock').attr('src', arrayOrData.stock)
-									$('#Card_manage_maxWordCount').attr('src', arrayOrData.maxWordCount)
+								case 'Card':
+									$('#Card_cover_preview').attr('src', arrayOfData.cover)
+									$('#Card_manage_id').val(arrayOfData.id)
+									$('#Card_manage_name').val(arrayOfData.name)
+									$('#Card_manage_price').val(arrayOfData.price)
+									$('#Card_manage_manufacturer').val(arrayOfData.manufacturer)
+									$('#Card_manage_cost').val(arrayOfData.cost)
+									$('#Card_manage_stock').val(arrayOfData.stock)
+									$('#Card_manage_maxWordCount').val(arrayOfData.maxWordCount)
+
+									$('#Card_manage_status option[selected]').prop('selected', false)
+									$('#Card_manage_status option[value=' + arrayOfData.status +']').prop('selected', true)
+
+									// TagIds
+
+									handleDescriptions(type, arrayOfData)
+									$('#' + type + '_manage_form').children('.js_description_container').empty()
+									$('#' + type + '_manage_form').children('.js_description_container').append
 									*/
 								}
 							})
@@ -504,7 +515,15 @@ function setApiButtons() {
 					body: JSON.stringify(jsonData)
 				})
 				.then((response) => response.json())
-				.then((result) => console.log(result))
+				.then((result) => {
+					console.log(result)
+					if(result.success) {
+						let type = apiPath.substring(apiPath.lastIndexOf('/') + 1)
+						type = type[0].toUpperCase() + type.substring(1)
+						$('#' + type + '_manage_form').reset()
+						alert('')
+					}
+				})
 			}
 		})
 	})
@@ -541,7 +560,7 @@ function setImageApiButtons() {
 			.then((response) => response.json())
 	    .then((result) => result.data.link)
 	    .then((link) => {
-	    	jsonData['cover'] = link
+	    	jsonData['image'] = link
 
 		    const fetchUrl = serverUrl + apiPath
 				fetch(fetchUrl, {
@@ -614,7 +633,7 @@ function setProductApis() {
 						...jsonData[productKey]
 					},
 					tagIds: tagIds.split(', ').filter((x) => (x != "")),
-					description: descriptions.map((description, index) => {
+					descriptions: descriptions.map((description, index) => {
 						description.image = listOfImageUrl[index]
 						return description
 					}),

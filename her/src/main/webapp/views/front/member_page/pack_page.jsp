@@ -7,7 +7,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>her - PACK</title>
 	<c:import url='/views/common/_resources.jsp' />
-
+	<script src="${pageContext.request.contextPath}/js/member_page/loginOrNot.js" type="text/javascript"></script>
+	<script src='${pageContext.request.contextPath}/js/pack_page_action.js' type='text/javascript'></script>
 	<script src='${pageContext.request.contextPath}/js/pack_page.js' type='text/javascript'></script>
 
 </head>
@@ -15,9 +16,9 @@
 	<div class='all flex_block chi_16_40'>
 		<!--_____________ _header _____________-->
 		<c:import url='/views/common/_header.jsp' />
-		
+
 		<!--_____________ _package_basket _____________-->
-		<c:import url='/views/common/_package_basket.jsp' />
+		<c:import url='/views/front/member_page/pack_basket_page.jsp' />
 
 		<div class='block flex_block'>
 			<div class='box820 flex_block'>
@@ -48,13 +49,6 @@
 						<div class='block40 flex_left bgc_lightgray'>
 							<label for='Recipient_id'
 								   class='rec_lable'>收件人</label>
-							<select id='Recipient_id'
-									name='recipient_id'
-									class='rec_input163 border chi_16_30'>
-									<option value=''>請選擇</option>
-									<option value='r01701010001'>Huang</option>
-									<option value='r01702020001'>Liu</option>
-							</select>
 						</div>
 						<div class='block40 flex_left'>
 							<label for='Recipient_name'
@@ -75,17 +69,17 @@
 								   class='rec_lable'>地址</label>
 							<div id='Recipient_postal_code'
 								 name='recipient_postal_code'
-								 class='rec_digit chi_16_20'>110</div>
-							<select id='Recipient_city'
-									name='recipient_city'
-									class='rec_input113 border chi_16_30'>
-									<option value=''>臺北市</option>
-							</select>
-							<select id='Recipient_disrict'
-									name='recipient_disrict'
-									class='rec_input113 border chi_16_30'>
-									<option value=''>中正區</option>
-							</select>
+								 class='rec_digit chi_16_20'></div>
+							<input
+								id='Recipient_city'
+								name='recipient_city'
+								class='rec_input113 border chi_16_30'
+								placeholder='臺北市' />
+							<input
+								id='Recipient_disrict'
+								name='recipient_disrict'
+								class='rec_input113 border chi_16_30'
+								placeholder='中正區' />
 						</div>
 						<div class='block80 flex_left'>
 							<div class='rec_lable'></div>
@@ -109,13 +103,6 @@
 						<div class='block40 flex_left bgc_lightgray'>
 							<label for='Member_id'
 								   class='rec_lable'>寄件人</label>
-							<select id='Member_id'
-									name='member_id'
-									class='rec_input163 border chi_16_30'>
-									<option value=''>請選擇</option>
-									<option value='r01701010001'>Huang</option>
-									<option value='r01702020001'>Liu</option>
-							</select>
 						</div>
 						<div class='block40 flex_left'>
 							<label for='Sender_name'
@@ -136,23 +123,21 @@
 								   class='rec_lable'>地址</label>
 							<div id='Sender_postal_code'
 								 name='sender_postal_code'
-								 class='rec_digit chi_16_20'>110</div>
-							<select id='Sender_city'
-									name='sender_city'
-									class='rec_input113 border chi_16_30'>
-									<option value=''>臺北市</option>
-							</select>
-							<select id='Sender_disrict'
-									name='sender_disrict'
-									class='rec_input113 border chi_16_30'>
-									<option value=''>中正區</option>
-							</select>
+								 class='rec_digit chi_16_20'></div>
+							<input
+								id='Sender_city'
+								name='sender_city'
+								class='rec_input113 border chi_16_30' />
+							<input
+								id='Sender_disrict'
+								name='sender_disrict'
+								class='rec_input113 border chi_16_30' />
 						</div>
 						<div class='block80 flex_left'>
 							<div class='rec_lable'></div>
 							<textarea id='Sender_addr'
 									  name='sender_addr'
-									  class='rec_textarea286 border chi_16_30'>羅斯福路三段</textarea>
+									  class='rec_textarea286 border chi_16_30'></textarea>
 						</div>
 					</div>
 				</div>
@@ -164,7 +149,7 @@
 						<div class='rec_text_40'>剩餘145字</div>
 					</div>
 					<div class='block100'>
-						<textarea class='rec_textarea800 border chi_16_30'>生日快樂。</textarea>
+						<textarea id= "content" class='rec_textarea800 border chi_16_30'></textarea>
 					</div>
 				</div>
 			</div>
@@ -178,9 +163,8 @@
 								class='button_roundcorner chi_16_30 bgc_pink'>寄出包裹</button>
 					</div>
 				</div>
-					<div class='block40 flex_spacebetween'>
-						<div class='rec_text_40'>To 黃</div>
-						<div class='rec_text_40'>$ 219</div>
+					<div   id="status2">
+						
 					</div>
 				</div>
 				<div class='block20'></div>
@@ -188,9 +172,8 @@
 					<div class='block40'>
 						<div class='rec_text_40'>暫存箱</div>
 					</div>
-					<div class='block40 flex_spacebetween onblur'>
-						<div class='rec_text_40'>包裹3</div>
-						<div class='rec_text_40'>$ 333</div>
+					<div  id="status1">
+					
 					</div>
 				</div>
 			</div>

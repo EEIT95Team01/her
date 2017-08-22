@@ -7,7 +7,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>her - MEMBER</title>
 	<c:import url='/views/common/_resources.jsp' />
-
+	
+	<script src="${pageContext.request.contextPath}/js/member_page/loginOrNot.js" type="text/javascript"></script>
 	<script src='${pageContext.request.contextPath}/js/member_page/member_page.js' type='text/babel'></script>
 </head>
 <body>

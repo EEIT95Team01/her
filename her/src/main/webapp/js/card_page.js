@@ -1,7 +1,0 @@
-$(function() {
-	setCards()
-})
-
-function setCards() {
-
-}

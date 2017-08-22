@@ -1,15 +1,8 @@
 $(function() {
-	// print cookie
-	console.log('0 cookie: ' + document.cookie)
-
 	// get cookie
 	herObject = getHer()
-	console.log('1 cookie: ' + JSON.stringify(getHer()))
 
 	loadBasketCookie()
-
-	// change cookie -> attach this event when cards are loaded
-	$('.bgi_add_to_basket').on('click', addToBasket)
 })
 
 const baseUrl = serverUrl + '/api/user'
@@ -19,6 +12,7 @@ let herObject = {
 }
 
 function setHer(herObject, exdays) {
+	console.log('setHer(): ' + JSON.stringify(herObject))
     var d = new Date();
     d.setTime(d.getTime() + (exdays*24*60*60*1000));
     var expires = "expires="+ d.toUTCString();
@@ -26,6 +20,7 @@ function setHer(herObject, exdays) {
 }
 
 function getHer() {
+	console.log('getHer()')
     var decodedCookie = decodeURIComponent(document.cookie);
     var ca = decodedCookie.split(';');
     for(var i = 0; i <ca.length; i++) {
@@ -38,15 +33,14 @@ function getHer() {
         }
     }
     setHer(herObject)
-    console.log('setHer()')
-    return "";
+    return {};
 }
 
 
-function addToBasket() {
-	console.log('add to basket')
-	const id = $(this).siblings('.js_id').val()
+function addToBasket(id) {
 	const prefix = id.slice(0, 1).toLowerCase()
+
+	console.log('adToBasket('+ id +')' + ', prefix: '+ prefix)
 
 	let type
 	switch(prefix) {
@@ -67,11 +61,8 @@ function addToBasket() {
 		if(herObject.hasOwnProperty('gifts')) {
 			herObject.gifts[id] =  1
 		} else {
-			herObject = {
-				gifts: {
-					[id]: 1
-				}
-			}
+			herObject.gifts = {}
+			herObject.gifts[id] =  1
 		}
 	}
 
@@ -79,9 +70,7 @@ function addToBasket() {
 	loadBasketCookie()
 }
 
-function removeFromBasket() {
-	console.log('remove form basket')
-	const id = $(this).siblings('.js_id').val()
+function removeFromBasket(id) {
 	const prefix = id.slice(0, 1).toLowerCase()
 
 	let type
@@ -96,11 +85,14 @@ function removeFromBasket() {
 			type = 'gift'
 			break;
 	}
+	
+	console.log('removeFormBasket('+ id +')' + ', prefix: '+ prefix)
 
 	if(type === 'card' || type === 'font') {
 		delete herObject[type]
 	} else if(type === 'gift') {
 		delete herObject.gifts[id]
+		
 		if($.isEmptyObject(herObject.gifts)) {
 			delete herObject.gifts
 		}
@@ -110,6 +102,24 @@ function removeFromBasket() {
 	loadBasketCookie()
 }
 
+function adjustGiftQuantity(id, n) {
+	console.log('adjustQuantity: '+ id +', n:' + n)
+
+	if(n===1 && herObject.gifts[id] < 6) {
+		herObject.gifts[id] += 1
+	}
+
+	if(n===-1 && herObject.gifts[id] > 1) {
+		herObject.gifts[id] -= 1
+	}
+
+	console.log(herObject)
+
+	setHer(herObject, 7)
+	loadBasketCookie()
+}
+
+/*--------------------------------------------------*/
 function loadMemberId() {
 	let memberId = getHer('memberId')
 	if(memberId !== null && memberId.length !== 0) {
@@ -123,10 +133,11 @@ const cardBoxEmpty = `
 	<img
 		src='${webapp}/images/_for_views/_package_basket/cover_card.png'
 		width='220'
-		height='220' />
+		height='220' 
+		/>
 </div>
 <div class='block60 flex_center bgc_white'>
-	<a href='${webapp}/card'>
+	<a href='${webapp}/views/front/card_page.jsp'>
 		<img
 			src='${webapp}/images/_for_views/_package_basket/title_card.png'
 			width='40'
@@ -135,6 +146,48 @@ const cardBoxEmpty = `
 </div>
 <div class='block40 flex_spacebetween'>
 	<div class='rec_text_40 chi_20'>CARD</div>
+</div>
+`
+	
+
+
+const cardBoxContent = (data) => `
+	<div class='square220'>
+		<img src='${data.cover}'
+			 width='220'
+			 height='220' />
+		<button
+			type='button'
+			class='button_circle bgi_remove_from_basket'
+			onclick='removeFromBasket("${data.id}")'></button>
+	</div>
+	<div class='block60 flex_left bgc_white'>
+		<div class='rec_text_60 chi_16_30'>${data.name}</div>
+	</div>
+	<div class='block40 flex_right'>
+		<div
+			id='Card_price'
+			class='rec_text_40 chi_20'>$ ${data.price}</div>
+	</div>
+`
+
+const fontBoxContent = (data) => `
+<div class='square220'>
+	<img src='${data.cover}'
+		 width='220'
+		 height='220' />
+	<button
+		type='button'
+		class='button_circle bgi_remove_from_basket'
+		onclick='removeFromBasket("${data.id}")'></button>
+</div>
+<div class='block60 flex_left bgc_white'>
+	<div class='rec_text_60 chi_16_30'>${data.name}</div>
+</div>
+<div class='block40 flex_right'>
+	<div
+		id='Font_price'
+		class='rec_text_40 chi_20'>$ ${data.price}</div>
 </div>
 `
 
@@ -146,7 +199,7 @@ const fontBoxEmpty = `
 		height='220' />
 </div>
 <div class='block60 flex_center bgc_white'>
-	<a href='${webapp}/font'>
+	<a href='${webapp}/views/front/font_page.jsp'>
 		<img
 			src='${webapp}/images/_for_views/_package_basket/title_font.png'
 			width='40'
@@ -165,7 +218,7 @@ const giftBoxEmpty = `
 		 height='220' />
 </div>
 <div class='block60 flex_center bgc_white'>
-	<a href='${webapp}/gift'>
+	<a href='${webapp}/views/front/gift_page.jsp'>
 		<img src='${webapp}/images/_for_views/_package_basket/title_gift.png'
 			 width='40'
 			 height='40' />
@@ -176,7 +229,45 @@ const giftBoxEmpty = `
 </div>
 `
 
-const giftBoxContent = `
+const getGiftsDataHTML = (giftsData) => {
+	return giftsData.reduce((acc, gift) => acc += `
+		<div class='rec60 flex_left'>
+			<div class='square60'>
+				<img src='${gift.cover}'
+					 width='60'
+					 height='60' />
+				<button
+					type='button'
+					class='button_circle bgi_remove_from_basket'
+					onclick='removeFromBasket("${gift.id}")'></button>
+			</div>
+			<div class='box220'>
+				<div class='rec_text_60 chi_16_30'>${gift.name}</div>
+			</div>
+			<div class='box90 flex_center'>
+				<div class='rec_text_40'>$ ${gift.price}</div>
+			</div>
+			<div class='box90 flex_center'>
+				<button
+					type='button'
+					class='square20 border bgi_minus'
+					onclick='adjustGiftQuantity("${gift.id}", -1)'></button>
+				<input class='rec_digit border chi_16_20 bgc_white'
+					   value='${gift.quantity}'
+					   disabled />
+				<button
+					type='button'
+					class='square20 border bgi_plus'
+					onclick='adjustGiftQuantity("${gift.id}", 1)'></button>
+			</div>
+			<div class='box90 flex_center'>
+				<div class='rec_text_40'>$ ${gift.price * gift.quantity}</div>
+			</div>
+		</div>
+	`, '')
+}
+
+const giftBoxContent = (giftsData) => `
 <div class='block280'>
 	<div class='block40 flex_left bgc_lightgray'>
 		<div class='box280 text_align'>商品名稱</div>
@@ -186,87 +277,118 @@ const giftBoxContent = `
 	</div>
 	<div class='block240 flex_block overflow_y bgc_white'>
 
-		<!-- A gift -->
-		<div class='rec60 flex_left'>
-			<div class='square60'>
-				<img src=''
-					 width='60'
-					 height='60' />
-				<input
-					type='hidden'
-					class='js_id'
-					value='g00000000000' />
-				<button type='button'
-						class='button_circle bgi_remove_from_basket'></button>
-			</div>
-			<div class='box220'>
-				<div class='rec_text_60 chi_16_30'>一二三</div>
-			</div>
-			<div class='box90 flex_center'>
-				<div class='rec_text_40'>$ 123</div>
-			</div>
-			<div class='box90 flex_center'>
-				<button type='button'
-						class='square20 border bgi_minus'></button>
-				<input class='rec_digit border chi_16_20 bgc_white'
-					   value='1'
-					   disabled />
-				<button type='button'
-						class='square20 border bgi_plus'></button>
-			</div>
-			<div class='box90 flex_center'>
-				<div class='rec_text_40'>$ 123</div>
-			</div>
-		</div>
-
+		${getGiftsDataHTML(giftsData)}
 
 	</div>
 </div>
 <div class='block40 flex_spacebetween'>
 	<div class='rec_text_40 chi_20'>GIFT</div>
-	<div class='rec_text_40 chi_20'>$ </div>
+	<div
+		id='Gifts_sum'
+		class='rec_text_40 chi_20'>$ ${calculateGiftsSum(giftsData)}</div>
 </div>
 `
+
+function calculateGiftsSum(giftsData) {
+	return giftsData.reduce((acc, gift) => {
+		acc += gift.price * gift.quantity
+		return acc
+	}, 0)
+}
+
+function renderBasketCardBoxView(cardData) {
+	const basket_card_box = $('#Basket_card_box')
+
+	basket_card_box.empty()
+	basket_card_box.append(cardBoxContent(cardData))
+}
+
+function renderBasketFontBoxView(fontData) {
+	const basket_font_box = $('#Basket_font_box')
+
+	basket_font_box.empty()
+	basket_font_box.append(fontBoxContent(fontData))
+}
+
+function renderBasketGiftBoxView(giftsData) {
+	const basket_gift_box = $('#Basket_gift_box')
+
+	basket_gift_box.empty()
+	basket_gift_box.append(giftBoxContent(giftsData))
+}
 
 function loadBasketCookie() {
 	const basket_card_box = $('#Basket_card_box')
 	const basket_font_box = $('#Basket_font_box')
 	const basket_gift_box = $('#Basket_gift_box')
+	
+	console.log('loadBasketCookie()')
 
 	if(herObject.hasOwnProperty('card')) {
 		const cardId = herObject.card
+		
+		console.log('has card: ' + cardId)
 
-		getProduct(cardId)
+		getProductDetail(cardId)
+		.then((result) => {
+			const cardData = result.data.card[0]
+			renderBasketCardBoxView(cardData)
+		})
+
 	} else {
 		basket_card_box.html(cardBoxEmpty)
 	}
 
 	if(herObject.hasOwnProperty('font')) {
 		const fontId = herObject.font
+		
+		console.log('has font: ' + fontId)
 
-		getProduct(fontId)
+		getProductDetail(fontId)
+		.then((result) => {
+			const fontData = result.data.font[0]
+			renderBasketFontBoxView(fontData)
+		})
+
 	} else {
 		basket_font_box.html(fontBoxEmpty)
 	}
 
 	if(herObject.hasOwnProperty('gifts')) {
 		const gifts = herObject.gifts
-		console.log('gifts: ' + JSON.stringify(gifts))
+		const giftsLength = Object.keys(gifts).length
+		
+		console.log('has gifts: ' + JSON.stringify(gifts))
+		
+		let giftsData = []
+		
+		Object.keys(gifts).map((giftId, index) => {
+			getProductDetail(giftId)
+			.then((result) => {
+				return giftData = {
+					quantity: gifts[giftId],
+					...result.data.gift[0]
+				}		
+			})
+			.then((giftData) => {
+				console.log(giftId + ': ' + JSON.stringify(giftData))
+				giftsData.push(giftData)
 
-		Object.keys(gifts).reduce((acc, giftId) => {
-			getProduct(giftId)
-		}, '')
-
-		basket_gift_box.html(giftBoxContent)
-
+				renderBasketGiftBoxView(giftsData)
+				
+			})
+		})
 	} else {
 		basket_gift_box.html(giftBoxEmpty)
 	}
-
-	$('.bgi_remove_from_basket').on('click', removeFromBasket)
 }
 
-function getProduct(id) {
+function viewSingleProduct(id){
+	window.open(webapp + '/views/front/product_page.jsp#' + id, '_self')
+}
+
+
+function getProductDetail(id) {
 	const prefix = id.slice(0, 1).toLowerCase()
 	let type
 
@@ -282,12 +404,88 @@ function getProduct(id) {
 			break;
 	}
 
-	let fetchUrl = baseUrl + '/' + type + '/' + id
+	let fetchUrl = baseUrl + '/' + type + '?id=' + id
 	console.log(fetchUrl)
-	/*
-	return fetch(baseUrl + '/'+ id, {
+
+	return fetch(fetchUrl, {
 		method: 'GET'
 	})
 	.then((response) => (response.json()))
-	*/
+}
+
+function insertPack() {
+	const memberId = getCookie("memberId")
+
+	if(memberId === "") {
+		console.log('not login')
+		window.open(webapp + '/views/front/member_page/login.jsp', '_self')
+	}
+	
+	const {
+		card = "",
+		font = "",
+		gifts = {}
+	} = herObject
+	
+	const requestBodyContent = {
+		memberId: memberId
+	}
+	
+	let cardPrice = 0
+	if($('#Card_price').length !== 0) {
+		cardPrice = parseInt($('#Card_price').text().substring(2))
+		requestBodyContent.card = {
+			id: card,
+			price: cardPrice
+		}
+	} else {
+		requestBodyContent.card = {}
+	}
+	
+	let fontPrice = 0
+	if($('#Font_price').length !== 0) {
+		fontPrice = parseInt($('#Font_price').text().substring(2))
+		requestBodyContent.font = {
+			id: font,
+			price: fontPrice
+		}
+	} else {
+		requestBodyContent.font = {}
+	}
+	
+	let giftsSum = 0
+	if($('#Gifts_sum').length !== 0) {
+		giftsSum = parseInt($('#Gifts_sum').text().substring(2))
+		requestBodyContent.giftSum = giftsSum
+	}
+	
+	requestBodyContent.gift = 
+		Object.keys(gifts).reduce((acc, cur) => {
+			acc.push({
+				giftId: cur,
+				giftQuantity: gifts[cur]
+			})
+			return acc
+		}, [])
+		
+	requestBodyContent.sum = cardPrice + fontPrice + giftsSum
+
+	const fetchUrl = serverUrl + '/api/user/pack'
+
+	if(herObject !== {}) {
+		console.log(requestBodyContent)
+
+		fetch(fetchUrl, {
+			method: 'POST',
+			headers: {
+						'Content-Type': 'application/json',
+					},
+			body: JSON.stringify(requestBodyContent)
+		})
+		.then(() => {
+			herObject = {}
+			setHer(herObject, 7)
+			loadBasketCookie()
+		})
+	}
 }

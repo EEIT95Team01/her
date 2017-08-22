@@ -99,7 +99,7 @@ public class AdminService {
 			if(!list.isEmpty()) {
 			System.out.println("進入Select Service-2");
 			List<CardTagBean> tagBeans = cardTag.selectBycardId(cardSelectBean.getId());
-//			 System.out.println(tagBeans.get(0));
+			 System.out.println("tagBeans.get(0) = "+tagBeans.get(0));
 			 String[] tagIds = new String[tagBeans.size()];
 			for(CardTagBean bean1:tagBeans ) {
 				tagIds[tagBeans.indexOf(bean1)] = bean1.toString();
@@ -524,7 +524,7 @@ public class AdminService {
 						
 					System.out.println("進入Select Service-2");
 					List<GiftTagBean> tagBeans = giftTag.selectById(giftSelectBean.getId());
-					System.out.println(tagBeans.get(1));
+					System.out.println(tagBeans.get(0));
 					 
 					String[] tagIds = new String[tagBeans.size()];
 					for(GiftTagBean bean1 : tagBeans) {

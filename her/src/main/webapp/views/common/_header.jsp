@@ -26,16 +26,16 @@
 			<div id='Logo'></div>
 		</div>
 		<div class='box500 flex_spacebetween chi_20'>
-			<a href='${pageContext.request.contextPath}/home_page.jsp'>
+			<a href='${pageContext.request.contextPath}/views/front/home_page.jsp'>
 				<span class='chi_20 bgc_white'>HOME</span>
 			</a>
-			<a href='${pageContext.request.contextPath}/card_page.jsp'>
+			<a href='${pageContext.request.contextPath}/views/front/card_page.jsp'>
 				<span class='bgc_white'>CARD</span>
 			</a>
-			<a href='${pageContext.request.contextPath}/font_page.jsp'>
+			<a href='${pageContext.request.contextPath}/views/front/font_page.jsp'>
 				<span class='bgc_white'>FONT</span>
 			</a>
-			<a href='${pageContext.request.contextPath}/gift_page.jsp'>
+			<a href='${pageContext.request.contextPath}/views/front/gift_page.jsp'>
 				<span class='bgc_white'>GIFT</span>
 			</a>
 			<a href='#'>
@@ -43,29 +43,26 @@
 			</a>
 		</div>
 		<div class='box200 flex_right'>
-			<c:if test="${empty sessionScope.user}">
 				<a href='${pageContext.request.contextPath}/views/front/member_page/login.jsp'>
 					<span
 						id='Login'
-						class='bgc_white'>登入</span>
+						class='bgc_white'>登入 </span>
 				</a>
-			</c:if>
-			<c:if test="${!empty sessionScope.user}">
-				<a href='${pageContext.request.contextPath}/views/front/home_page.jsp'>
-					<span
+					<button
 						id='Logout'
-						class='bgc_white'>登出</span>
-				</a>
-			</c:if>
+						class='bgc_white chi_16_40'
+						style='display:none'>登出</button>
 		</div>
 		<div class='box200 flex_center'>
-			<a href='#'
-			   class='flex_center'>
+			<button 
+			   id = "mailbox"
+			   class='flex_center chi_16_40 bgc_white'
+			   onclick = "findMemberId('pack')">
 				<span class='bgc_white'>郵寄箱</span>
 				<img src='${pageContext.request.contextPath}/images/_for_views/_header/icon_mailbox.png'
 					 width='40'
 					 height='40'/>
-			</a>
+			</button>
 		</div>
 	</div>
 </div>

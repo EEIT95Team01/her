@@ -83,7 +83,7 @@ public class AdvertisementDAOHibernate implements AdvertisementDAOInterface {
 		if (id != 0) {
 			criteria.add(Restrictions.ge("id", id));
 		}
-		if (!name.isEmpty()) {
+		if (name!=null) {
 			criteria.add(Restrictions.ge("name", name));
 		}
 		try {

@@ -426,6 +426,7 @@ public class AdminController {
 		public @ResponseBody MsgSelectGiftBean giftselect(GiftSelectBean giftSelectBean) {
 			System.out.println("giftSelectBean = " + giftSelectBean.toString());
 			MsgSelectGiftBean msg = new MsgSelectGiftBean();
+			System.out.println(giftSelectBean.toString());
 			msg.setMessage("success");
 			msg.setSuccess("true");
 			msg.setData(AS.selectGift(giftSelectBean));

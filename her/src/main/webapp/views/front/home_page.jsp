@@ -8,6 +8,7 @@
 	<title>her - HOME</title>
 	<c:import url='/views/common/_resources.jsp' />
 
+	<script src="${pageContext.request.contextPath}/js/member_page/loginOrNot.js" type="text/javascript"></script>
 	<script src='${pageContext.request.contextPath}/js/front_page_action.js' type='text/javascript'></script>
 	<script src='${pageContext.request.contextPath}/js/home_page.js' type='text/javascript'></script>
 </head>
@@ -27,7 +28,7 @@
 			<div class='block400 flex_block'>
 				<div
 					id='js_recommend'
-					class='box700 flex_block'>
+					class='box700 flex_xxx'>
 <!-- top 2 viewed cards -->
 <!-- card 1
 					<div class='square220'>
@@ -90,7 +91,7 @@
 			</div>
 			<div
 				id='js_new'
-				class='block412 flex_block'>
+				class='block412 flex_xxx'>
 			<!--
 				<div class='square196'>
 					<input

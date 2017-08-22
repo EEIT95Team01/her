@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.eeit95.her.model.advertisement.AdvertisementBean;
+import com.eeit95.her.model.advertisement.MsgSelectAdvertisementBean;
 import com.eeit95.her.model.card.CardBean;
 import com.eeit95.her.model.card.CardDescriptionBean;
 import com.eeit95.her.model.card.CardIUBean;
@@ -39,20 +41,19 @@ import com.eeit95.her.model.misc.PrimitiveNumberEditor;
 import com.eeit95.her.model.service.AdminService;
 import com.eeit95.her.model.service.CardService;
 import com.eeit95.her.model.service.FontService;
+import com.eeit95.her.model.service.FrontService;
 import com.eeit95.her.model.service.FrontTopService;
 
 @Controller
 @RequestMapping("/front")
 public class FrontController {
-	@Autowired
-	private CardService cardService;
+	
 	@Autowired
 	private AdminService AS;
 	@Autowired
-	private FrontTopService FTS;
-	@Autowired
 	private JdbcTemplate jdbcTemplate;
-
+	@Autowired
+	private FrontService frontService;
 
 	@InitBinder
 	public void initializePropertyEditor(WebDataBinder webDataBinder) {
@@ -244,6 +245,17 @@ public class FrontController {
 			msg.setSuccess("false");
 		}
 		return msg;
+	}
+	@RequestMapping(value = "/ad", method = RequestMethod.GET, produces = "application/json") //
+	public @ResponseBody MsgSelectAdvertisementBean select() {
+		MsgSelectAdvertisementBean msgSelectAdvertisementBean = new MsgSelectAdvertisementBean();
+		List<AdvertisementBean> result = frontService.select();
+
+		msgSelectAdvertisementBean.setMessage("success");
+		msgSelectAdvertisementBean.setSuccess("true");
+		msgSelectAdvertisementBean.setData(result);
+
+		return msgSelectAdvertisementBean;
 	}
 	
 }

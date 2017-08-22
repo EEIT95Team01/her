@@ -11,6 +11,8 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.stereotype.Service;
 
+import com.eeit95.her.model.advertisement.AdvertisementBean;
+import com.eeit95.her.model.advertisement.AdvertisementDAOInterface;
 import com.eeit95.her.model.dao.font.FontDAOHibernate;
 import com.eeit95.her.model.dao.tag.TagDAOhibernate;
 import com.eeit95.her.model.font.FontBean;
@@ -56,8 +58,8 @@ public class FontService {
 //	}
 	
 	
-	
-	
+
+
 	public List<FontBean> selectOrderBy(String option) {
 
 //		try {

@@ -1,6 +1,8 @@
 package com.eeit95.her.controller.front;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.eeit95.her.model.card.MsgBean;
 import com.eeit95.her.model.misc.PrimitiveNumberEditor;
 import com.eeit95.her.model.orderform.OrderformBean;
+import com.eeit95.her.model.pack.MsgSelectPackBean;
 import com.eeit95.her.model.pack.PackBean;
 import com.eeit95.her.model.pack.PackInsertBean;
 import com.eeit95.her.model.service.PackService;
@@ -40,7 +43,45 @@ public class PackController {
 
 	
 	
-	
+	//Pack
+	 //selectByMidAndStatus (0822)
+	 @RequestMapping(value = "/pack", method = RequestMethod.GET, produces = "application/json")
+	 public @ResponseBody MsgSelectPackBean selectMidAndStatus(PackBean bean) {
+	  MsgSelectPackBean msg = new MsgSelectPackBean();
+	  List<PackBean> result = PS.selectByMIdnStatusnPId(bean);
+	  if(result != null) {
+	   msg.setMessage("success");
+	   msg.setSuccess("true");
+	   msg.setData(result);
+	   System.out.println("PackController - select");
+	  } else {
+	   msg.setMessage("查無訂單");
+	   msg.setSuccess("false");
+	  }
+	  return msg;
+	 }
+	 
+	//selectByPid (0822)
+	 @RequestMapping(value = "/packId", method = RequestMethod.GET, produces = "application/json")
+	 public @ResponseBody MsgSelectPackBean selectId(PackBean bean) {
+	  MsgSelectPackBean msg = new MsgSelectPackBean();
+	  PackBean result = PS.selectById(bean);
+	  List<PackBean> list= new ArrayList<PackBean>();
+	  list.add(result);
+	  if(result != null) {
+	   msg.setMessage("success");
+	   msg.setSuccess("true");
+	   msg.setData(list);
+	   System.out.println("PackController - select");
+	  } else {
+	   msg.setMessage("查無訂單");
+	   msg.setSuccess("false");
+	  }
+	  return msg;
+	 }
+	 
+	 
+	 
 	//Pack
 	//新增 - insert (POST-0816 TEST OK)
 	@RequestMapping(value = "/pack", method = RequestMethod.POST, 

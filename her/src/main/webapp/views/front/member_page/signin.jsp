@@ -8,6 +8,8 @@
 	<title>her - SIGN IN</title>
 	<c:import url='/views/common/_resources.jsp' />
 	
+	<script src="${pageContext.request.contextPath}/js/member_page/memberInsert.js" type="text/javascript" ></script>
+	
 </head>
 <body style='width:100%; height:100vh' class='flex_center'>
 	<div class='rec_login340 chi_16_40'>

@@ -8,6 +8,7 @@
 	<title>her - LOG IN</title>
 	<c:import url='/views/common/_resources.jsp' />
 	
+	<script src="${pageContext.request.contextPath}/js/member_page/loginOrNot.js" type="text/javascript"></script>
 	<script src="${pageContext.request.contextPath}/js/front_page_action.js" type="text/javascript"></script>
 	<script src="${pageContext.request.contextPath}/js/member_page/loginAndSignin.js" type="text/javascript"></script>
 	
@@ -16,11 +17,14 @@
 	<div class='rec_login340 chi_16_40'>
 		<div class='block40 flex_spacebetween'>
 			<div class='rec_text40'>會員登入</div>
+			
 			<div class='rec40'>
 				<button
 					id='Member_forget_button'
 					type='button'
-					class='button_roundcorner chi_16_30 bgc_gray'>忘記密碼</button>
+					class='button_roundcorner chi_16_30 bgc_gray'>忘記密碼</button>	
+				</div>
+				<div class='rec40'>
 				<button
 					id='Member_login_button'
 					type='button'
@@ -35,8 +39,8 @@
 				id='Email'
 				name='email'
 				class='rec_input163 border chi_16_30' />
-		</div>
-		<div class='block40 flex_left'>
+				</div>
+				<div class='block40 flex_left'>
 			<label for='Password'
 				   class='rec_lable'>密碼</label>
 			<input

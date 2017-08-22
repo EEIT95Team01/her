@@ -163,7 +163,7 @@ public class MemberHibernateDAO implements MemberDAO_interface {
 	}
 	
 	@Override
-	public void getMemberPassword(String email){
+	public boolean getMemberPassword(String email){
 		 List<MemberBean> list = this.getAll();
 		 for(MemberBean mb :list){
 			 if(mb.getEmail().equals(email.trim())){
@@ -171,8 +171,10 @@ public class MemberHibernateDAO implements MemberDAO_interface {
 				 mb.setPassword(newPassword);
 				 this.update(mb);
 				 this.sendEmail(email, newPassword);
+				 return true;
 			 }
 		 }
+		 return false;
 	}
 	
 	//產生亂數密碼的方法

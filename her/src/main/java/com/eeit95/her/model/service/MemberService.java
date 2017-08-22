@@ -27,8 +27,8 @@ public class MemberService {
 		return sessionFactory.getCurrentSession();
 	}
 	
-	public void getPassword(String email){
-		MDAOI.getMemberPassword(email);
+	public boolean getPassword(String email){
+		return MDAOI.getMemberPassword(email);
 	}
 	
 	public MemberBean login(String email, String password) {
