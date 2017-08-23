@@ -37,28 +37,6 @@
 			<div
 				id='js_productBox'
 				class='block flex_left'>
-<!--
-				<div class='rec_category'>
-					<div class="square190">
-						<img
-							src=''
-							width='190'
-							height='190' />
-						<input
-	          	type='hidden'
-	          	class='js_id'
-	          	value='g00000000000' />
-            <button
-            	type='button'
-							class='button_circle bgi_add_to_collection'></button>
-						<button
-							type='button'
-							class='button_circle bgi_add_to_basket'></button>
-          </div>
-          <div class='js_name rec_text_60 chi_16_30'>而我喜歡這樣的你</div>
-          <div class='js_price rec_text_40 flex_right'>$ 30</div>
-				</div>
--->
 			</div>
 		</div>
 

@@ -19,7 +19,9 @@ import com.eeit95.her.model.card.MsgBean;
 import com.eeit95.her.model.misc.PrimitiveNumberEditor;
 import com.eeit95.her.model.orderform.OrderformBean;
 import com.eeit95.her.model.pack.MsgSelectPackBean;
+import com.eeit95.her.model.pack.MsgSelectPackGiftBean;
 import com.eeit95.her.model.pack.PackBean;
+import com.eeit95.her.model.pack.PackGiftBean;
 import com.eeit95.her.model.pack.PackInsertBean;
 import com.eeit95.her.model.service.PackService;
 
@@ -80,7 +82,18 @@ public class PackController {
 	  return msg;
 	 }
 	 
-	 
+	// PackGiftSelect 0823
+		@RequestMapping(value = "/packgift", method = RequestMethod.GET, produces = "application/json")
+		public @ResponseBody MsgSelectPackGiftBean selectById(PackBean bean) {
+			MsgSelectPackGiftBean msg = new MsgSelectPackGiftBean();
+			List<PackGiftBean> result = PS.selectByPackId(bean);
+
+			msg.setMessage("success");
+			msg.setSuccess("true");
+			msg.setData(result);
+
+			return msg;
+		}	 
 	 
 	//Pack
 	//新增 - insert (POST-0816 TEST OK)

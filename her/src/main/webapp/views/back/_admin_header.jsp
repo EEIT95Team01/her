@@ -44,7 +44,7 @@
 		</div>
 		<div class='box200 flex_right'>
 			<a href='#'>
-				<span class='bgc_black'>管理員登入</span>
+				<span class='bgc_black'>管理員m005 登出</span>
 			</a>
 		</div>
 		<div class='box200 flex_center'>

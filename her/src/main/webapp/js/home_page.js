@@ -33,7 +33,7 @@ function setRecommend() {
 							<img src='${cover}'
 								 width='${size}'
 								 height='${size}'
-								 class='cursor
+								 class='cursor'
 								 onclick='viewSingleProduct("${id}")'>
 							
 							<button type='button'

@@ -41,8 +41,7 @@ function findMemberId(name){
 	if(memberId === "") {
 		console.log('not login')
 		window.open(webapp + '/views/front/member_page/login.jsp', '_self')
-	}
-	if(name=="pack"){
+	}else if(name=="pack"){
 	window.open(webapp + '/views/front/member_page/pack_page.jsp', '_self')
 	}
 }

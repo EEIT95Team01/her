@@ -146,7 +146,7 @@
 					<div class='block40 flex_spacebetween bgc_lightgray'>
 						<label for='Content'
 							   class='rec_lable'>卡片內容</label>
-						<div class='rec_text_40'>剩餘145字</div>
+						<div class='rec_text_40'></div>
 					</div>
 					<div class='block100'>
 						<textarea id= "content" class='rec_textarea800 border chi_16_30'></textarea>

@@ -29,7 +29,7 @@ $(function() {
 		case 'c':
 			$('#pName').html(data.card[0].name)
 			$('#price').html(data.card[0].price)
-			$('#addBasket').attr("onclick","addToBasket("+data.card[0].id+")")
+			$('#addBasket').attr("onclick","addToBasket('"+data.card[0].id+"')")
 			const price = data.card[0].price
 			console.log(data.card[0].maxWordCount)
 			const mw = $("<div></div>").text("最大容納字數   "+data.card[0].maxWordCount+"字").attr("class",'rec_text_60 chi_24')
@@ -67,7 +67,7 @@ $(function() {
 			$('#price').html(data.font[0].price)
 			console.log(data.font[0].maxWordCount)
 			$('#mw').html(data.font[0].maxWordCount)
-			$('#addBasket').attr("onclick","addToBasket("+data.font[0].id+")")
+			$('#addBasket').attr("onclick","addToBasket('"+data.font[0].id+"')")
 			$('#vc').html(data.font[0].viewCount)
 			$('#sc').html(data.font[0].salesCount)
 			$('#cover').attr("src",data.font[0].cover)
@@ -98,7 +98,7 @@ $(function() {
 				$('#price').html(data.gift[0].price)
 				console.log(data.gift[0].maxWordCount)
 				$('#mw').html(data.gift[0].maxWordCount)
-				$('#addBasket').attr("onclick","addToBasket("+data.gift[0].id+")")
+				$('#addBasket').attr("onclick","addToBasket('"+data.gift[0].id+"')")
 				$('#vc').html(data.gift[0].viewCount)
 				$('#sc').html(data.gift[0].salesCount)
 				$('#cover').attr("src",data.gift[0].cover)

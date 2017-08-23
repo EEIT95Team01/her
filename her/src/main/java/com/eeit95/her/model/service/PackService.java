@@ -115,6 +115,19 @@ public class PackService {
 		}
 	}
 
+	/*---------------------------------------------------------------------*/
+	//selectPackGift 0823
+	public List<PackGiftBean> selectByPackId(PackBean packBean){
+		List<PackGiftBean> result = null;
+		if(packBean.getId()!=null) {
+			result = packGift.selectByPackId(packBean.getId());
+		}
+		
+		
+		return result;
+	}
+	
+	
 	
 /*---------------------------------------------------------------------*/	
 	

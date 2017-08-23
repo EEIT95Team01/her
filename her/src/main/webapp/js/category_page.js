@@ -90,7 +90,7 @@ function renderProductView(arrayOfData) {
 							src='${cur.cover}'
 							width='190'
 							height='190' 
-							class='cursor
+							class='cursor'
 							onclick='viewSingleProduct("${cur.id}")' />
             <button
             	type='button'

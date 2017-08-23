@@ -38,7 +38,7 @@
 			<a href='${pageContext.request.contextPath}/views/front/gift_page.jsp'>
 				<span class='bgc_white'>GIFT</span>
 			</a>
-			<a href='#'>
+			<a href='${pageContext.request.contextPath}/views/front/about_page/about_page.jsp'>
 				<span class='bgc_white'>ABOUT</span>
 			</a>
 		</div>
