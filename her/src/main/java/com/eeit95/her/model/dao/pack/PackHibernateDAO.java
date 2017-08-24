@@ -147,10 +147,12 @@ public class PackHibernateDAO implements PackDAOInterface{
 			criteria.add(Restrictions.le("dateMailed", selectEnd));
 		}
 		
-		if(packSelectBean.getStatus() == 0) {
-			  criteria.add(Restrictions.eq("status",0));
-		 }else if(packSelectBean.getStatus() == 1) {
+		if(packSelectBean.getStatus() == 1) {
 			  criteria.add(Restrictions.eq("status",1));
+		 }else if(packSelectBean.getStatus() == 2) {
+			  criteria.add(Restrictions.eq("status",2));
+		 }else if(packSelectBean.getStatus() == 3) {
+			  criteria.add(Restrictions.eq("status",3));
 		 }
 		
 		result = criteria.list();

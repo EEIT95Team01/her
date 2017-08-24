@@ -12,6 +12,7 @@ import com.eeit95.her.model.orderform.OrderformBean;
 import com.eeit95.her.model.orderform.OrderformDAOInterface;
 import com.eeit95.her.model.orderform.OrderformPackBean;
 import com.eeit95.her.model.orderform.OrderformPackDAOInterface;
+import com.eeit95.her.model.orderform.OrderformSelectBean;
 import com.eeit95.her.model.pack.PackBean;
 import com.eeit95.her.model.pack.PackDAOInterface;
 import com.eeit95.her.model.pack.PackGiftBean;
@@ -157,7 +158,8 @@ public class PackService {
 				opBean.setStatus(1);
 				orderformPack.insert(opBean);
 				pBean.setStatus(3); //按下寄出包裹後，包裹的狀態即更改為訂單狀態(代號:3)
-				}				
+				pack.update(pBean);
+				}
 				return result2;
 			}else {
 				System.out.println("寄出包裹新增失敗");
@@ -168,6 +170,8 @@ public class PackService {
 		return null;
 	}
 	
+	
+
 
 	
 }

@@ -48,35 +48,40 @@
 				</div>
 				<div class='block20'></div>
 				<div class='block60 flex_spacebetween'>
-					<button class='box220 chi_24 bgc_pink'>加入我的收藏</button>
+					<button class='box220 chi_24 bgc_pink'>加入收藏</button>
 					<button class='box220 chi_24 bgc_green' id= "addBasket">加入包裹組合籃</button>
 					<div class='box220 flex_spacebetween'>
-					<!--
+					
 						<img
 							src='${pageContext.request.contextPath}/images/_for_views/product_page/icon_facebook.png'
 							width='40'
-							height='40' />
+							height='40'
+							class='cursor' />
 						<img
 							src='${pageContext.request.contextPath}/images/_for_views/product_page/icon_googleplus.png'
 							width='40'
-							height='40' />
+							height='40'
+							class='cursor' />
 						<img
 							src='${pageContext.request.contextPath}/images/_for_views/product_page/icon_instagram.png'
 							width='40'
-							height='40' />
+							height='40'
+							class='cursor' />
 						<img
 							src='${pageContext.request.contextPath}/images/_for_views/product_page/icon_plurk.png'
 							width='40'
-							height='40' />
+							height='40'
+							class='cursor' />
 						<img
 							src='${pageContext.request.contextPath}/images/_for_views/product_page/icon_twitter.png'
 							width='40'
-							height='40' />
-						-->
+							height='40'
+							class='cursor' />
+						
 					</div>
 				</div>
 				<div class='block20'></div>
-				<div class='block40 flex_spacebetween'>
+				<div class='block40 flex_spacearound'>
 					<div class='box220 flex_center'>
 						<img
 							src='${pageContext.request.contextPath}/images/_for_views/product_page/icon_viewcount.png'
@@ -84,13 +89,14 @@
 							height='40' />
 						<div class='sub_rec40'>瀏覽 <span id='vc'></span>次</div>
 					</div>
+					<!--  
 					<div class='box220 flex_center'>
 						<img
 							src='${pageContext.request.contextPath}/images/_for_views/product_page/icon_collection.png'
 							width='40'
 							height='40' />
 						<div class='sub_rec40'>1,234 人收藏</div>
-					</div>
+					</div> -->
 					<div class='box220 flex_center'>
 						<img
 							src='${pageContext.request.contextPath}/images/_for_views/product_page/icon_salescount.png'

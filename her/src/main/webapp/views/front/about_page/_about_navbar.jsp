@@ -18,23 +18,6 @@
 	</div>
 </div>
 
-<!--_____________ Begining _____________-->
-<div class='box220'>
-	<div class='block'>
-		<div class='block40 js_nav_button cursor'>
-			<button type='button'
-					class='square15 bgi_open_nav'></button>
-			<div class='rec40'>網站介紹</div>
-		</div>
-	</div>
-	<div class='block' style='display: none'>
-		<div class='sub_block40'>
-			<a href='#From' class='rec40 bgc_white'>
-				<span>緣起</span>
-			</a>
-		</div>
-	</div>
-</div>
 
 <!--_____________ Member _____________-->
 <div class='box220'>
@@ -87,6 +70,24 @@
 		<div class='sub_block40'>
 			<a href='#Technique' class='rec40 bgc_white'>
 				<span>一覽表</span>
+			</a>
+		</div>
+	</div>
+</div>
+
+<!--_____________ Begining _____________-->
+<div class='box220'>
+	<div class='block'>
+		<div class='block40 js_nav_button cursor'>
+			<button type='button'
+					class='square15 bgi_open_nav'></button>
+			<div class='rec40'>網站介紹</div>
+		</div>
+	</div>
+	<div class='block' style='display: none'>
+		<div class='sub_block40'>
+			<a href='#From' class='rec40 bgc_white'>
+				<span>緣起</span>
 			</a>
 		</div>
 	</div>

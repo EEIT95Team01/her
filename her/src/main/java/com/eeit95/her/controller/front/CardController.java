@@ -82,7 +82,7 @@ public class CardController {
 				sqlText.append(" order by c.id");
 				break;
 			case "SALES_DESC":
-				sqlText.append(" order by c.salesCount");
+				sqlText.append(" order by c.salesCount desc");
 				break;
 			case "PRICE_ASC":
 				sqlText.append(" order by c.price");

@@ -10,7 +10,9 @@ $(function() {
 	// 商品組合籃
 	setEmptyBasket()
 
-	$('#order_insert_button').on('click', insertOrder)
+	$('#ordering_redirect_button').on('click', redirectOrdering)
+
+	//
 })
 
 // 目前瀏覽 packId
@@ -31,8 +33,8 @@ function updatePack(currentPackId) {
 			let resultData = result.data[0]
 
 			// 修改資料
-			resultData.recipientName = $('#Recipient_name').val()
 			resultData.name = $('#Pack_name').val()
+			resultData.recipientName = $('#Recipient_name').val()
 			resultData.recipientPhone = $('#Recipient_phone').val()
 			resultData.recipientCity = $('#Recipient_city').val()
 			resultData.recipientDistrict = $('#Recipient_disrict').val()
@@ -54,6 +56,12 @@ function updatePack(currentPackId) {
 				},
 				body: JSON.stringify(resultData)
 			})
+			.then((response) => response.json())
+			.then((result) => {
+				if(result.success === 'true') {
+					alert('修改成功')
+				}
+			})
 		})
 }
 
@@ -70,7 +78,7 @@ function movePack(currentPackId) {
 		.then((response) => response.json())
 		.then((result) => {
 			let resultData = result.data[0]
-			
+
 			resultData.name = $('#Pack_name').val()
 			resultData.recipientName = $('#Recipient_name').val()
 			resultData.recipientPhone = $('#Recipient_phone').val()
@@ -100,6 +108,13 @@ function movePack(currentPackId) {
 					'Content-Type': 'application/json',
 				},
 				body: JSON.stringify(resultData)
+			})
+			.then((response) => response.json())
+			.then((result) => {
+				var memberId = getCookie("memberId")
+
+				getStatus1(memberId);
+				getStatus2(memberId);
 			})
 		})
 }
@@ -337,7 +352,7 @@ function getStatus2(memberId) {
 			const data = result.data;
 			$.each(data, function(index, obj) {
 				console.log("status=1,obj.name = " + obj.sum);
-				var pack_name = $("<div></div>").text(obj.name).attr("class", 'button_roundcorner border bgc_white chi_16_30');
+				var pack_name = $("<button></button>").text(obj.name).attr("class", 'button_roundcorner border bgc_white chi_16_30');
 				var pack_sum = $("<div></div>").text('$ ' + obj.sum).attr("class", 'rec40');
 				var a = $("<a />").attr("onclick", "getPackId('" + obj.id + "')").append(pack_name)
 				var div = $("<div></div>").append(a, pack_sum).attr("class", 'block40 flex_spacebetween')
@@ -388,27 +403,19 @@ function getPackId(id) {
 	$('#Pack_move_button').off('click')
 	$('#Pack_move_button').on('click', function() {
 		movePack(id)
-
-		var memberId = getCookie("memberId")
-
-		getStatus1(memberId);
-		getStatus2(memberId);
+//		window.location.reload() 
 	})
 
 	$('#Pack_update_button').off('click')
 	$('#Pack_update_button').on('click', function() {
 		updatePack(id)
-
-		var memberId = getCookie("memberId")
-
-		getStatus1(memberId);
-		getStatus2(memberId);
+//		window.location.reload() 
 	})
 
 }
 
 function cardToBasket(id) {
-	return fetch('/her/api/admin/card?id=' + id, {
+	fetch('/her/api/admin/card?id=' + id, {
 			method: 'GET'
 		})
 		.then((response) => (response.json()))
@@ -419,7 +426,7 @@ function cardToBasket(id) {
 }
 
 function fontToBasket(id) {
-	return fetch('/her/api/admin/font?id=' + id, {
+	fetch('/her/api/admin/font?id=' + id, {
 			method: 'GET'
 		})
 		.then((response) => (response.json()))
@@ -430,9 +437,8 @@ function fontToBasket(id) {
 }
 
 function giftsToBasket(packId) {
-	console.log('abcde')
 
-	return fetch('/her/api/user/packgift?id=' + packId, {
+	fetch('/her/api/user/packgift?id=' + packId, {
 			method: 'GET'
 		})
 		.then((response) => response.json())
@@ -462,37 +468,8 @@ function giftsToBasket(packId) {
 		})
 }
 
-// 寄出包裹，新增訂單
-function insertOrder() {
-
-	// 以 memberId 及 status 取得 會員郵寄箱中的包裹
-	fetch('/her/api/user/pack?memberId=' + memberId + "&status=2", {
-			method: 'GET'
-		})
-		.then((response) => (response.json()))
-		.then((result) => {
-			const data = result.data;
-
-			const fetchUrl = serverUrl + '/api/user/order'
-
-			// insert order, update pack's status to 3
-			fetch(fetchUrl, {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-				},
-				body: JSON.stringify(data)
-			})
-		})
-
-	// 重置郵寄箱 與 暫存箱
-	var memberId = getCookie("memberId")
-
-	getStatus1(memberId);
-	getStatus2(memberId);
-
-	// 重置包裹組合籃
-	setEmptyBasket()
+function redirectOrdering() {
+	window.open(webapp + '/views/front/member_page/ordering.jsp', '_self')
 }
 
 function getCookie(cookieName) {

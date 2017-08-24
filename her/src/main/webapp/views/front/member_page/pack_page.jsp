@@ -161,7 +161,7 @@
 						<div class='rec_text_40'>郵寄箱</div>
 					<div class='rec40 flex_center'>
 						<button
-							id='order_insert_button'
+							id='ordering_redirect_button'
 							type='button'
 							class='button_roundcorner chi_16_30 bgc_pink'>寄出包裹</button>
 					</div>

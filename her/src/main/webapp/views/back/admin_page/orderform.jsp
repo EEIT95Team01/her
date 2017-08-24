@@ -5,8 +5,10 @@
 	<div class='block40 flex_spacebetween'>
 		<div class='rec_text_40'>查詢訂單</div>
 		<div class='rec_text'>
-			<button type='button'
-					class='button_roundcorner chi_16_30 bgc_pink'>查詢</button>
+			<button
+				id='Orderform_select_button' 
+				type='button'
+				class='button_roundcorner chi_16_30 bgc_pink'>查詢</button>
 		</div>
 	</div>
 	<div class='block'>

@@ -6,15 +6,9 @@
 	class='js_form_container block flex_block'>
 	<div class='block40 flex_spacebetween'>
 	
-	<div>
-	<h1>手寫的溫度</h1>
-	</div>
-
-	</div>
-	<div class='box360'>
-		<h3>財團法人資訊工業策進會</h3>
-		<h4>Java跨平台程式設計就業養成班</h4>
-		<h5>EEIT95期 第一組</h5>
-	</div>
+	<div  style="width:600px;margin-top:350px" >
+        <img src="../../../images/_for_views/member/投影片1.JPG" width="800" />
+    </div>
+    </div>
 </form>
 

@@ -69,15 +69,15 @@
 				<div class='rec_text_40'>商品分類｜CATEGORY</div>
 			</div>
 			<div class='block210 flex_block chi_60'>
-				<a href='${pageContext.request.contextPath}/card'
+				<a href='${pageContext.request.contextPath}/views/front/card_page.jsp'
 				   class='box340 flex_center bgc_card'>
 					<span>CARD</span>
 				</a>
-				<a href='${pageContext.request.contextPath}/font'
+				<a href='${pageContext.request.contextPath}/views/front/font_page.jsp'
 				   class='box340 flex_center bgc_font'>
 					<span>FONT</span>
 				</a>
-				<a href='${pageContext.request.contextPath}/gift'
+				<a href='${pageContext.request.contextPath}/views/front/gift_page.jsp'
 				   class='box340 flex_center bgc_gift'>
 					<span>GIFT</span>
 				</a>

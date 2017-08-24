@@ -244,6 +244,11 @@ textarea {
 	height: 100%;
 }
 
+.box550 {
+	width: 550px;
+	height:100%;
+}
+
 .box580 {
 	width: 580px;
 	height: 100%;
@@ -617,6 +622,17 @@ textarea {
 			flex-wrap: wrap;
 }
 
+.flex_spacearound {
+	display: -webkit-flex;
+	display: flex;
+	-webkit-justify-content: space-around;
+			justify-content: space-around;
+	-webkit-align-items: center;
+			align-items: center;
+	-webkit-flex-wrap: wrap;
+			flex-wrap: wrap;
+}
+
 .flex_left {
 	display: -webkit-flex;
 	display: flex;
@@ -667,6 +683,11 @@ textarea {
 
 .chi_24 {
 	font: 200 24px 'Noto Sans TC', sans-serif;
+	line-height: 60px;
+}
+
+.chi_32 {
+	font: 300 32px 'Noto Sans TC', sans-serif;
 	line-height: 60px;
 }
 

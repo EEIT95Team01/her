@@ -4,9 +4,11 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -66,17 +68,32 @@ public class OrderformHibernateDAO implements OrderformDAOInterface{
 
 	@Override
 	public List<OrderformBean> select
-	(String id, int paymentMethod, int status, String lowDate, String highDate) {
+	(String id, String memberId, int status, String lowDate, String highDate) {
 		
 		List<OrderformBean> result = null;
 		Session session = this.getSession();
-		Query query = session.createQuery(select);
-		query.setParameter(0, id);
-		query.setParameter(1, paymentMethod);
-		query.setParameter(2, status);
-		query.setParameter(3, lowDate);
-		query.setParameter(4, highDate);
-		result = query.list();
+		Criteria criteria = session.createCriteria(OrderformBean.class);
+		if(!id.isEmpty()) {
+			criteria.add(Restrictions.eq("id",id));
+			System.out.println("id" +id);
+		}
+		if(!memberId.isEmpty()) {
+			criteria.add(Restrictions.eq("memberId",memberId));
+			System.out.println("memberId" +memberId);
+		}
+		if(status!=0) {
+			criteria.add(Restrictions.eq("paymentStatus",status));
+			System.out.println("status" +status);
+		}
+		if(!lowDate.isEmpty()) {
+			criteria.add(Restrictions.ge("dateCreated",lowDate));
+			System.out.println("lowDate" +lowDate);
+		}
+		if(!highDate.isEmpty()) {
+			criteria.add(Restrictions.le("dateCreated",highDate));
+			System.out.println("highDate" +highDate);
+		}
+		result = criteria.list();
 		
 		return result;
 	}
@@ -107,13 +124,13 @@ public class OrderformHibernateDAO implements OrderformDAOInterface{
 	 }
 	
 
-	public static void main(String[] args) {
-		ApplicationContext context = new AnnotationConfigApplicationContext(SpringJavaConfiguration.class);
-		SessionFactory sessionFactory = (SessionFactory) context.getBean("sessionFactory");
-		OrderformHibernateDAO dao = (OrderformHibernateDAO) context.getBean("orderformHibernateDAO");
-		
-		try {
-			sessionFactory.getCurrentSession().beginTransaction();
+//	public static void main(String[] args) {
+//		ApplicationContext context = new AnnotationConfigApplicationContext(SpringJavaConfiguration.class);
+//		SessionFactory sessionFactory = (SessionFactory) context.getBean("sessionFactory");
+//		OrderformHibernateDAO dao = (OrderformHibernateDAO) context.getBean("orderformHibernateDAO");
+//		
+//		try {
+//			sessionFactory.getCurrentSession().beginTransaction();
 
 		//● 查詢-1 selectByMIdAndStatus(0809測試OK)
 //		List<OrderformBean> beans = dao.selectByMIdAndStatus("o01705160001", 0);
@@ -126,22 +143,22 @@ public class OrderformHibernateDAO implements OrderformDAOInterface{
 //		}
 			
 		//● 查詢-2 select	(0809測試OK)
-		List<OrderformBean> beans = dao.select("o01707210001",2,1,"2017-07-01", "2017-07-30");
-		for(OrderformBean bean : beans) {
-			System.out.println(bean.getId());
-			System.out.println(bean.getDateCreated());
-			System.out.println(bean.getPaymentMethod());
-			System.out.println(bean.getPaymentStatus());
-			System.out.println(bean.getNote());
-		}
-			
-			sessionFactory.getCurrentSession().getTransaction().commit();
-		} catch (RuntimeException ex) {
-			sessionFactory.getCurrentSession().getTransaction().rollback();
-			throw ex;
-		} finally {
-			((ConfigurableApplicationContext) context).close();
-		}
+//		List<OrderformBean> beans = dao.select("o01707210001",2,1,"2017-07-01", "2017-07-30");
+//		for(OrderformBean bean : beans) {
+//			System.out.println(bean.getId());
+//			System.out.println(bean.getDateCreated());
+//			System.out.println(bean.getPaymentMethod());
+//			System.out.println(bean.getPaymentStatus());
+//			System.out.println(bean.getNote());
+//		}
+//			
+//			sessionFactory.getCurrentSession().getTransaction().commit();
+//		} catch (RuntimeException ex) {
+//			sessionFactory.getCurrentSession().getTransaction().rollback();
+//			throw ex;
+//		} finally {
+//			((ConfigurableApplicationContext) context).close();
+//		}
 
-	}
+//	}
 }

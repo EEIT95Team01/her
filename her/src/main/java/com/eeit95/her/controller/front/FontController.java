@@ -77,7 +77,7 @@ public class FontController {
 				sqlText.append(" order by f.id");
 				break;
 			case "SALES_DESC":
-				sqlText.append(" order by f.salesCount");
+				sqlText.append(" order by f.salesCount desc");
 				break;
 			case "PRICE_ASC":
 				sqlText.append(" order by f.price");

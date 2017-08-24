@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.context.annotation.SessionScope;
 
+
 import com.eeit95.her.model.advertisement.AdvertisementBean;
 import com.eeit95.her.model.advertisement.MsgSelectAdvertisementBean;
 import com.eeit95.her.model.card.CardBean;
@@ -42,6 +43,9 @@ import com.eeit95.her.model.gift.GiftIUBean;
 import com.eeit95.her.model.gift.GiftSelectBean;
 import com.eeit95.her.model.gift.MsgSelectGiftBean;
 import com.eeit95.her.model.misc.PrimitiveNumberEditor;
+import com.eeit95.her.model.orderform.MsgOrderformSelectBean;
+import com.eeit95.her.model.orderform.OrderformBean;
+import com.eeit95.her.model.orderform.OrderformSelectBean;
 import com.eeit95.her.model.pack.MsgSelectPackBean;
 import com.eeit95.her.model.pack.PackSelectBean;
 import com.eeit95.her.model.service.AdminFontService;
@@ -98,6 +102,9 @@ public class AdminController {
 				return msg;
 			}
 		}
+		CardBean card=cardIUBean.getCard();
+		card.setViewCount(1);
+		cardIUBean.setCard(card);
 		boolean result = AS.insert(cardIUBean);
 		// 判斷回傳值是否正確
 		if (result) {
@@ -448,6 +455,18 @@ public class AdminController {
 			System.out.println("setData = " + msg.toString());
 			return msg;
 		}		
-				
+			
+		/*-------------------------------------------------------------------------------*/
+		//select
+		@RequestMapping(value = "/orderform", method = RequestMethod.GET, 
+				produces = "application/json")
+		public @ResponseBody MsgOrderformSelectBean orderformselect(OrderformSelectBean orderformSelectBean) {
+			MsgOrderformSelectBean msg = new MsgOrderformSelectBean();
+			List<OrderformBean> results = AS.select(orderformSelectBean);
+			msg.setMessage("success");
+			msg.setSuccess("true");
+			msg.setData(results);
+			return msg;
+		}
 
 }

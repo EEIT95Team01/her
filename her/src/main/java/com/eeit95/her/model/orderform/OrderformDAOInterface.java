@@ -11,7 +11,7 @@ public interface OrderformDAOInterface {
 	public List<OrderformBean> selectByMIdAndStatus(String id, int status);
 	
 	public List<OrderformBean> select
-	(String id, int paymentMethod, int status, String lowDate, String highDate);
+	(String id, String memberId, int status, String lowDate, String highDate);
 	
 	public String getNewId();
 	

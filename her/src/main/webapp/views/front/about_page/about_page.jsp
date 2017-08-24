@@ -11,7 +11,7 @@
 	
 
 	<c:import url='/views/common/_resources.jsp' />
-
+	<script src="${pageContext.request.contextPath}/js/member_page/loginOrNot.js" type="text/javascript"></script>
 	<script src='${pageContext.request.contextPath}/js/category_page.js' type='text/javascript'></script>
 	<script src='${pageContext.request.contextPath}/js/front_page_action.js' type='text/javascript'></script>
 <!--  -->

@@ -87,7 +87,7 @@ public class GiftController {
 				sqlText.append(" order by g.id");
 				break;
 			case "SALES_DESC":
-				sqlText.append(" order by g.salesCount");
+				sqlText.append(" order by g.salesCount desc");
 				break;
 			case "PRICE_ASC":
 				sqlText.append(" order by g.price");
