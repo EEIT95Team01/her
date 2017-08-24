@@ -25,13 +25,13 @@
 				<div class='block40 flex_spacebetween'>
 					<div class='rec_text_40'>包裹｜PACK</div>
 					<div class='rec40'>
-						<button id=''
+						<button id='Pack_delete_button'
 								type='button'
 								class='button_roundcorner chi_16_30 bgc_darkgray'>刪除</button>
-						<button id=''
+						<button id='Pack_move_button'
 								type='button'
 								class='button_roundcorner chi_16_30 bgc_gray'>移至暫存箱</button>
-						<button id=''
+						<button id='Pack_update_button'
 								type='button'
 								class='button_roundcorner chi_16_30 bgc_green'>儲存修改</button>
 					</div>
@@ -74,18 +74,18 @@
 								id='Recipient_city'
 								name='recipient_city'
 								class='rec_input113 border chi_16_30'
-								placeholder='臺北市' />
+								placeholder='縣市' />
 							<input
 								id='Recipient_disrict'
 								name='recipient_disrict'
 								class='rec_input113 border chi_16_30'
-								placeholder='中正區' />
+								placeholder='鄉鎮市區' />
 						</div>
 						<div class='block80 flex_left'>
 							<div class='rec_lable'></div>
 							<textarea id='Recipient_addr'
 									  name='recipient_addr'
-									  class='rec_textarea286 border chi_16_30'>信義路五段</textarea>
+									  class='rec_textarea286 border chi_16_30'></textarea>
 						</div>
 					</div>
 				</div>
@@ -127,11 +127,13 @@
 							<input
 								id='Sender_city'
 								name='sender_city'
-								class='rec_input113 border chi_16_30' />
+								class='rec_input113 border chi_16_30'
+								placeholder='縣市' />
 							<input
 								id='Sender_disrict'
 								name='sender_disrict'
-								class='rec_input113 border chi_16_30' />
+								class='rec_input113 border chi_16_30'
+								placeholder='鄉鎮市區' />
 						</div>
 						<div class='block80 flex_left'>
 							<div class='rec_lable'></div>
@@ -158,13 +160,14 @@
 					<div class='block40 flex_spacebetween'>
 						<div class='rec_text_40'>郵寄箱</div>
 					<div class='rec40 flex_center'>
-						<button id=''
-								type='button'
-								class='button_roundcorner chi_16_30 bgc_pink'>寄出包裹</button>
+						<button
+							id='order_insert_button'
+							type='button'
+							class='button_roundcorner chi_16_30 bgc_pink'>寄出包裹</button>
 					</div>
 				</div>
 					<div   id="status2">
-						
+
 					</div>
 				</div>
 				<div class='block20'></div>
@@ -173,7 +176,7 @@
 						<div class='rec_text_40'>暫存箱</div>
 					</div>
 					<div  id="status1">
-					
+
 					</div>
 				</div>
 			</div>

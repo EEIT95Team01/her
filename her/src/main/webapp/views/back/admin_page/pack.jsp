@@ -5,7 +5,8 @@
 	<div class='block40 flex_spacebetween'>
 		<div class='rec_text_40'>查詢包裹</div>
 		<div class='rec_text'>
-			<button type='button'
+			<button id='Pack_select_button'
+					type='button'
 					class='button_roundcorner chi_16_30 bgc_pink'>查詢</button>
 		</div>
 	</div>

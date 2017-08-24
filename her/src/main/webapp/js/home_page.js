@@ -53,8 +53,7 @@ function setRecommend() {
 }
 
 function setAd() {
-	console.log('setAd() is not ready')
-	/*
+//	console.log('setAd() is not ready')
 	fetch(frontBaseUrl + adApi, {
 		method: "GET"
 	})
@@ -78,9 +77,8 @@ function setAd() {
 			$('#js_ad img').attr('src', adUrls[i % length])
 
 			i++
-		}, 2000)
+		}, 4000)
 	})
-	*/
 }
 
 

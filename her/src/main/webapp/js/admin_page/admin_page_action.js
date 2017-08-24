@@ -49,11 +49,11 @@ const apis = {
 			id: () => $('#Pack_select_id').val(),
 			name: () => $('#Pack_select_nanme').val(),
 			memberId: () => $('#Pack_select_memberId').val(),
-			lowSum: () => $('#Pack_select_sum_slider').slider('values', 0),
-			highSum: () => $('#Pack_select_sum_slider').slider('values', 1),
-			beginDateMailed: () => $('#Pack_select_beginDateMailed').val(),
-			endDateMailed: () => $('#Pack_select_endDateMailed').val(),
-			status: () => $('#Pack_select_').val()
+			lowPrice: () => $('#Pack_select_sum_slider').slider('values', 0),
+			highPrice: () => $('#Pack_select_sum_slider').slider('values', 1),
+			beginDate: () => $('#Pack_select_beginDateMailed').val(),
+			endDate: () => $('#Pack_select_endDateMailed').val(),
+			status: () => $('#Pack_select_status').val()
 		}
 	}, "#Orderform_select_button": {
 		apiPath: '/api/admin/orderform',

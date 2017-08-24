@@ -23,7 +23,11 @@
 	</div>
 	<div class='block100 flex_block'>
 		<div class='box160 flex_center'>
-			<div id='Logo'></div>
+			<a href='${pageContext.request.contextPath}/views/front/home_page.jsp'>
+				<div id='Logo'>
+				<img width="100px" src="${pageContext.request.contextPath}/images/_for_views/emblemmatic-warm-do-logo-36.png"/>
+				</div>
+				</a>
 		</div>
 		<div class='box500 flex_spacebetween chi_20'>
 			<a href='${pageContext.request.contextPath}/views/front/home_page.jsp'>
